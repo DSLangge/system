@@ -1,0 +1,22 @@
+*{margin:0;padding: 0;}
+html,body{height: 100%;}
+
+.fl{float: left;}
+.fr{float: right;}
+.clear{clear: both;}
+.mar{margin: 0 auto;}
+.posir{position: relative;}
+.posia{position: absolute;}
+.pt10{padding-top: 10px;}
+.pt20{padding-top: 20px;}
+
+.herd{height: 15%;}
+.w1190{width: 1190px;margin: 0 auto;}
+.bac_login{background:rgb(200,200,200,0.6);height: 250px;width: 455px;position: absolute;right: 50%;top:50%;
+margin-top: -155px;margin-right: -290px;;padding: 20px;padding-right: 50px;border-radius: 10px;}
+.head_img{width: 400px;height: 100%;background: url(../img/login.png) no-repeat transparent center;}
+
+.bac{height: 65%;background: url(../img/bac.jpg) no-repeat center;background-size: contain;}
+.layui-form-item >.layui-form-label > i{font-size: 10px;float: right;color: #FF0000;}
+
+.fot{font-size:12px ;color: rgb(136,136,136);text-align: center;padding-top: 20px;}
