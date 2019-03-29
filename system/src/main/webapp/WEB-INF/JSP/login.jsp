@@ -29,7 +29,7 @@
 <div class="bac">
     <div class="w1190 posir" style="height: 100%;">
         <div class="bac_login" >
-            <form class="layui-form" action="">
+            <form class="layui-form" action="user_login">
                 <div class="layui-form-item">
                     <label class="layui-form-label"><i class="layui-icon layui-icon-rate-solid"></i>用户名</label>
                     <div class="layui-input-block">
@@ -83,7 +83,7 @@
                     //监听提交
                     form.on('submit(formDemo)', function(data){
                         layer.msg(JSON.stringify(data.field));
-                        return false;
+                        return true;
                     });
                 });
             </script>
