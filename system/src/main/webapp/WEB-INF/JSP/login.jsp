@@ -11,7 +11,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>高校辅导员管理系统登录</title>
     <link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
     <script src="layui/layui.js" type="text/javascript" charset="utf-8"></script>
     <link rel="stylesheet" type="text/css" href="css/base.css" />
@@ -92,7 +92,7 @@
 </div>
 
 <footer class="fot ">
-    <p>版权所有：中原工学院 软件学院 RB移动153 DCL 未经授权本站内容禁止私自转载使用！</p>
+    <p>版权所有：中原工学院 软件学院 RB移动153  未经授权本站内容禁止私自转载使用！</p>
 </footer>
 </body>
 
