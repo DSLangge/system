@@ -28,4 +28,7 @@ public class UserController {
         req.getSession().removeAttribute("vrifyCode");
         return "login";
     }
+
+
+
 }

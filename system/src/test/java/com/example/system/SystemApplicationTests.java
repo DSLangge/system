@@ -1,6 +1,6 @@
 package com.example.system;
 
-import com.example.system.entity.User;
+import com.example.system.dao.UserMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,14 +13,10 @@ import javax.annotation.Resource;
 public class SystemApplicationTests {
 
     @Resource
-    private User user;
-
+    UserMapper userMapper;
     @Test
     public void contextLoads() {
-        user.setId(1);
-        user.setPassword("123");
-        System.out.println(user);
-
+        System.out.println(userMapper.findByID(1));
     }
 
 }

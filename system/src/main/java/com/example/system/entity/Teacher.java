@@ -3,8 +3,10 @@ package com.example.system.entity;
 import lombok.Data;
 
 @Data
-public class Power {
+public class Teacher {
     private Integer id;
-    private String po_name;
+    private Integer teach_id;
+    private String teach_name;
+    private String password;
     private Integer del;
 }
