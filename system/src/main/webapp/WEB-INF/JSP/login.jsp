@@ -33,7 +33,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label"><i class="layui-icon layui-icon-rate-solid"></i>用户名</label>
                     <div class="layui-input-block">
-                        <input type="text" name="title" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                        <input type="text" name="userid" required  lay-verify="required" placeholder="请输入学工号" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -47,11 +47,9 @@
                     <label class="layui-form-label"><i class="layui-icon layui-icon-rate-solid"></i>身份选择</label>
                     <div class="layui-input-block">
                         <select name="power" lay-verify="required">
-                            <option value=""></option>
                             <option value="0">学生</option>
                             <option value="1">老师</option>
-                            <option value="2">辅导员</option>
-                            <option value="3">系统管理员</option>
+                            <option value="2">系统管理员</option>
                         </select>
                     </div>
                 </div>
@@ -75,7 +73,6 @@
                 function change() {
                     document.getElementById("img").src ="verify?r="+Math.random();
                 }
-
                 //Demo
                 layui.use('form', function(){
                     var form = layui.form;
