@@ -33,7 +33,7 @@ public class UserController {
 //                    loginMapper.userLogin(loginDTO.getUserid(),loginDTO.getPassword());
 //                    return "index";
 //            }
-            return "index";
+            return "admin/index/index";
         }
         return "login";
     }
