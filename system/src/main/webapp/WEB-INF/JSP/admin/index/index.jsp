@@ -7,8 +7,8 @@
   		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>网站后台管理模版</title>
-		<link rel="stylesheet" type="text/css" href="static/admin/layui/css/layui.css"/>
-		<link rel="stylesheet" type="text/css" href="static/admin/css/admin.css"/>
+		<link rel="stylesheet" type="text/css" href="../../static/admin/layui/css/layui.css"/>
+		<link rel="stylesheet" type="text/css" href="../../static/admin/css/admin.css"/>
 	</head>
 	<body>
 		<div class="main-layout" id='main-layout'>
@@ -19,9 +19,9 @@
 				  <li class="layui-nav-item layui-nav-itemed">
 				    <a href="javascript:;"><i class="iconfont">&#xe607;</i>用户基本管理</a>
 				    <dl class="layui-nav-child">
-				      <dd><a href="javascript:;" data-url="menu1.html" data-id='1' data-text="系统用户"><span class="l-line"></span>系统用户</a></dd>
+				      <dd><a href="javascript:;" data-url="/userSystem" data-id='1' data-text="系统用户"><span class="l-line"></span>系统用户</a></dd>
 				      <dd><a href="javascript:;" data-url="menu2.html" data-id='2' data-text="老师用户"><span class="l-line"></span>老师用户</a></dd>
-							<dd><a href="javascript:;" data-url="system-user.html" data-id='3' data-text="学生用户"><span class="l-line"></span>学生用户</a></dd>
+					  <dd><a href="javascript:;" data-url="system-user.html" data-id='3' data-text="学生用户"><span class="l-line"></span>学生用户</a></dd>
 				    </dl>
 				  </li>
 				  <li class="layui-nav-item">
@@ -75,7 +75,7 @@
 					  <div class="layui-tab-content">
 					    <div class="layui-tab-item layui-show" style="background: #f5f5f5;">
 					    	<!--1-->
-					    	<iframe src="/user_loginOut" width="100%" height="100%" name="iframe" scrolling="auto" class="iframe" framborder="0"></iframe>
+					    	<iframe src="" width="100%" height="100%" name="iframe" scrolling="auto" class="iframe" framborder="0"></iframe>
 					    	<!--1end-->
 					    </div>
 					  </div>

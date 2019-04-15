@@ -21,20 +21,22 @@ public class UserController {
         /**
          * 定义一个登录表单的DTO
          */
-        if(req.getSession().getAttribute("vrifyCode").equals(loginDTO.getVerify())){
-//            switch (loginDTO.getPower()){
-//                case 0:
-//                    loginMapper.stuLogin(loginDTO.getUserid(),loginDTO.getPassword());
-//                    return "index";
-//                case 1:
-//                    loginMapper.teachLogin(loginDTO.getUserid(),loginDTO.getPassword());
-//                    return "index";
-//                case 2:
-//                    loginMapper.userLogin(loginDTO.getUserid(),loginDTO.getPassword());
-//                    return "index";
-//            }
-            System.out.println(123);
-            return "admin/index/index";
+        if(req.getSession().getAttribute("vrifyCode")!=null){
+            if(req.getSession().getAttribute("vrifyCode").equals(loginDTO.getVerify())){
+            switch (loginDTO.getPower()){
+                case 0:
+                    System.out.println(loginMapper.stuLogin(loginDTO.getUserid(),loginDTO.getPassword()));;
+                    return "admin/index/index";
+                case 1:
+                    System.out.println(loginMapper.teachLogin(loginDTO.getUserid(),loginDTO.getPassword()));;
+                    return "admin/index/index";
+                case 2:
+                    System.out.println(loginMapper.userLogin(loginDTO.getUserid(),loginDTO.getPassword()));;
+                    return "admin/index/index";
+            }
+                System.out.println(123);
+                return "admin/index/index";
+            }
         }
         return "login";
     }
@@ -47,6 +49,12 @@ public class UserController {
         */
         req.getSession().removeAttribute("vrifyCode");
         return "login";
+    }
+
+    @RequestMapping("/userSystem")
+    public String gitUser(HttpServletRequest req, HttpServletResponse resp){
+
+        return "admin/index/user-menu";
     }
 
 
