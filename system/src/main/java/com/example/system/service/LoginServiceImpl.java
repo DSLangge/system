@@ -4,9 +4,10 @@ import com.example.system.dao.LoginMapper;
 import com.example.system.entity.Student;
 import com.example.system.entity.Teacher;
 import com.example.system.entity.User;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-
+@Service("loginService")
 public class LoginServiceImpl implements LoginService {
     @Resource
     LoginMapper loginMapper;

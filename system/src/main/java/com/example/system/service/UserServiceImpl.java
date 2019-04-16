@@ -2,10 +2,13 @@ package com.example.system.service;
 
 import com.example.system.dao.UserMapper;
 import com.example.system.entity.User;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
-
+@Service("userService")
 public class UserServiceImpl implements UserService {
     @Resource
     UserMapper userMapper;
@@ -26,8 +29,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAllUser() {
-        return userMapper.findAllUser();
+    public PageInfo<User> findAllUser(Integer page,Integer limit) {
+        PageHelper.startPage(page,limit);
+        PageInfo<User> userPageInfo = new PageInfo<>(userMapper.findAllUser());
+        return userPageInfo;
     }
 
     @Override

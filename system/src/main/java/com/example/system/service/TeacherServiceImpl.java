@@ -2,10 +2,12 @@ package com.example.system.service;
 
 import com.example.system.dao.TeacherMapper;
 import com.example.system.entity.Teacher;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
-
+@Service("teacherService")
 public class TeacherServiceImpl implements TeacherService {
     @Resource
     TeacherMapper teacherMapper;
@@ -26,8 +28,10 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public List<Teacher> findAllTeacher() {
-        return teacherMapper.findAllTeacher();
+    public PageInfo<Teacher> findAllTeacher(Integer page, Integer limit) {
+        PageHelper.startPage(page,limit);
+        PageInfo<Teacher> teacherPageInfo = new PageInfo<>(teacherMapper.findAllTeacher());
+        return teacherPageInfo;
     }
 
     @Override

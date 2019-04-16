@@ -12,14 +12,22 @@
 </head>
 <body>
 
+<div class="demoTable">
+	搜索ID：
+	<div class="layui-inline">
+		<input class="layui-input" name="id" id="demoReload" autocomplete="off">
+	</div>
+	<button class="layui-btn" data-type="reload">搜索</button>
+</div>
+
 <table class="layui-hide" id="test" lay-filter="test"></table>
 
 <script type="text/html" id="toolbarDemo">
-	<div class="layui-btn-container">
-		<button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
-		<button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
-		<button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
-	</div>
+	<%--<div class="layui-btn-container">--%>
+		<%--<button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>--%>
+		<%--<button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>--%>
+		<%--<button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>--%>
+	<%--</div>--%>
 </script>
 
 <script type="text/html" id="barDemo">
@@ -58,39 +66,55 @@
 				// ,{field:'ip', title:'IP', width:120}
 				// ,{field:'logins', title:'登入次数', width:100, sort: true}
 				// ,{field:'joinTime', title:'加入时间', width:120}
-				// ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+				,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
 			]]
 			,page: true
+			,id: 'testReload'
 			,response: {
 				statusCode: 200 //重新规定成功的状态码为 200，table 组件默认为 0
 			}
-			,parseData: function(res){ //将原始数据解析成 table 组件所规定的数据
-				return {
-					"code": res.status, //解析接口状态
-					"msg": res.message, //解析提示文本
-					"count": res.total, //解析数据长度
-					"data": res.rows.item //解析数据列表
-				};
-			}
 		});
 
-		//头工具栏事件
-		table.on('toolbar(test)', function(obj){
-			var checkStatus = table.checkStatus(obj.config.id);
-			switch(obj.event){
-				case 'getCheckData':
-					var data = checkStatus.data;
-					layer.alert(JSON.stringify(data));
-					break;
-				case 'getCheckLength':
-					var data = checkStatus.data;
-					layer.msg('选中了：'+ data.length + ' 个');
-					break;
-				case 'isAll':
-					layer.msg(checkStatus.isAll ? '全选': '未全选');
-					break;
-			};
+
+		var $ = layui.$, active = {
+			reload: function(){
+				var demoReload = $('#demoReload');
+
+				//执行重载
+				table.reload('testReload', {
+					page: {
+						curr: 1 //重新从第 1 页开始
+					}
+					,where: {
+						id: demoReload.val()
+					}
+				});
+			}
+		};
+
+		$('.demoTable .layui-btn').on('click', function(){
+			var type = $(this).data('type');
+			active[type] ? active[type].call(this) : '';
 		});
+
+
+		// //头工具栏事件
+		// table.on('toolbar(test)', function(obj){
+		// 	var checkStatus = table.checkStatus(obj.config.id);
+		// 	switch(obj.event){
+		// 		case 'getCheckData':
+		// 			var data = checkStatus.data;
+		// 			layer.alert(JSON.stringify(data));
+		// 			break;
+		// 		case 'getCheckLength':
+		// 			var data = checkStatus.data;
+		// 			layer.msg('选中了：'+ data.length + ' 个');
+		// 			break;
+		// 		case 'isAll':
+		// 			layer.msg(checkStatus.isAll ? '全选': '未全选');
+		// 			break;
+		// 	};
+		// });
 
 		//监听行工具事件
 		table.on('tool(test)', function(obj){

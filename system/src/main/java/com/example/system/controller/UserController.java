@@ -23,17 +23,17 @@ public class UserController {
          */
         if(req.getSession().getAttribute("vrifyCode")!=null){
             if(req.getSession().getAttribute("vrifyCode").equals(loginDTO.getVerify())){
-            switch (loginDTO.getPower()){
-                case 0:
-                    System.out.println(loginMapper.stuLogin(loginDTO.getUserid(),loginDTO.getPassword()));;
-                    return "admin/index/index";
-                case 1:
-                    System.out.println(loginMapper.teachLogin(loginDTO.getUserid(),loginDTO.getPassword()));;
-                    return "admin/index/index";
-                case 2:
-                    System.out.println(loginMapper.userLogin(loginDTO.getUserid(),loginDTO.getPassword()));;
-                    return "admin/index/index";
-            }
+//            switch (loginDTO.getPower()){
+//                case 0:
+//                    System.out.println(loginMapper.stuLogin(loginDTO.getUserid(),loginDTO.getPassword()));;
+//                    return "admin/index/index";
+//                case 1:
+//                    System.out.println(loginMapper.teachLogin(loginDTO.getUserid(),loginDTO.getPassword()));;
+//                    return "admin/index/index";
+//                case 2:
+//                    System.out.println(loginMapper.userLogin(loginDTO.getUserid(),loginDTO.getPassword()));;
+//                    return "admin/index/index";
+//            }
                 System.out.println(123);
                 return "admin/index/index";
             }
