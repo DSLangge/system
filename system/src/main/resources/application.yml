@@ -6,6 +6,9 @@ server:
     context-path: /
 #配置视图解析器
 spring:
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd
   mvc:
     view:
       prefix: /WEB-INF/JSP/

@@ -57,13 +57,14 @@ public class SystemApplicationTests {
     @Test
     public void student() throws ParseException {
 //        System.out.println(studentMapper.findByStuID("201560140330"));
-        Student stu=new Student();
-        stu.setStu_id("201560140331");
-        stu.setStu_name("朱振源");
-        stu.setPassword("78456123");
-        stu.setSchool_year(new SimpleDateFormat("yyyy-MM-dd").parse("2015-09-01"));
-        stu.setGraduat_year(new SimpleDateFormat("yyyy-MM-dd").parse("2019-07-01"));
-        studentMapper.insert(stu);
+//        Student stu=new Student();
+//        stu.setStu_id("201560140331");
+//        stu.setStu_name("朱振源");
+//        stu.setPassword("78456123");
+//        stu.setSchool_year(new SimpleDateFormat("yyyy-MM-dd").parse("2015-09-01"));
+//        stu.setGraduat_year(new SimpleDateFormat("yyyy-MM-dd").parse("2019-07-01"));
+        String a="201560140330";
+        System.out.println(studentMapper.findAllStu());;
     }
 
     @Test

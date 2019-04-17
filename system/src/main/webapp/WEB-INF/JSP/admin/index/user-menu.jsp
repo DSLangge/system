@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<div class="demoTable">
+<div class="demoTable" style="margin: 5px">
 	搜索ID：
 	<div class="layui-inline">
 		<input class="layui-input" name="id" id="demoReload" autocomplete="off">
@@ -23,19 +23,15 @@
 <table class="layui-hide" id="test" lay-filter="test"></table>
 
 <script type="text/html" id="toolbarDemo">
-	<%--<div class="layui-btn-container">--%>
-		<%--<button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>--%>
-		<%--<button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>--%>
-		<%--<button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>--%>
-	<%--</div>--%>
-</script>
-
-<script type="text/html" id="barDemo">
-	<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+	<div class="layui-btn-container">
+		<button class="layui-btn layui-btn-sm" lay-event="add"><i class="layui-icon layui-icon-add-1"></i> 添加</button>
+		<button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="delete"><i class="layui-icon layui-icon-delete"></i> 删除</button>
+		<button class="layui-btn layui-btn-sm" lay-event="edit"><i class="layui-icon layui-icon-edit"></i> 编辑</button>
+	</div>
 </script>
 
 
+<script src="js/jquery-1.11.1.js" type="text/javascript" charset="utf-8"></script>
 <script src="layui/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 
@@ -50,25 +46,14 @@
 			,title: '用户数据表'
 			,cols: [[
 				{type: 'checkbox', fixed: 'left'}
-				,{field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
-				,{field:'user_id', title:'user_id', width:120, edit: 'text'}
-				,{field:'user_name', title:'user_name', width:120, edit: 'text'}
-				,{field:'password', title:'password', width:120, edit: 'text'}
-				,{field:'del', title:'del', width:120, edit: 'text'}
-				// ,{field:'username', title:'用户名', width:120, edit: 'text'}
-				// ,{field:'email', title:'邮箱', width:150, edit: 'text', templet: function(res){
-				// 		return '<em>'+ res.email +'</em>'
-				// 	}}
-				// ,{field:'sex', title:'性别', width:80, edit: 'text', sort: true}
-				// ,{field:'city', title:'城市', width:100}
-				// ,{field:'sign', title:'签名'}
-				// ,{field:'experience', title:'积分', width:80, sort: true}
-				// ,{field:'ip', title:'IP', width:120}
-				// ,{field:'logins', title:'登入次数', width:100, sort: true}
-				// ,{field:'joinTime', title:'加入时间', width:120}
-				,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+				,{field:'id', title:'系统数据库ID', width:80, fixed: 'left', unresize: true, sort: true}
+				,{field:'user_id', title:'系统用户工号', width:120, edit: 'text'}
+				,{field:'user_name', title:'用户名', width:120, edit: 'text'}
+				,{field:'password', title:'密码', width:120, edit: 'text'}
+				,{field:'del', title:'状态', width:120, edit: 'text'}
 			]]
 			,page: true
+			,height: 'full'
 			,id: 'testReload'
 			,response: {
 				statusCode: 200 //重新规定成功的状态码为 200，table 组件默认为 0
@@ -98,44 +83,43 @@
 		});
 
 
-		// //头工具栏事件
-		// table.on('toolbar(test)', function(obj){
-		// 	var checkStatus = table.checkStatus(obj.config.id);
-		// 	switch(obj.event){
-		// 		case 'getCheckData':
-		// 			var data = checkStatus.data;
-		// 			layer.alert(JSON.stringify(data));
-		// 			break;
-		// 		case 'getCheckLength':
-		// 			var data = checkStatus.data;
-		// 			layer.msg('选中了：'+ data.length + ' 个');
-		// 			break;
-		// 		case 'isAll':
-		// 			layer.msg(checkStatus.isAll ? '全选': '未全选');
-		// 			break;
-		// 	};
-		// });
+		//头工具栏事件
+		table.on('toolbar(test)', function(obj){
+			var checkStatus = table.checkStatus(obj.config.id);
+			switch(obj.event){
+				case 'add':
 
-		//监听行工具事件
-		table.on('tool(test)', function(obj){
-			var data = obj.data;
-			//console.log(obj)
-			if(obj.event === 'del'){
-				layer.confirm('真的删除行么', function(index){
-					obj.del();
-					layer.close(index);
-				});
-			} else if(obj.event === 'edit'){
-				layer.prompt({
-					formType: 2
-					,value: data.email
-				}, function(value, index){
-					obj.update({
-						email: value
+					break;
+				case 'delete':
+					var data = checkStatus.data;
+					var batdel="(";//批量删除参数
+					if(data.length===0){
+						layer.msg('请选择一个用户');
+						break;
+					}
+					var n=data.length-1;
+					$.each(data,function(index,ele){
+						if(index<n){
+							batdel+=ele.id+",";
+						}else{
+							batdel+=ele.id+")";
+						}
+					})
+					layer.msg(batdel);
+					break;
+				case 'edit':
+					var data = checkStatus.data;
+					if(data.length!=1){
+						layer.msg("只能选择一个用户哟~");
+						break;
+					}
+					layer.open({
+						type: 2,
+						area: ['500px', '500px'],
+						content: ['admin-info.html', 'no']//添加修改路径
 					});
-					layer.close(index);
-				});
-			}
+					break;
+			};
 		});
 	});
 </script>

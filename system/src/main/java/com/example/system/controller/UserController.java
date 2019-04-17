@@ -2,6 +2,7 @@ package com.example.system.controller;
 
 import com.example.system.dao.LoginMapper;
 import com.example.system.dto.LoginDTO;
+import com.example.system.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,9 @@ public class UserController {
 
     @Resource
     LoginMapper loginMapper;
+
+    @Resource
+    UserService userService;
 
     @RequestMapping("/user_login")
     public String login(LoginDTO loginDTO, HttpServletRequest req, HttpServletResponse resp){
@@ -41,7 +45,6 @@ public class UserController {
         return "login";
     }
 
-
     @RequestMapping("/user_loginOut")
     public String loginOut(HttpServletRequest req, HttpServletResponse resp){
         /**
@@ -52,9 +55,21 @@ public class UserController {
     }
 
     @RequestMapping("/userSystem")
-    public String gitUser(HttpServletRequest req, HttpServletResponse resp){
+    public String getUserPage(HttpServletRequest req, HttpServletResponse resp){
 
         return "admin/index/user-menu";
+    }
+
+    @RequestMapping("/teacherSystem")
+    public String getTeacherPage(HttpServletRequest req, HttpServletResponse resp){
+
+        return "admin/index/teacher-menu";
+    }
+
+    @RequestMapping("/studentSystem")
+    public String getStudentPage(HttpServletRequest req, HttpServletResponse resp){
+
+        return "admin/index/student-menu";
     }
 
 

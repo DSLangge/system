@@ -6,9 +6,9 @@
 		<meta name="renderer" content="webkit">
   		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title>网站后台管理模版</title>
-		<link rel="stylesheet" type="text/css" href="../../static/admin/layui/css/layui.css"/>
-		<link rel="stylesheet" type="text/css" href="../../static/admin/css/admin.css"/>
+		<title>高校辅导员管理系统</title>
+		<link rel="stylesheet" type="text/css" href="static/admin/layui/css/layui.css"/>
+		<link rel="stylesheet" type="text/css" href="static/admin/css/admin.css"/>
 	</head>
 	<body>
 		<div class="main-layout" id='main-layout'>
@@ -20,8 +20,8 @@
 				    <a href="javascript:;"><i class="iconfont">&#xe607;</i>用户基本管理</a>
 				    <dl class="layui-nav-child">
 				      <dd><a href="javascript:;" data-url="/userSystem" data-id='1' data-text="系统用户"><span class="l-line"></span>系统用户</a></dd>
-				      <dd><a href="javascript:;" data-url="menu2.html" data-id='2' data-text="老师用户"><span class="l-line"></span>老师用户</a></dd>
-					  <dd><a href="javascript:;" data-url="system-user.html" data-id='3' data-text="学生用户"><span class="l-line"></span>学生用户</a></dd>
+				      <dd><a href="javascript:;" data-url="/teacherSystem" data-id='2' data-text="老师用户"><span class="l-line"></span>老师用户</a></dd>
+					  <dd><a href="javascript:;" data-url="/studentSystem" data-id='3' data-text="学生用户"><span class="l-line"></span>学生用户</a></dd>
 				    </dl>
 				  </li>
 				  <li class="layui-nav-item">
