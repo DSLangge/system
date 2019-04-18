@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
 
 public interface UserService {
 
-    void insert(User user);
-    void delete(String user_id);
-    void upDate(User user);
+    int insert(User user);
+    int delete(String user_id);
+    int upDate(User user);
     PageInfo<User> findAllUser(Integer page, Integer limit);
     User findByID(Integer id);
     User findByUserID(String user_id);

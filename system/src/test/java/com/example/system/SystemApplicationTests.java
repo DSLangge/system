@@ -63,7 +63,7 @@ public class SystemApplicationTests {
 //        stu.setPassword("78456123");
 //        stu.setSchool_year(new SimpleDateFormat("yyyy-MM-dd").parse("2015-09-01"));
 //        stu.setGraduat_year(new SimpleDateFormat("yyyy-MM-dd").parse("2019-07-01"));
-        String a="201560140330";
+
         System.out.println(studentMapper.findAllStu());;
     }
 

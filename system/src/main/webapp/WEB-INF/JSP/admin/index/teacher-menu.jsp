@@ -12,12 +12,25 @@
 </head>
 <body>
 
-<div class="demoTable" style="margin: 5px">
-    搜索ID：
-    <div class="layui-inline">
-        <input class="layui-input" name="id" id="demoReload" autocomplete="off">
+<div class="demoTable">
+    <div class="layui-form" style="float: left;">
+        <select name="searchtype" lay-verify="required" id="searchtype">
+            <option value="stu_id">学号</option>
+            <option value="stu_name">姓名</option>
+            <option value="stu_age">年龄</option>
+            <option value="stu_edu">学制</option>
+            <option value="stu_nation">民族</option>
+            <option value="stu_style">考生类型</option>
+            <option value="stu_antive">出生地</option>
+            <option value="stu_high">高中</option>
+            <option value="stu_high">入学年份</option>
+            <option value="stu_high">高中</option>
+        </select>
     </div>
-    <button class="layui-btn" data-type="reload">搜索</button>
+    <div class="layui-inline">
+        <input class="layui-input" name="id" id="searchcontent" autocomplete="off">
+    </div>
+    <div class="layui-btn" data-type="reload">搜索</div>
 </div>
 
 <table class="layui-hide" id="test" lay-filter="test"></table>
@@ -47,28 +60,32 @@
             ,cols: [[
                 {type: 'checkbox', fixed: 'left'}
                 ,{field:'id', title:'教师数据库ID', width:80, fixed: 'left', unresize: true, sort: true}
-                ,{field:'teach_id', title:'教师工号', width:120}
-                ,{field:'teach_name', title:'教师姓名', width:120}
-                ,{field:'password', title:'密码', width:120}
-                ,{field:'del', title:'状态', width:120}
+                ,{field:'teach_id', title:'教师工号', width:120,align:'center'}
+                ,{field:'teach_name', title:'教师姓名', width:120,align:'center'}
+                ,{field:'password', title:'密码', width:120,align:'center'}
+                ,{field:'del', title:'状态', width:120,align:'center'}
             ]]
             ,page: true
+            ,height: 'full'
             ,id: 'testReload'
             ,response: {
                 statusCode: 200 //重新规定成功的状态码为 200，table 组件默认为 0
             }
         });
+
+
         var $ = layui.$, active = {
             reload: function(){
-                var demoReload = $('#demoReload');
-
+                var searchcontent = $('#searchcontent');
+                var searchtype = $('#searchtype');
                 //执行重载
                 table.reload('testReload', {
                     page: {
                         curr: 1 //重新从第 1 页开始
                     }
                     ,where: {
-                        id: demoReload.val()
+                        searchcontent: searchcontent.val(),
+                        searchtype: searchtype.val()
                     }
                 });
             }

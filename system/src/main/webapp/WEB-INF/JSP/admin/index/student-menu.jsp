@@ -12,12 +12,25 @@
 </head>
 <body>
 
-<div class="demoTable" style="margin: 5px">
-    搜索ID：
-    <div class="layui-inline">
-        <input class="layui-input" name="id" id="demoReload" autocomplete="off">
+<div class="demoTable">
+    <div class="layui-form" style="float: left;">
+        <select name="searchtype" lay-verify="required" id="searchtype">
+            <option value="stu_id">学号</option>
+            <option value="stu_name">姓名</option>
+            <option value="stu_age">年龄</option>
+            <option value="stu_edu">学制</option>
+            <option value="stu_nation">民族</option>
+            <option value="stu_style">考生类型</option>
+            <option value="stu_antive">出生地</option>
+            <option value="stu_high">高中</option>
+            <option value="stu_high">入学年份</option>
+            <option value="stu_high">高中</option>
+        </select>
     </div>
-    <button class="layui-btn" data-type="reload">搜索</button>
+    <div class="layui-inline">
+        <input class="layui-input" name="id" id="searchcontent" autocomplete="off">
+    </div>
+    <div class="layui-btn" data-type="reload">搜索</div>
 </div>
 
 <table class="layui-hide" id="test" lay-filter="test"></table>
@@ -46,13 +59,24 @@
             ,title: '用户数据表'
             ,cols: [[
                 {type: 'checkbox', fixed: 'left'}
-                ,{field:'id', title:'系统数据库ID', width:80, fixed: 'left', unresize: true, sort: true}
-                ,{field:'stu_id', title:'学生学号', width:120}
-                ,{field:'stu_name', title:'用户名', width:120}
-                ,{field:'password', title:'密码', width:120}
-                ,{field:'school_year', title:'入学年份', width:120}
-                ,{field:'graduat_year', title:'毕业年份', width:120}
-                ,{field:'del', title:'状态', width:120}
+                ,{field:'stu_id', title:'学生学号', width:125, fixed: 'left',align:'center'}
+                ,{field:'stu_name', title:'姓名', width:75, fixed: 'left',align:'center'}
+                ,{field:'stu_sex', title:'性别', width:80,align:'center'}
+                ,{field:'password', title:'密码', width:80,align:'center'}
+                ,{field:'stu_age', title:'年龄', width:60,align:'center'}
+                ,{field:'stu_edu', title:'学制', width:60,align:'center'}
+                ,{field:'stu_nation', title:'民族', width:60,align:'center'}
+                ,{field:'stu_birth', title:'出生日期', width:110,align:'center'}
+                ,{field:'stu_proID', title:'身份证号', width:100,align:'center'}
+                ,{field:'stu_phone', title:'联系电话', width:120,align:'center'}
+                ,{field:'postcode', title:'邮编', width:80,align:'center'}
+                ,{field:'stu_style', title:'考生类型', width:110,align:'center'}
+                ,{field:'stu_email', title:'邮箱', width:110,align:'center'}
+                ,{field:'stu_high', title:'高中', width:110,align:'center'}
+                ,{field:'stu_antive', title:'出生地', width:110,align:'center'}
+                ,{field:'school_year', title:'入学年份', width:110,align:'center'}
+                ,{field:'graduat_year', title:'毕业年份', width:110}
+                ,{field:'del', title:'状态', width:60,align:'center'}
             ]]
             ,page: true
             ,height: 'full'
@@ -65,15 +89,16 @@
 
         var $ = layui.$, active = {
             reload: function(){
-                var demoReload = $('#demoReload');
-
+                var searchcontent = $('#searchcontent');
+                var searchtype = $('#searchtype');
                 //执行重载
                 table.reload('testReload', {
                     page: {
                         curr: 1 //重新从第 1 页开始
                     }
                     ,where: {
-                        id: demoReload.val()
+                        searchcontent: searchcontent.val(),
+                        searchtype: searchtype.val()
                     }
                 });
             }

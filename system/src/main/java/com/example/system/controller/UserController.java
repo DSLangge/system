@@ -54,21 +54,20 @@ public class UserController {
         return "login";
     }
 
+
+
     @RequestMapping("/userSystem")
     public String getUserPage(HttpServletRequest req, HttpServletResponse resp){
-
         return "admin/index/user-menu";
     }
 
     @RequestMapping("/teacherSystem")
     public String getTeacherPage(HttpServletRequest req, HttpServletResponse resp){
-
         return "admin/index/teacher-menu";
     }
 
     @RequestMapping("/studentSystem")
     public String getStudentPage(HttpServletRequest req, HttpServletResponse resp){
-
         return "admin/index/student-menu";
     }
 

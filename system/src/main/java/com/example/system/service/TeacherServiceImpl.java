@@ -13,18 +13,18 @@ public class TeacherServiceImpl implements TeacherService {
     TeacherMapper teacherMapper;
 
     @Override
-    public void insert(Teacher teacher) {
-        teacherMapper.insert(teacher);
+    public int insert(Teacher teacher) {
+        return teacherMapper.insert(teacher);
     }
 
     @Override
-    public void delete(String teach_id) {
-        teacherMapper.delete(teach_id);
+    public int delete(String teach_id) {
+        return teacherMapper.delete(teach_id);
     }
 
     @Override
-    public void upDate(Teacher teacher) {
-        teacherMapper.upDate(teacher);
+    public int upDate(Teacher teacher) {
+        return teacherMapper.upDate(teacher);
     }
 
     @Override

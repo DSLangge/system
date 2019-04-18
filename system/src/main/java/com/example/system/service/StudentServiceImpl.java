@@ -15,18 +15,18 @@ public class StudentServiceImpl implements StudentService {
     @Resource
     StudentMapper studentMapper;
     @Override
-    public void insert(Student student) {
-        studentMapper.insert(student);
+    public int insert(Student student) {
+        return studentMapper.insert(student);
     }
 
     @Override
-    public void delete(String stu_id) {
-        studentMapper.delete(stu_id);
+    public int delete(String stu_id) {
+        return studentMapper.delete(stu_id);
     }
 
     @Override
-    public void upDate(Student student) {
-        studentMapper.upDate(student);
+    public int upDate(Student student) {
+        return studentMapper.upDate(student);
     }
 
     @Override

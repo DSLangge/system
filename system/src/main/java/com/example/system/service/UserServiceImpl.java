@@ -14,18 +14,18 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
 
     @Override
-    public void insert(User user) {
-        userMapper.insert(user);
+    public int insert(User user) {
+        return userMapper.insert(user);
     }
 
     @Override
-    public void delete(String user_id) {
-        userMapper.delete(user_id);
+    public int delete(String user_id) {
+        return userMapper.delete(user_id);
     }
 
     @Override
-    public void upDate(User user) {
-        userMapper.upDate(user);
+    public int upDate(User user) {
+        return userMapper.upDate(user);
     }
 
     @Override

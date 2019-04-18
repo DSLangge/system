@@ -16,14 +16,14 @@ public interface TeacherMapper {
      */
     @Insert("INSERT INTO `javawork`.`teacher`(`teach_id`,`teach_name`,`password`)\n" +
             "VALUES (#{teach_id},#{teach_name},#{password})")
-    void insert(Teacher teacher);
+    int insert(Teacher teacher);
 
     /**
      *删除老师
      * @param teach_id
      */
     @Update("UPDATE `javawork`.`teacher` SET  `del` = 1  WHERE `teach_id` = #{teach_id}")
-    void delete(String teach_id);
+    int delete(String teach_id);
 
     /**
      *通过工号更新老师信息
@@ -31,7 +31,7 @@ public interface TeacherMapper {
      */
     @Update("UPDATE `javawork`.`teacher` SET `teach_name` = #{teach_name}," +
             "   `password` = #{password} WHERE `teach_id` = #{teach_id}")
-    void upDate(Teacher teacher);
+    int upDate(Teacher teacher);
 
     /**
      *查找所有老师

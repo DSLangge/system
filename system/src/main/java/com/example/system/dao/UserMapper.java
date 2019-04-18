@@ -15,16 +15,16 @@ public interface UserMapper {
 //    添加系统用户操作
     @Insert("INSERT INTO `javawork`.`user`(`user_id`,`user_name`,`password`)\n" +
             "VALUES (#{user_id},#{user_name},#{password})")
-    void insert(User user);
+    int insert(User user);
 
 //    删除操作
     @Update("UPDATE `javawork`.`user` SET  `del` = 1  WHERE `user_id` = #{user_id}")
-    void delete(String user_id);
+    int delete(String user_id);
 
 //    通过工号更新系统用户名和密码
     @Update("UPDATE `javawork`.`user` SET `user_name` = #{user_name}," +
             "   `password` = #{password} WHERE `user_id` = #{user_id}")
-    void upDate(User user);
+    int upDate(User user);
 
 //    查找所有存在的用户
     @Select("SELECT * FROM `javawork`.`user` WHERE del=0")
