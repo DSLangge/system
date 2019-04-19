@@ -24,5 +24,6 @@ public class Student {
     private String stu_antive;
     private Date school_year;
     private Date graduat_year;
+    private Integer pow_ID;
     private Integer del;
 }

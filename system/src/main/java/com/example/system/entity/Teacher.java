@@ -8,5 +8,6 @@ public class Teacher {
     private String teach_id;
     private String teach_name;
     private String password;
+    private Integer pow_ID;
     private Integer del;
 }
