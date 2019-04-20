@@ -154,7 +154,6 @@
         form.render();
         //监听信息提交
         form.on('submit(adminInfo)', function(data){
-            layer.msg(JSON.stringify(data.field));
             $.ajax({
                 url : "addstudent",
                 type : "post",
@@ -178,7 +177,7 @@
                     graduat_year : $("input[name='graduat_year']").val()
                 },
                 success : function(data){
-                    alert(data)
+                    layer.msg(data)
                 }
             });
             return false;
