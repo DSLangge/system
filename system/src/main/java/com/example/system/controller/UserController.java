@@ -2,6 +2,8 @@ package com.example.system.controller;
 
 import com.example.system.dao.LoginMapper;
 import com.example.system.dto.LoginDTO;
+import com.example.system.entity.Student;
+import com.example.system.service.StudentService;
 import com.example.system.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,9 @@ public class UserController {
 
     @Resource
     UserService userService;
+
+    @Resource
+    StudentService studentService;
 
     @RequestMapping("/user_login")
     public String login(LoginDTO loginDTO, HttpServletRequest req, HttpServletResponse resp){
@@ -57,18 +62,36 @@ public class UserController {
 
 
     @RequestMapping("/userSystem")
-    public String getUserPage(HttpServletRequest req, HttpServletResponse resp){
+    public String getUserPage(){
         return "admin/index/user-menu";
     }
 
+
+
+
     @RequestMapping("/teacherSystem")
-    public String getTeacherPage(HttpServletRequest req, HttpServletResponse resp){
+    public String getTeacherPage(){
         return "admin/index/teacher-menu";
     }
 
+
+
+
     @RequestMapping("/studentSystem")
-    public String getStudentPage(HttpServletRequest req, HttpServletResponse resp){
+    public String getStudentPage(){
         return "admin/index/student-menu";
+    }
+
+    @RequestMapping("/studentedit")
+    public String getStudentedit(String stu_id){
+        System.out.println(stu_id);
+        return "admin/index/stu-edit";
+    }
+
+    @RequestMapping("/studentadd")
+    public String getStudentadd(){
+        System.out.println("我是返回页面的");
+        return "admin/index/stu-add";
     }
 
 

@@ -64,6 +64,7 @@
                 ,{field:'stu_sex', title:'性别', width:80,align:'center'}
                 ,{field:'password', title:'密码', width:80,align:'center'}
                 ,{field:'stu_age', title:'年龄', width:60,align:'center'}
+                ,{field:'stu_class', title:'班级', width:110,align:'center'}
                 ,{field:'stu_edu', title:'学制', width:60,align:'center'}
                 ,{field:'stu_nation', title:'民族', width:60,align:'center'}
                 ,{field:'stu_birth', title:'出生日期', width:110,align:'center'}
@@ -75,7 +76,7 @@
                 ,{field:'stu_high', title:'高中', width:110,align:'center'}
                 ,{field:'stu_antive', title:'出生地', width:110,align:'center'}
                 ,{field:'school_year', title:'入学年份', width:110,align:'center'}
-                ,{field:'graduat_year', title:'毕业年份', width:110}
+                ,{field:'graduat_year', title:'毕业年份', width:110,align:'center'}
                 ,{field:'del', title:'状态', width:60,align:'center'}
             ]]
             ,page: true
@@ -115,7 +116,11 @@
             var checkStatus = table.checkStatus(obj.config.id);
             switch(obj.event){
                 case 'add':
-
+                    layer.open({
+                        type: 2,
+                        area: ['1400px', '600px'],
+                        content: ['studentadd', 'no']//添加修改路径
+                    });
                     break;
                 case 'delete':
                     var data = checkStatus.data;
@@ -140,10 +145,12 @@
                         layer.msg("只能选择一个用户哟~");
                         break;
                     }
-                    layer.open({
-                        type: 2,
-                        area: ['500px', '500px'],
-                        content: ['admin-info.html', 'no']//添加修改路径
+                    $.each(data,function(index,ele){
+                        layer.open({
+                            type: 2,
+                            area: ['1400px', '600px'],
+                            content: ['studentedit?stu_id='+ele.stu_id, 'no']//添加修改路径
+                        });
                     });
                     break;
             };

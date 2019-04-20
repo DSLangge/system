@@ -13,6 +13,7 @@ import com.example.system.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -88,6 +89,12 @@ public class PersonController {
         System.out.println(pageDTO);
         PageInfo<Student> allStu = studentService.findAllStu(pageDTO.getPage(), pageDTO.getLimit());
         return new ResultMapDTO(200,"",allStu.getSize(),allStu.getList());
+    }
+
+    @PostMapping("/addstudent")
+    public String addStudent(Student student){
+        System.out.println(student);
+        return "添加成功";
     }
 
 

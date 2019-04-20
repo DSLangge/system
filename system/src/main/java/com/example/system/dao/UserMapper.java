@@ -14,7 +14,7 @@ public interface UserMapper {
 
 //    添加系统用户操作
     @Insert("INSERT INTO `javawork`.`user`(`user_id`,`user_name`,`password`)\n" +
-            "VALUES (#{user_id},#{user_name},#{password})")
+            "VALUES (#{user_id},#{user_name},123456)")
     int insert(User user);
 
 //    删除操作

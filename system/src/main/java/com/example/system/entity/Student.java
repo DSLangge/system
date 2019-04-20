@@ -12,6 +12,7 @@ public class Student {
     private String stu_sex;
     private String password;
     private Integer stu_age;
+    private String stu_class;
     private Integer stu_edu;
     private String stu_nation;
     private Date stu_birth;

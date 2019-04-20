@@ -15,7 +15,7 @@ public interface TeacherMapper {
      * @param teacher
      */
     @Insert("INSERT INTO `javawork`.`teacher`(`teach_id`,`teach_name`,`password`)\n" +
-            "VALUES (#{teach_id},#{teach_name},#{password})")
+            "VALUES (#{teach_id},#{teach_name},123456)")
     int insert(Teacher teacher);
 
     /**
