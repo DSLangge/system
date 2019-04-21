@@ -106,7 +106,7 @@
 					break;
 				case 'delete':
 					var data = checkStatus.data;
-					var batdel="(";//批量删除参数
+					var batdel="";//批量删除参数
 					if(data.length===0){
 						layer.msg('请选择一个用户');
 						break;
@@ -114,12 +114,24 @@
 					var n=data.length-1;
 					$.each(data,function(index,ele){
 						if(index<n){
-							batdel+=ele.id+",";
+							batdel+=ele.stu_id+"-";
 						}else{
-							batdel+=ele.id+")";
+							batdel+=ele.stu_id;
 						}
-					})
-					layer.msg(batdel);
+					});
+					layer.confirm('真的要删除么？', function(index){
+						// $.ajax({
+						// 	url : "deletestudent",
+						// 	type : "post",
+						// 	data : {
+						// 		batdel : batdel
+						// 	},
+						// 	success : function(data){
+						// 		layer.msg(data)
+						// 	}
+						// });
+						layer.close(index);
+					});
 					break;
 				case 'edit':
 					var data = checkStatus.data;

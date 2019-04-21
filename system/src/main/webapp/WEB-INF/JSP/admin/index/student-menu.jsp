@@ -19,12 +19,14 @@
             <option value="stu_name">姓名</option>
             <option value="stu_age">年龄</option>
             <option value="stu_edu">学制</option>
+            <option value="stu_class">班级</option>
             <option value="stu_nation">民族</option>
             <option value="stu_style">考生类型</option>
             <option value="stu_antive">出生地</option>
             <option value="stu_high">高中</option>
-            <option value="stu_high">入学年份</option>
-            <option value="stu_high">高中</option>
+            <option value="school_year">入学年份</option>
+            <option value="graduat_year">毕业年份</option>
+            <option value="stu_birth">出生日期</option>
         </select>
     </div>
     <div class="layui-inline">
@@ -124,7 +126,7 @@
                     break;
                 case 'delete':
                     var data = checkStatus.data;
-                    var batdel="(";//批量删除参数
+                    var batdel="";//批量删除参数
                     if(data.length===0){
                         layer.msg('请选择一个用户');
                         break;
@@ -132,12 +134,25 @@
                     var n=data.length-1;
                     $.each(data,function(index,ele){
                         if(index<n){
-                            batdel+=ele.id+",";
+                            batdel+=ele.stu_id+"-";
                         }else{
-                            batdel+=ele.id+")";
+                            batdel+=ele.stu_id;
                         }
-                    })
-                    layer.msg(batdel);
+                    });
+                    layer.confirm('真的要删除么？', function(index){
+                        $.ajax({
+                            url : "deleteper",
+                            type : "post",
+                            data : {
+                                batdel : batdel,
+                                type: "student"
+                            },
+                            success : function(data){
+                                layer.msg(data)
+                            }
+                        });
+                        layer.close(index);
+                    });
                     break;
                 case 'edit':
                     var data = checkStatus.data;

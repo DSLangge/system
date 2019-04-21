@@ -37,4 +37,5 @@ public interface UserMapper {
 //    根据工号查找用户
     @Select("SELECT * FROM `javawork`.`user` WHERE user_id=#{user_id} AND del=0")
     User findByUserID(String user_id);
+
 }

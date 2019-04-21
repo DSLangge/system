@@ -27,8 +27,8 @@
 				  <li class="layui-nav-item">
 				    <a href="javascript:;"><i class="iconfont">&#xe609;</i>通知事件管理</a>
 				    <dl class="layui-nav-child">
-				      <dd><a href="javascript:;" data-url="article-list.html" data-id='3' data-text="添加事务"><span class="l-line"></span>添加事务</a></dd>
-				      <dd><a href="javascript:;" data-url="danye-list.html" data-id='9' data-text="修改事务"><span class="l-line"></span>修改事务</a></dd>
+				      <dd><a href="javascript:;" data-url="修改" data-id='3' data-text="添加事务"><span class="l-line"></span>添加事务</a></dd>
+				      <dd><a href="javascript:;" data-url="修改" data-id='9' data-text="修改事务"><span class="l-line"></span>修改事务</a></dd>
 				    </dl>
 				  </li>
 					<li class="layui-nav-item">
@@ -44,7 +44,7 @@
 				    <a href="javascript:;"><i class="iconfont">&#xe60a;</i>安全管理</a>
 				  </li>
 				  <li class="layui-nav-item">
-				  	<a href="javascript:;" data-url="system.html" data-id='6' data-text="系统维护"><i class="iconfont">&#xe60b;</i>系统维护</a>
+				  	<a href="javascript:;" data-url="修改" data-id='6' data-text="系统维护"><i class="iconfont">&#xe60b;</i>系统维护</a>
 				  </li>
 				</ul>
 			</div>
@@ -75,7 +75,7 @@
 					  <div class="layui-tab-content">
 					    <div class="layui-tab-item layui-show" style="background: #f5f5f5;">
 					    	<!--1-->
-					    	<iframe src="" width="100%" height="100%" name="iframe" scrolling="auto" class="iframe" framborder="0"></iframe>
+					    	<iframe src="/userSystem" width="100%" height="100%" name="iframe" scrolling="auto" class="iframe" framborder="0"></iframe>
 					    	<!--1end-->
 					    </div>
 					  </div>
@@ -89,7 +89,7 @@
 		</div>
 		<script type="text/javascript">
 			var scope={
-				link:'admin/index/welcome.html'
+				link:'修改'
 			}
 		</script>
 		<script src="static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>

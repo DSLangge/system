@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,6 +76,37 @@ public class PersonController {
         return new ResultMapDTO(200,"",allTeacher.getSize(),allTeacher.getList());
     }
 
+    @PostMapping("/addteacher")
+    public String addTeacher(Teacher teacher){
+        System.out.println(teacher);
+        int i = teacherService.insert(teacher);
+        if(i==1){
+            return "老师添加成功";
+        }
+        return "老师添加失败";
+    }
+
+    @PostMapping("/editteacher")
+    public String editTeacher(Teacher teacher){
+        int i = teacherService.upDate(teacher);
+        if(i==1){
+            return "老师修改成功";
+        }
+        return "老师修改失败";
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * 需要判断传入searchDTO内的数据
      * @param pageDTO
@@ -94,7 +126,51 @@ public class PersonController {
     @PostMapping("/addstudent")
     public String addStudent(Student student){
         System.out.println(student);
-        return "添加成功";
+        int i = studentService.insert(student);
+        if(i==1){
+            return "学生添加成功";
+        }
+        return "学生添加失败";
+    }
+
+    @PostMapping("/editstudent")
+    public String editStudent(Student student){
+        System.out.println(student);
+        int i = studentService.upDate(student);
+        if(i==1){
+            return "修改成功";
+        }
+        return "修改失败";
+    }
+
+    /**
+     * 用户删除操作
+     * @param batdel
+     * @return
+     */
+    @PostMapping("/deleteper")
+    public String deleteStudent(String  batdel,String type){
+        System.out.println(batdel+type);
+        int i=0;
+        String[] split = batdel.split("-");
+        switch (type){
+            case "student":
+                for (String s : split) {
+                    i+=studentService.delete(s);
+                }
+                break;
+            case "teacher":
+                for (String s : split) {
+                    i+=teacherService.delete(s);
+                }
+                break;
+            case "user":
+                break;
+        }
+        if(i==split.length){
+            return "删除成功";
+        }
+        return "删除失败";
     }
 
 

@@ -14,8 +14,8 @@ public interface TeacherMapper {
      *添加老师
      * @param teacher
      */
-    @Insert("INSERT INTO `javawork`.`teacher`(`teach_id`,`teach_name`,`password`)\n" +
-            "VALUES (#{teach_id},#{teach_name},123456)")
+    @Insert("INSERT INTO `javawork`.`teacher`(`teach_id`,`teach_name`,`teach_sex`,`password`,`entry_time`)\n" +
+            "VALUES (#{teach_id},#{teach_name},#{teach_sex},123456,#{entry_time})")
     int insert(Teacher teacher);
 
     /**
@@ -29,8 +29,21 @@ public interface TeacherMapper {
      *通过工号更新老师信息
      * @param teacher
      */
-    @Update("UPDATE `javawork`.`teacher` SET `teach_name` = #{teach_name}," +
-            "   `password` = #{password} WHERE `teach_id` = #{teach_id}")
+    @Update("<script>" +
+            "       UPDATE `javawork`.`teacher`" +
+            "        <set>" +
+            "        <if test=\"teach_sex!=null and teach_sex!=''\">" +
+            "            `teach_sex` = #{teach_sex}," +
+            "        </if>" +
+            "        <if test=\"password!=null and password!=''\">" +
+            "            `password` = #{password}," +
+            "        </if>" +
+            "        <if test=\"entry_time!=null\">" +
+            "            `entry_time` = #{entry_time}," +
+            "        </if>"  +
+            "        </set>" +
+            "        WHERE `teach_id` = #{teach_id} and del = 0" +
+            "</script>")
     int upDate(Teacher teacher);
 
     /**

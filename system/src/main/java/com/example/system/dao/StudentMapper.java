@@ -32,9 +32,59 @@ public interface StudentMapper {
 
     /**
      * 通过学号更新学生
+     * mybatis版本BUG，日期类型不能与空字符串比较，否则报：java.lang.IllegalArgumentException: invalid comparison: java.util.Date and java.lang.String
      */
-    @Update("UPDATE `javawork`.`student` SET `stu_name` = #{stu_name}," +
-            "   `password` = #{password} WHERE `stu_id` = #{stu_id}")
+    @Update("<script>" +
+            "       UPDATE `javawork`.`student`" +
+            "        <set>" +
+            "        <if test=\"stu_sex!=null and stu_sex!=''\">" +
+            "            `stu_sex` = #{stu_sex}," +
+            "        </if>" +
+            "        <if test=\"password!=null and password!=''\">" +
+            "            `password` = #{password}," +
+            "        </if>" +
+            "        <if test=\"stu_age!=null and stu_age!=''\">" +
+            "            `stu_age` = #{stu_age}," +
+            "        </if>"  +
+            "        <if test=\"stu_class!=null and stu_class!=''\">" +
+            "            `stu_class` = #{stu_class}," +
+            "        </if>"  +
+            "        <if test=\"stu_nation!=null and stu_nation!=''\">" +
+            "            `stu_nation` = #{stu_nation}," +
+            "        </if>"  +
+            "        <if test=\"stu_birth!=null\">" +
+            "            `stu_birth` = #{stu_birth}," +
+            "        </if>"  +
+            "        <if test=\"stu_proID!=null and stu_proID!=''\">" +
+            "            `stu_proID` = #{stu_proID}," +
+            "        </if>"  +
+            "        <if test=\"stu_phone!=null and stu_phone!=''\">" +
+            "            `stu_phone` = #{stu_phone}," +
+            "        </if>"  +
+            "        <if test=\"postcode!=null and postcode!=''\">" +
+            "            `postcode` = #{postcode}," +
+            "        </if>"  +
+            "        <if test=\"stu_style!=null and stu_style!=''\">" +
+            "            `stu_style` = #{stu_style}," +
+            "        </if>"  +
+            "        <if test=\"stu_email!=null and stu_email!=''\">" +
+            "            `stu_email` = #{stu_email}," +
+            "        </if>"  +
+            "        <if test=\"stu_high!=null and stu_high!=''\">" +
+            "            `stu_high` = #{stu_high}," +
+            "        </if>"  +
+            "        <if test=\"stu_antive!=null and stu_antive!=''\">" +
+            "            `stu_antive` = #{stu_antive}," +
+            "        </if>"  +
+            "        <if test=\"school_year!=null\">" +
+            "            `school_year` = #{school_year}," +
+            "        </if>"  +
+            "        <if test=\"graduat_year!=null\">" +
+            "            `graduat_year` = #{graduat_year}," +
+            "        </if>"  +
+            "        </set>" +
+            "        WHERE `stu_id` = #{stu_id} and del = 0" +
+            "</script>")
     int upDate(Student student);
 
     /**

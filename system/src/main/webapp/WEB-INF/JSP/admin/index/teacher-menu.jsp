@@ -15,16 +15,10 @@
 <div class="demoTable">
     <div class="layui-form" style="float: left;">
         <select name="searchtype" lay-verify="required" id="searchtype">
-            <option value="stu_id">学号</option>
-            <option value="stu_name">姓名</option>
-            <option value="stu_age">年龄</option>
-            <option value="stu_edu">学制</option>
-            <option value="stu_nation">民族</option>
-            <option value="stu_style">考生类型</option>
-            <option value="stu_antive">出生地</option>
-            <option value="stu_high">高中</option>
-            <option value="stu_high">入学年份</option>
-            <option value="stu_high">高中</option>
+            <option value="teach_id">教师工号</option>
+            <option value="teach_name">教师姓名</option>
+            <option value="teach_sex">性别</option>
+            <option value="entry_time">入职时间</option>0
         </select>
     </div>
     <div class="layui-inline">
@@ -59,11 +53,12 @@
             ,title: '教师信息'
             ,cols: [[
                 {type: 'checkbox', fixed: 'left'}
-                ,{field:'id', title:'教师数据库ID', width:80, fixed: 'left', unresize: true, sort: true}
-                ,{field:'teach_id', title:'教师工号', width:120,align:'center'}
-                ,{field:'teach_name', title:'教师姓名', width:120,align:'center'}
-                ,{field:'password', title:'密码', width:120,align:'center'}
-                ,{field:'del', title:'状态', width:120,align:'center'}
+                ,{field:'teach_id', title:'教师工号', width:125, fixed: 'left', unresize: true, sort: true,align:'center'}
+                ,{field:'teach_name', title:'教师姓名', width:110,align:'center'}
+                ,{field:'teach_sex', title:'性别', width:80,align:'center'}
+                ,{field:'password', title:'密码', width:100,align:'center'}
+                ,{field:'entry_time', title:'入职时间', width:110,align:'center'}
+                ,{field:'del', title:'状态', width:60,align:'center'}
             ]]
             ,page: true
             ,height: 'full'
@@ -102,11 +97,15 @@
             var checkStatus = table.checkStatus(obj.config.id);
             switch(obj.event){
                 case 'add':
-
+                    layer.open({
+                        type: 2,
+                        area: ['1000px', '400px'],
+                        content: ['teacheradd', 'no']//添加修改路径
+                    });
                     break;
                 case 'delete':
                     var data = checkStatus.data;
-                    var batdel="(";//批量删除参数
+                    var batdel="";//批量删除参数
                     if(data.length===0){
                         layer.msg('请选择一个用户');
                         break;
@@ -114,12 +113,25 @@
                     var n=data.length-1;
                     $.each(data,function(index,ele){
                         if(index<n){
-                            batdel+=ele.id+",";
+                            batdel+=ele.teach_id+"-";
                         }else{
-                            batdel+=ele.id+")";
+                            batdel+=ele.teach_id;
                         }
-                    })
-                    layer.msg(batdel);
+                    });
+                    layer.confirm('真的要删除么？', function(index){
+                        $.ajax({
+                            url : "deleteper",
+                            type : "post",
+                            data : {
+                                batdel : batdel,
+                                type: "teacher"
+                            },
+                            success : function(data){
+                                layer.msg(data)
+                            }
+                        });
+                        layer.close(index);
+                    });
                     break;
                 case 'edit':
                     var data = checkStatus.data;
@@ -127,10 +139,12 @@
                         layer.msg("只能选择一个用户哟~");
                         break;
                     }
-                    layer.open({
-                        type: 2,
-                        area: ['500px', '500px'],
-                        content: ['', 'no']//添加修改路径
+                    $.each(data,function(index,ele){
+                        layer.open({
+                            type: 2,
+                            area: ['1000px', '400px'],
+                            content: ['teacheredit?teach_id='+ele.teach_id, 'no']//添加修改路径
+                        });
                     });
                     break;
             };

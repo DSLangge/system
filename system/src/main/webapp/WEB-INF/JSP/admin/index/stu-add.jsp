@@ -66,7 +66,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">民族：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="stu_nation" required lay-verify="required" placeholder="请输入名族" autocomplete="off" class="layui-input">
+                            <input type="text" name="stu_nation" required lay-verify="required" placeholder="请输入民族" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
