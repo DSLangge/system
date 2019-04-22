@@ -141,7 +141,7 @@
                     });
                     layer.confirm('真的要删除么？', function(index){
                         $.ajax({
-                            url : "deleteper",
+                            url : "delete",
                             type : "post",
                             data : {
                                 batdel : batdel,

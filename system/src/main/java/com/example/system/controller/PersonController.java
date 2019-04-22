@@ -148,7 +148,7 @@ public class PersonController {
      * @param batdel
      * @return
      */
-    @PostMapping("/deleteper")
+    @PostMapping("/delete")
     public String deleteStudent(String  batdel,String type){
         System.out.println(batdel+type);
         int i=0;

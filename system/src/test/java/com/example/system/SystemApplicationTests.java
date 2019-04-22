@@ -4,9 +4,11 @@ import com.example.system.dao.LoginMapper;
 import com.example.system.dao.StudentMapper;
 import com.example.system.dao.TeacherMapper;
 import com.example.system.dao.UserMapper;
+import com.example.system.entity.Inform;
 import com.example.system.entity.Student;
 import com.example.system.entity.Teacher;
 import com.example.system.entity.User;
+import com.example.system.service.InformService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.annotation.Resource;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -28,6 +31,8 @@ public class SystemApplicationTests {
     StudentMapper studentMapper;
     @Resource
     LoginMapper loginMapper;
+    @Resource
+    InformService informService;
 
     @Test
     public void insert() {
@@ -40,7 +45,11 @@ public class SystemApplicationTests {
 
     @Test
     public void delete() {
-        userMapper.delete("10001");
+//        userMapper.delete("10001");
+        Inform inform = new Inform();
+        inform.setId(1);
+        inform.setInf_title("良哥");
+        System.out.println(informService.update(inform));;
     }
 
     @Test

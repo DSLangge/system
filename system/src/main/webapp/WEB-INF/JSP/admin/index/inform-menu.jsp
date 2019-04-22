@@ -1,3 +1,10 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: Acer
+  Date: 2019/4/22
+  Time: 16:33
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -15,10 +22,9 @@
 <div class="demoTable">
     <div class="layui-form" style="float: left;">
         <select name="searchtype" lay-verify="required" id="searchtype">
-            <option value="teach_id">教师工号</option>
-            <option value="teach_name">教师姓名</option>
-            <option value="teach_sex">性别</option>
-            <option value="entry_time">入职时间</option>0
+            <option value="stu_id">学号</option>
+            <option value="stu_name">姓名</option>
+
         </select>
     </div>
     <div class="layui-inline">
@@ -48,16 +54,16 @@
 
         table.render({
             elem: '#test'
-            ,url:'/teacher'
+            ,url:'/inform'
             ,toolbar: '#toolbarDemo'
-            ,title: '教师信息'
+            ,title: '用户数据表'
             ,cols: [[
                 {type: 'checkbox', fixed: 'left'}
-                ,{field:'teach_id', title:'教师工号', width:125, fixed: 'left', unresize: true, sort: true,align:'center'}
-                ,{field:'teach_name', title:'教师姓名', width:110,align:'center'}
-                ,{field:'teach_sex', title:'性别', width:80,align:'center'}
-                ,{field:'password', title:'密码', width:100,align:'center'}
-                ,{field:'entry_time', title:'入职时间', width:110,align:'center'}
+                ,{field:'stu_id', title:'学生学号', width:125, fixed: 'left',align:'center'}
+                ,{field:'stu_name', title:'姓名', width:75, fixed: 'left',align:'center'}
+                ,{field:'stu_sex', title:'性别', width:80,align:'center'}
+                ,{field:'password', title:'密码', width:80,align:'center'}
+                ,{field:'stu_age', title:'年龄', width:60,align:'center'}
                 ,{field:'del', title:'状态', width:60,align:'center'}
             ]]
             ,page: true
@@ -97,40 +103,41 @@
             var checkStatus = table.checkStatus(obj.config.id);
             switch(obj.event){
                 case 'add':
-                    layer.open({
-                        type: 2,
-                        area: ['1000px', '400px'],
-                        content: ['teacheradd', 'no']//添加修改路径
-                    });
+                    layer.msg("通知添加");
+                    // layer.open({
+                    //     type: 2,
+                    //     area: ['1400px', '600px'],
+                    //     content: ['studentadd', 'no']//添加修改路径
+                    // });
                     break;
                 case 'delete':
                     var data = checkStatus.data;
                     var batdel="";//批量删除参数
                     if(data.length===0){
-                        layer.msg('请选择一个用户');
+                        layer.msg('请至少选择一条通知');
                         break;
                     }
                     var n=data.length-1;
                     $.each(data,function(index,ele){
                         if(index<n){
-                            batdel+=ele.teach_id+"-";
+                            batdel+=ele.id+"-";
                         }else{
-                            batdel+=ele.teach_id;
+                            batdel+=ele.id;
                         }
                     });
                     layer.confirm('真的要删除么？', function(index){
-                        $.ajax({
-                            url : "delete",
-                            type : "post",
-                            data : {
-                                batdel : batdel,
-                                type: "teacher"
-                            },
-                            success : function(data){
-                                layer.msg(data)
-                            }
-                        });
-                        layer.close(index);
+                        // $.ajax({
+                        //     url : "delete",
+                        //     type : "post",
+                        //     data : {
+                        //         batdel : batdel,
+                        //         type: "inform"
+                        //     },
+                        //     success : function(data){
+                        //         layer.msg(data)
+                        //     }
+                        // });
+                        // layer.close(index);
                     });
                     break;
                 case 'edit':
@@ -139,13 +146,14 @@
                         layer.msg("只能选择一个用户哟~");
                         break;
                     }
-                    $.each(data,function(index,ele){
-                        layer.open({
-                            type: 2,
-                            area: ['1000px', '400px'],
-                            content: ['teacheredit?teach_id='+ele.teach_id, 'no']//添加修改路径
-                        });
-                    });
+                    layer.msg("通知编辑");
+                    // $.each(data,function(index,ele){
+                    //     layer.open({
+                    //         type: 2,
+                    //         area: ['1400px', '600px'],
+                    //         content: ['studentedit?stu_id='+ele.stu_id, 'no']//添加修改路径
+                    //     });
+                    // });
                     break;
             };
         });
