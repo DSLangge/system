@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -156,6 +157,18 @@ public class PersonController {
         System.out.println(pageDTO);
         PageInfo<Inform> allInfo = informService.findAllInfo(pageDTO.getPage(), pageDTO.getLimit());
         return new ResultMapDTO(200,"",allInfo.getSize(),allInfo.getList());
+    }
+
+    @PostMapping("/editinform")
+    public String editInform(Inform inform){
+        if(inform.getInf_pub()==1){
+            inform.setInf_pubtime(new Date());
+        }
+        int i = informService.update(inform);
+        if(i==1){
+            return "200";
+        }
+        return "0";
     }
 
 

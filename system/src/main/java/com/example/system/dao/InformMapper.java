@@ -38,7 +38,7 @@ public interface InformMapper {
             "        <if test=\"inf_pubtime!=null\">" +
             "            `inf_pubtime` = #{inf_pubtime}," +
             "        </if>"  +
-            "        <if test=\"inf_pub!=null and inf_pub!=''\">" +
+            "        <if test=\"inf_pub!=null\">" +
             "            `inf_pub` = #{inf_pub}," +
             "        </if>"  +
             "           `inf_updatime`= now() "+

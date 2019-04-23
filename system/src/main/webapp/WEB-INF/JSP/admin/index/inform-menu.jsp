@@ -73,7 +73,7 @@
                 ,{field:'pre_id', title:'发布人工号', width:110,align:'center'}
                 ,{field:'inf_creatime', title:'创建时间', width:160,align:'center'}
                 ,{field:'inf_updatime', title:'更新时间', width:160,align:'center'}
-                ,{field:'inf_pubtime', title:'发布时间', width:160,align:'center'}
+                ,{field:'inf_pubtime', title:'上次发布时间', width:160,align:'center'}
                 ,{field:'inf_pub', title:'是否发布', width:110, templet: '#checkbox_inf_pub', unresize: true,align:'center'}
                 ,{field:'del', title:'状态', width:60,align:'center'}
             ]]
@@ -90,24 +90,40 @@
             var id=this.value;
             if(obj.elem.checked){
                 layer.confirm('确定发布本条通知？', function(index){
-                    // $.ajax({
-                    //     url : "delete",
-                    //     type : "post",
-                    //     data : {
-                    //         batdel : batdel,
-                    //         type: "inform"
-                    //     },
-                    //     success : function(data){
-                    //         layer.msg(data)
-                    //     }
-                    // });
-                    // layer.close(index);
-                    layer.msg("您需要发布通知的ID为："+id);
+                    $.ajax({
+                        url : "editinform",
+                        type : "post",
+                        data : {
+                            id : id,
+                            inf_pub: 1
+                        },
+                        success : function(data){
+                            if(data=="200"){
+                                layer.msg("发布成功");
+                            }else{
+                                layer.msg("发布失败")
+                            }
+                        }
+                    });
+                    layer.close(index);
                 });
             }else{
-                layer.msg("取消发布");
+                $.ajax({
+                    url : "editinform",
+                    type : "post",
+                    data : {
+                        id : id,
+                        inf_pub: 0
+                    },
+                    success : function(data){
+                        if(data=="200"){
+                            layer.msg("取消成功");
+                        }else{
+                            layer.msg("取消失败")
+                        }
+                    }
+                });
             }
-            layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
         });
 
 

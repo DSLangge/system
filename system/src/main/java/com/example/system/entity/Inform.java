@@ -14,14 +14,14 @@ public class Inform {
 //    发布人ID
     private String pre_id;
 //    发布按钮
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:MM:ss")
-    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:MM:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     private Date inf_creatime;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:MM:ss")
-    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:MM:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     private Date inf_updatime;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:MM:ss")
-    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:MM:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     private Date inf_pubtime;
     private Integer inf_pub;
     private Integer del;
