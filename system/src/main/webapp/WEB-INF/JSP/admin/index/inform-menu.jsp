@@ -22,8 +22,10 @@
 <div class="demoTable">
     <div class="layui-form" style="float: left;">
         <select name="searchtype" lay-verify="required" id="searchtype">
-            <option value="stu_id">学号</option>
-            <option value="stu_name">姓名</option>
+            <option value="inf_title">事务标题</option>
+            <option value="inf_msg">事务信息</option>
+            <%--暂定发布人ID 可改发布人姓名--%>
+            <option value="pre_id">发布人ID</option>
 
         </select>
     </div>
@@ -44,14 +46,20 @@
 </script>
 
 
+<script type="text/html" id="checkbox_inf_pub">
+    <%-- 报错无所谓~可忽略 --%>
+    <input type="checkbox" name="inf_pub" value="{{d.id}}" lay-skin="switch" lay-text="已发布|未发布" lay-filter="inf_pubDemo" {{ d.inf_pub == 1 ? 'checked' : '' }}>
+</script>
+
+
 <script src="js/jquery-1.11.1.js" type="text/javascript" charset="utf-8"></script>
 <script src="layui/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 
 <script>
     layui.use('table', function(){
-        var table = layui.table;
-
+        var table = layui.table
+        ,form = layui.form;
         table.render({
             elem: '#test'
             ,url:'/inform'
@@ -59,11 +67,14 @@
             ,title: '用户数据表'
             ,cols: [[
                 {type: 'checkbox', fixed: 'left'}
-                ,{field:'stu_id', title:'学生学号', width:125, fixed: 'left',align:'center'}
-                ,{field:'stu_name', title:'姓名', width:75, fixed: 'left',align:'center'}
-                ,{field:'stu_sex', title:'性别', width:80,align:'center'}
-                ,{field:'password', title:'密码', width:80,align:'center'}
-                ,{field:'stu_age', title:'年龄', width:60,align:'center'}
+                ,{field:'id', title:'事务序号', width:110, fixed: 'left',align:'center'}
+                ,{field:'inf_title', title:'事务标题', width:110, fixed: 'left',align:'center'}
+                ,{field:'inf_msg', title:'事务信息', width:200,align:'center'}
+                ,{field:'pre_id', title:'发布人工号', width:110,align:'center'}
+                ,{field:'inf_creatime', title:'创建时间', width:160,align:'center'}
+                ,{field:'inf_updatime', title:'更新时间', width:160,align:'center'}
+                ,{field:'inf_pubtime', title:'发布时间', width:160,align:'center'}
+                ,{field:'inf_pub', title:'是否发布', width:110, templet: '#checkbox_inf_pub', unresize: true,align:'center'}
                 ,{field:'del', title:'状态', width:60,align:'center'}
             ]]
             ,page: true
@@ -72,6 +83,31 @@
             ,response: {
                 statusCode: 200 //重新规定成功的状态码为 200，table 组件默认为 0
             }
+        });
+
+        //监听发布操作按钮操作
+        form.on('switch(inf_pubDemo)', function(obj){
+            var id=this.value;
+            if(obj.elem.checked){
+                layer.confirm('确定发布本条通知？', function(index){
+                    // $.ajax({
+                    //     url : "delete",
+                    //     type : "post",
+                    //     data : {
+                    //         batdel : batdel,
+                    //         type: "inform"
+                    //     },
+                    //     success : function(data){
+                    //         layer.msg(data)
+                    //     }
+                    // });
+                    // layer.close(index);
+                    layer.msg("您需要发布通知的ID为："+id);
+                });
+            }else{
+                layer.msg("取消发布");
+            }
+            layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
         });
 
 

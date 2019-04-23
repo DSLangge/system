@@ -4,9 +4,11 @@ import com.example.system.dao.UserMapper;
 import com.example.system.dto.PageDTO;
 import com.example.system.dto.ResultMapDTO;
 import com.example.system.dto.SearchDTO;
+import com.example.system.entity.Inform;
 import com.example.system.entity.Student;
 import com.example.system.entity.Teacher;
 import com.example.system.entity.User;
+import com.example.system.service.InformService;
 import com.example.system.service.StudentService;
 import com.example.system.service.TeacherService;
 import com.example.system.service.UserService;
@@ -31,6 +33,8 @@ public class PersonController {
     TeacherService teacherService;
     @Resource
     StudentService studentService;
+    @Resource
+    InformService informService;
 
     /**
      * 需要判断传入searchDTO内的数据
@@ -142,6 +146,31 @@ public class PersonController {
         }
         return "修改失败";
     }
+
+
+
+    @GetMapping("/inform")
+    public ResultMapDTO getInform(PageDTO pageDTO, SearchDTO searchDTO) throws JsonProcessingException {
+        System.out.println("这是inform");
+        System.out.println(searchDTO);
+        System.out.println(pageDTO);
+        PageInfo<Inform> allInfo = informService.findAllInfo(pageDTO.getPage(), pageDTO.getLimit());
+        return new ResultMapDTO(200,"",allInfo.getSize(),allInfo.getList());
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * 用户删除操作

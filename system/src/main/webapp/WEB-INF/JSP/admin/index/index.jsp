@@ -27,8 +27,9 @@
 				  <li class="layui-nav-item">
 				    <a href="javascript:;"><i class="iconfont">&#xe609;</i>通知事件管理</a>
 				    <dl class="layui-nav-child">
-				      <dd><a href="javascript:;" data-url="修改" data-id='3' data-text="添加事务"><span class="l-line"></span>添加事务</a></dd>
-				      <dd><a href="javascript:;" data-url="修改" data-id='9' data-text="修改事务"><span class="l-line"></span>修改事务</a></dd>
+						<dd><a href="javascript:;" data-url="/informSystem" data-id='4' data-text="事务列表"><span class="l-line"></span>事务列表</a></dd>
+						<dd><a href="javascript:;" data-url="修改" data-id='3' data-text="添加事务"><span class="l-line"></span>添加事务</a></dd>
+						<dd><a href="javascript:;" data-url="修改" data-id='9' data-text="修改事务"><span class="l-line"></span>修改事务</a></dd>
 				    </dl>
 				  </li>
 					<li class="layui-nav-item">

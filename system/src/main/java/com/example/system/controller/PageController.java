@@ -164,4 +164,13 @@ public class PageController {
 
 
 
+
+
+
+
+    @RequestMapping("/informSystem")
+    public String getInformPage(){
+        return "admin/index/inform-menu";
+    }
+
 }

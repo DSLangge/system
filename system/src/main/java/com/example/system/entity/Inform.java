@@ -1,6 +1,8 @@
 package com.example.system.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -12,8 +14,14 @@ public class Inform {
 //    发布人ID
     private String pre_id;
 //    发布按钮
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:MM:ss")
+    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:MM:ss")
     private Date inf_creatime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:MM:ss")
+    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:MM:ss")
     private Date inf_updatime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:MM:ss")
+    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:MM:ss")
     private Date inf_pubtime;
     private Integer inf_pub;
     private Integer del;
