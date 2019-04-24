@@ -8,13 +8,13 @@ public class ResultMapDTO {
 
     private Integer code;
     private String msg;
-    private Integer count;
+    private Long count;
     private Object data;
 
     public ResultMapDTO() {
     }
 
-    public ResultMapDTO(Integer code, String msg, Integer count, Object data) {
+    public ResultMapDTO(Integer code, String msg, Long count, Object data) {
         this.code = code;
         this.msg = msg;
         this.count = count;

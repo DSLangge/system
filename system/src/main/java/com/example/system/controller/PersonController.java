@@ -56,7 +56,9 @@ public class PersonController {
         System.out.println(searchDTO);
         System.out.println(pageDTO);
         PageInfo<User> allUser = userService.findAllUser(pageDTO.getPage(), pageDTO.getLimit());
-        return new ResultMapDTO(200,"",allUser.getSize(),allUser.getList());
+        ResultMapDTO resultMapDTO = new ResultMapDTO(200, "",allUser.getTotal(), allUser.getList());
+        System.out.println(resultMapDTO);
+        return resultMapDTO;
     }
 
     /**
@@ -78,7 +80,7 @@ public class PersonController {
         System.out.println(searchDTO);
         System.out.println(pageDTO);
         PageInfo<Teacher> allTeacher = teacherService.findAllTeacher(pageDTO.getPage(), pageDTO.getLimit());
-        return new ResultMapDTO(200,"",allTeacher.getSize(),allTeacher.getList());
+        return new ResultMapDTO(200,"",allTeacher.getTotal(),allTeacher.getList());
     }
 
     @PostMapping("/addteacher")
@@ -125,7 +127,7 @@ public class PersonController {
         System.out.println(searchDTO);
         System.out.println(pageDTO);
         PageInfo<Student> allStu = studentService.findAllStu(pageDTO.getPage(), pageDTO.getLimit());
-        return new ResultMapDTO(200,"",allStu.getSize(),allStu.getList());
+        return new ResultMapDTO(200,"",allStu.getTotal(),allStu.getList());
     }
 
     @PostMapping("/addstudent")
@@ -156,7 +158,7 @@ public class PersonController {
         System.out.println(searchDTO);
         System.out.println(pageDTO);
         PageInfo<Inform> allInfo = informService.findAllInfo(pageDTO.getPage(), pageDTO.getLimit());
-        return new ResultMapDTO(200,"",allInfo.getSize(),allInfo.getList());
+        return new ResultMapDTO(200,"",allInfo.getTotal(),allInfo.getList());
     }
 
     @PostMapping("/editinform")
