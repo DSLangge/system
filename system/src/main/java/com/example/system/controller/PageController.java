@@ -2,8 +2,10 @@ package com.example.system.controller;
 
 import com.example.system.dao.LoginMapper;
 import com.example.system.dto.LoginDTO;
+import com.example.system.entity.Inform;
 import com.example.system.entity.Student;
 import com.example.system.entity.Teacher;
+import com.example.system.service.InformService;
 import com.example.system.service.StudentService;
 import com.example.system.service.TeacherService;
 import com.example.system.service.UserService;
@@ -29,7 +31,8 @@ public class PageController {
 
     @Resource
     TeacherService teacherService;
-
+    @Resource
+    InformService informService;
 
     /**
      * 登录跳转
@@ -173,7 +176,16 @@ public class PageController {
         return "admin/index/inform-menu";
     }
 
-
+    @RequestMapping("/informedit")
+    public String getInformedit(Integer id,HttpServletRequest req){
+        Inform info = informService.findByID(id);
+        req.getSession().setAttribute("inform",info);
+        return "admin/index/inform-edit";
+    }
+    @RequestMapping("/informadd")
+    public String getInformadd(){
+        return "admin/index/inform-add";
+    }
 
 
 

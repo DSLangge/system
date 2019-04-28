@@ -15,7 +15,8 @@ public interface InformMapper {
      * @param inform
      * @return
      */
-    @Insert("")
+    @Insert("INSERT INTO `javawork`.`inform`(`inf_title`,`inf_msg`,`pre_id`,`inf_creatime`,`inf_updatime`)\n" +
+            "VALUES (#{inf_title},#{inf_msg},#{pre_id},NOW(),NOW())")
     int insert(Inform inform);
 
     /**

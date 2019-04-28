@@ -52,9 +52,6 @@ public class PersonController {
 //            list.add(userService.findByID(id));
 //            return new ResultMapDTO(200,"",1,list);
 //        }
-        System.out.println("这是user");
-        System.out.println(searchDTO);
-        System.out.println(pageDTO);
         PageInfo<User> allUser = userService.findAllUser(pageDTO.getPage(), pageDTO.getLimit());
         ResultMapDTO resultMapDTO = new ResultMapDTO(200, "",allUser.getTotal(), allUser.getList());
         System.out.println(resultMapDTO);
@@ -76,16 +73,12 @@ public class PersonController {
 //            list.add(teacherService.findByID(id));
 //            return new ResultMapDTO(200,"",1,list);
 //        }
-        System.out.println("这是teacher");
-        System.out.println(searchDTO);
-        System.out.println(pageDTO);
         PageInfo<Teacher> allTeacher = teacherService.findAllTeacher(pageDTO.getPage(), pageDTO.getLimit());
         return new ResultMapDTO(200,"",allTeacher.getTotal(),allTeacher.getList());
     }
 
     @PostMapping("/addteacher")
     public String addTeacher(Teacher teacher){
-        System.out.println(teacher);
         int i = teacherService.insert(teacher);
         if(i==1){
             return "老师添加成功";
@@ -123,16 +116,12 @@ public class PersonController {
      */
     @GetMapping("/student")
     public ResultMapDTO getStudent(PageDTO pageDTO, SearchDTO searchDTO) throws JsonProcessingException {
-        System.out.println("这是student");
-        System.out.println(searchDTO);
-        System.out.println(pageDTO);
         PageInfo<Student> allStu = studentService.findAllStu(pageDTO.getPage(), pageDTO.getLimit());
         return new ResultMapDTO(200,"",allStu.getTotal(),allStu.getList());
     }
 
     @PostMapping("/addstudent")
     public String addStudent(Student student){
-        System.out.println(student);
         int i = studentService.insert(student);
         if(i==1){
             return "学生添加成功";
@@ -142,7 +131,6 @@ public class PersonController {
 
     @PostMapping("/editstudent")
     public String editStudent(Student student){
-        System.out.println(student);
         int i = studentService.upDate(student);
         if(i==1){
             return "修改成功";
@@ -154,17 +142,25 @@ public class PersonController {
 
     @GetMapping("/inform")
     public ResultMapDTO getInform(PageDTO pageDTO, SearchDTO searchDTO) throws JsonProcessingException {
-        System.out.println("这是inform");
-        System.out.println(searchDTO);
-        System.out.println(pageDTO);
         PageInfo<Inform> allInfo = informService.findAllInfo(pageDTO.getPage(), pageDTO.getLimit());
         return new ResultMapDTO(200,"",allInfo.getTotal(),allInfo.getList());
     }
 
+    @PostMapping("/addinform")
+    public String addInform(Inform inform){
+        int i = informService.insert(inform);
+        if(i==1){
+            return "添加成功";
+        }
+        return "添加失败";
+    }
+
     @PostMapping("/editinform")
     public String editInform(Inform inform){
-        if(inform.getInf_pub()==1){
-            inform.setInf_pubtime(new Date());
+        if(inform.getInf_pub()!=null){
+            if(inform.getInf_pub()==1){
+                inform.setInf_pubtime(new Date());
+            }
         }
         int i = informService.update(inform);
         if(i==1){
@@ -194,7 +190,6 @@ public class PersonController {
      */
     @PostMapping("/delete")
     public String deleteStudent(String  batdel,String type){
-        System.out.println(batdel+type);
         int i=0;
         String[] split = batdel.split("-");
         switch (type){
@@ -209,6 +204,11 @@ public class PersonController {
                 }
                 break;
             case "user":
+                break;
+            case "inform":
+                for (String s : split) {
+                    i+=informService.delete(Integer.parseInt(s));
+                }
                 break;
         }
         if(i==split.length){

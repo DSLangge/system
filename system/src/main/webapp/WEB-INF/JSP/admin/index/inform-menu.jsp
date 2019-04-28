@@ -70,7 +70,7 @@
                 ,{field:'id', title:'事务序号', width:110, fixed: 'left',align:'center'}
                 ,{field:'inf_title', title:'事务标题', width:110, fixed: 'left',align:'center'}
                 ,{field:'inf_msg', title:'事务信息', width:200,align:'center'}
-                ,{field:'pre_id', title:'发布人工号', width:110,align:'center'}
+                ,{field:'pre_id', title:'创建人工号', width:110,align:'center'}
                 ,{field:'inf_creatime', title:'创建时间', width:160,align:'center'}
                 ,{field:'inf_updatime', title:'更新时间', width:160,align:'center'}
                 ,{field:'inf_pubtime', title:'上次发布时间', width:160,align:'center'}
@@ -155,12 +155,11 @@
             var checkStatus = table.checkStatus(obj.config.id);
             switch(obj.event){
                 case 'add':
-                    layer.msg("通知添加");
-                    // layer.open({
-                    //     type: 2,
-                    //     area: ['1400px', '600px'],
-                    //     content: ['studentadd', 'no']//添加修改路径
-                    // });
+                    layer.open({
+                        type: 2,
+                        area: ['800px', '350px'],
+                        content: ['informadd', 'no']//添加修改路径
+                    });
                     break;
                 case 'delete':
                     var data = checkStatus.data;
@@ -178,34 +177,34 @@
                         }
                     });
                     layer.confirm('真的要删除么？', function(index){
-                        // $.ajax({
-                        //     url : "delete",
-                        //     type : "post",
-                        //     data : {
-                        //         batdel : batdel,
-                        //         type: "inform"
-                        //     },
-                        //     success : function(data){
-                        //         layer.msg(data)
-                        //     }
-                        // });
-                        // layer.close(index);
+                        $.ajax({
+                            url : "delete",
+                            type : "post",
+                            data : {
+                                batdel : batdel,
+                                type: "inform"
+                            },
+                            success : function(data){
+                                layer.msg(data)
+                            }
+                        });
+                        layer.close(index);
                     });
                     break;
                 case 'edit':
                     var data = checkStatus.data;
                     if(data.length!=1){
-                        layer.msg("只能选择一个用户哟~");
+                        layer.msg("只能选择一个哟~");
                         break;
                     }
                     layer.msg("通知编辑");
-                    // $.each(data,function(index,ele){
-                    //     layer.open({
-                    //         type: 2,
-                    //         area: ['1400px', '600px'],
-                    //         content: ['studentedit?stu_id='+ele.stu_id, 'no']//添加修改路径
-                    //     });
-                    // });
+                    $.each(data,function(index,ele){
+                        layer.open({
+                            type: 2,
+                            area: ['800px', '400px'],
+                            content: ['informedit?id='+ele.id, 'no']//添加修改路径
+                        });
+                    });
                     break;
             };
         });
