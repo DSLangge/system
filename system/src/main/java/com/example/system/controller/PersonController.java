@@ -54,7 +54,6 @@ public class PersonController {
 //        }
         PageInfo<User> allUser = userService.findAllUser(pageDTO.getPage(), pageDTO.getLimit());
         ResultMapDTO resultMapDTO = new ResultMapDTO(200, "",allUser.getTotal(), allUser.getList());
-        System.out.println(resultMapDTO);
         return resultMapDTO;
     }
 
@@ -150,9 +149,9 @@ public class PersonController {
     public String addInform(Inform inform){
         int i = informService.insert(inform);
         if(i==1){
-            return "添加成功";
+            return "200";
         }
-        return "添加失败";
+        return "0";
     }
 
     @PostMapping("/editinform")
