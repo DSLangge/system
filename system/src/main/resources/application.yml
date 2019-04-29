@@ -6,6 +6,11 @@ server:
     context-path: /
 #配置视图解析器
 spring:
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+      enabled: true
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd

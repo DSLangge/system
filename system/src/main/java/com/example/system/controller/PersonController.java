@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -56,6 +58,14 @@ public class PersonController {
         ResultMapDTO resultMapDTO = new ResultMapDTO(200, "",allUser.getTotal(), allUser.getList());
         return resultMapDTO;
     }
+
+
+
+
+
+
+
+
 
     /**
      * 需要判断传入searchDTO内的数据
@@ -139,6 +149,18 @@ public class PersonController {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     @GetMapping("/inform")
     public ResultMapDTO getInform(PageDTO pageDTO, SearchDTO searchDTO) throws JsonProcessingException {
         PageInfo<Inform> allInfo = informService.findAllInfo(pageDTO.getPage(), pageDTO.getLimit());
@@ -170,6 +192,14 @@ public class PersonController {
 
 
 
+    @PostMapping("/upload")
+    public String upload(MultipartFile file){
+        System.out.println(file.getOriginalFilename());
+        System.out.println(file.getSize());
+//        file.transferTo(new File("123"));   根据指定的路径存放上传文件
+        return "00000";
+    }
+
 
 
 
@@ -183,12 +213,12 @@ public class PersonController {
 
 
     /**
-     * 用户删除操作
+     * 删除操作
      * @param batdel
      * @return
      */
     @PostMapping("/delete")
-    public String deleteStudent(String  batdel,String type){
+    public String delete(String  batdel,String type){
         int i=0;
         String[] split = batdel.split("-");
         switch (type){

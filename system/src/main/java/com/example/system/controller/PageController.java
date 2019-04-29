@@ -91,6 +91,10 @@ public class PageController {
     }
 
 
+
+
+
+
     /**
      *   教师用户跳转
      * @return
@@ -171,6 +175,10 @@ public class PageController {
 
 
 
+    /**
+     * 信息管理页面
+     * @return
+     */
     @RequestMapping("/informSystem")
     public String getInformPage(){
         return "admin/index/inform-menu";
@@ -188,9 +196,17 @@ public class PageController {
     }
 
 
+    @RequestMapping("/getupload")
+    public String geetupload(){
+        return "admin/index/upload";
+    }
 
 
 
+    /**
+     * 获取评价页面
+     * @return
+     */
     @RequestMapping("/evaluSheet")
     public String geetEvalSheet(){
         return "admin/index/evalu-sheet";
