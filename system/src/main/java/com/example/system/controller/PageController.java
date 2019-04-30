@@ -2,16 +2,13 @@ package com.example.system.controller;
 
 import com.example.system.dao.LoginMapper;
 import com.example.system.dto.LoginDTO;
+import com.example.system.entity.FeedBack;
 import com.example.system.entity.Inform;
 import com.example.system.entity.Student;
 import com.example.system.entity.Teacher;
-import com.example.system.service.InformService;
-import com.example.system.service.StudentService;
-import com.example.system.service.TeacherService;
-import com.example.system.service.UserService;
+import com.example.system.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +30,8 @@ public class PageController {
     TeacherService teacherService;
     @Resource
     InformService informService;
-
+    @Resource
+    LeaBackService leaBackService;
     /**
      * 登录跳转
      * @param loginDTO
@@ -87,7 +85,7 @@ public class PageController {
      */
     @RequestMapping("/userSystem")
     public String getUserPage(){
-        return "admin/index/user-menu";
+        return "admin/index/user/user-menu";
     }
 
 
@@ -101,7 +99,7 @@ public class PageController {
      */
     @RequestMapping("/teacherSystem")
     public String getTeacherPage(){
-        return "admin/index/teacher-menu";
+        return "admin/index/teacher/teacher-menu";
     }
 
     /**
@@ -114,7 +112,7 @@ public class PageController {
     public String getTeacheredit(String teach_id,HttpServletRequest req){
         Teacher tea = teacherService.findByTeachID(teach_id);
         req.getSession().setAttribute("teacher",tea);
-        return "admin/index/tea-edit";
+        return "admin/index/teacher/tea-edit";
     }
 
     /**
@@ -127,7 +125,7 @@ public class PageController {
     public String getTeacheradd(String teach_id,HttpServletRequest req){
         Teacher tea = teacherService.findByTeachID(teach_id);
         req.getSession().setAttribute("teacher",tea);
-        return "admin/index/tea-add";
+        return "admin/index/teacher/tea-add";
     }
 
 
@@ -145,7 +143,7 @@ public class PageController {
      */
     @RequestMapping("/studentSystem")
     public String getStudentPage(){
-        return "admin/index/student-menu";
+        return "admin/index/student/student-menu";
     }
 
     /**
@@ -157,7 +155,7 @@ public class PageController {
     public String getStudentedit(String stu_id,HttpServletRequest req){
         Student stu = studentService.findByStuID(stu_id);
         req.getSession().setAttribute("student",stu);
-        return "admin/index/stu-edit";
+        return "admin/index/student/stu-edit";
     }
 
     /**
@@ -166,7 +164,7 @@ public class PageController {
      */
     @RequestMapping("/studentadd")
     public String getStudentadd(){
-        return "admin/index/stu-add";
+        return "admin/index/student/stu-add";
     }
 
 
@@ -181,25 +179,63 @@ public class PageController {
      */
     @RequestMapping("/informSystem")
     public String getInformPage(){
-        return "admin/index/inform-menu";
+        return "admin/index/inform/inform-menu";
     }
 
     @RequestMapping("/informedit")
     public String getInformedit(Integer id,HttpServletRequest req){
         Inform info = informService.findByID(id);
         req.getSession().setAttribute("inform",info);
-        return "admin/index/inform-edit";
+        return "admin/index/inform/inform-edit";
     }
     @RequestMapping("/informadd")
     public String getInformadd(){
-        return "admin/index/inform-add";
+        return "admin/index/inform/inform-add";
     }
 
 
-    @RequestMapping("/getupload")
+
+
+
+
+
+
+    @RequestMapping("/adviceSystem")
+    public String getAdvicePage(){
+        return "admin/index/adv/adv-menu";
+    }
+
+
+    @RequestMapping("/advadd")
     public String geetupload(){
-        return "admin/index/upload";
+        return "admin/index/adv/adv-add";
     }
+
+
+
+
+
+
+
+    @RequestMapping("/leabackSystem")
+    public String getLeaAndBackPage(){
+        return "admin/index/leaAndback/lea-back-menu";
+    }
+
+
+    @RequestMapping("/leabackadd")
+    public String getLeaBavkAdd(FeedBack feedBack, HttpServletRequest req){
+        req.setAttribute("back_id",feedBack.getBack_id());
+        return "admin/index/leaAndback/lea-back-add";
+    }
+
+    @RequestMapping("/leabackedit")
+    public String getLeaBavkEdit(Integer back_id, HttpServletRequest req){
+        FeedBack byBackId = leaBackService.findByBackId(back_id);
+        req.setAttribute("feedBack",byBackId);
+        return "admin/index/leaAndback/lea-back-edit";
+    }
+
 
 
 
@@ -209,7 +245,7 @@ public class PageController {
      */
     @RequestMapping("/evaluSheet")
     public String geetEvalSheet(){
-        return "admin/index/evalu-sheet";
+        return "admin/index/evalu/evalu-sheet";
     }
 
 }

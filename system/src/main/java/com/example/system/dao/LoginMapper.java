@@ -14,7 +14,7 @@ public interface LoginMapper {
      * @param password
      * @return
      */
-    @Select("SELECT * FROM `javawork`.`user`  WHERE user_id=#{user_id} AND PASSWORD=#{password}")
+    @Select("SELECT * FROM `javawork`.`user`  WHERE user_id=#{user_id} AND PASSWORD=#{password} AND del = 0")
     User userLogin(String user_id,String password);
 
     /**
@@ -23,7 +23,7 @@ public interface LoginMapper {
      * @param password
      * @return
      */
-    @Select("SELECT * FROM `javawork`.`teacher`  WHERE teach_id=#{teach_id} AND PASSWORD=#{password}")
+    @Select("SELECT * FROM `javawork`.`teacher`  WHERE teach_id=#{teach_id} AND PASSWORD=#{password} AND del = 0")
     Teacher teachLogin(String teach_id,String password);
 
     /**
@@ -32,6 +32,6 @@ public interface LoginMapper {
      * @param password
      * @return
      */
-    @Select("SELECT * FROM `javawork`.`student`  WHERE stu_id=#{stu_id} AND PASSWORD=#{password}")
+    @Select("SELECT * FROM `javawork`.`student`  WHERE stu_id=#{stu_id} AND PASSWORD=#{password} AND del = 0")
     Student stuLogin(String stu_id,String password);
 }

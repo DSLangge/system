@@ -1,17 +1,12 @@
 package com.example.system.controller;
 
 import com.example.system.dao.UserMapper;
+import com.example.system.dto.LeaBackDTO;
 import com.example.system.dto.PageDTO;
 import com.example.system.dto.ResultMapDTO;
 import com.example.system.dto.SearchDTO;
-import com.example.system.entity.Inform;
-import com.example.system.entity.Student;
-import com.example.system.entity.Teacher;
-import com.example.system.entity.User;
-import com.example.system.service.InformService;
-import com.example.system.service.StudentService;
-import com.example.system.service.TeacherService;
-import com.example.system.service.UserService;
+import com.example.system.entity.*;
+import com.example.system.service.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,6 +34,10 @@ public class PersonController {
     StudentService studentService;
     @Resource
     InformService informService;
+    @Resource
+    AdviceService adviceService;
+    @Resource
+    LeaBackService leaBackService;
 
     /**
      * 需要判断传入searchDTO内的数据
@@ -191,19 +191,56 @@ public class PersonController {
     }
 
 
+    /**
+     * 获取通知信息
+     * @param pageDTO
+     * @param searchDTO
+     * @return
+     * @throws JsonProcessingException
+     */
 
-    @PostMapping("/upload")
-    public String upload(MultipartFile file){
-        System.out.println(file.getOriginalFilename());
-        System.out.println(file.getSize());
-//        file.transferTo(new File("123"));   根据指定的路径存放上传文件
-        return "00000";
+    @GetMapping("/advice")
+    public ResultMapDTO getAdv(PageDTO pageDTO, SearchDTO searchDTO) throws JsonProcessingException {
+        PageInfo<AdviceNote> allAdv = adviceService.findAllAdv(pageDTO.getPage(), pageDTO.getLimit());
+        return new ResultMapDTO(200,"",allAdv.getTotal(),allAdv.getList());
+    }
+
+    @PostMapping("/addadv")
+    public String addAdv(MultipartFile file,AdviceNote adviceNote) throws IOException {
+        if(null==file){
+            adviceService.insert(adviceNote);
+            return "0";
+        }
+        adviceNote.setAdv_msg(file.getOriginalFilename());
+        file.transferTo( new File("F:/upload/"+file.getOriginalFilename()));   //根据指定的路径存放上传文件
+        adviceService.insert(adviceNote);
+        return "0";
     }
 
 
+    @GetMapping("/leaback")
+    public ResultMapDTO getLeaBack(PageDTO pageDTO, SearchDTO searchDTO) throws JsonProcessingException {
+        PageInfo<LeaBackDTO> allLeaBack = leaBackService.findAllLeaBack(pageDTO.getPage(), pageDTO.getLimit());
+        return new ResultMapDTO(200,"",allLeaBack.getTotal(),allLeaBack.getList());
+    }
 
+    @PostMapping("/addleaback")
+    public String addLeaBack(FeedBack feedBack) throws IOException {
+        int i = leaBackService.insert(feedBack);
+        if(i==1){
+            return "200";
+        }
+        return "0";
+    }
 
-
+    @PostMapping("/editleaback")
+    public String editLeaBack(FeedBack feedBack) throws IOException {
+        int i = leaBackService.update(feedBack);
+        if(i==1){
+            return "200";
+        }
+        return "0";
+    }
 
 
 
@@ -237,6 +274,19 @@ public class PersonController {
             case "inform":
                 for (String s : split) {
                     i+=informService.delete(Integer.parseInt(s));
+                }
+                break;
+            case "advice":
+                for (String s : split) {
+                    i+=adviceService.delete(Integer.parseInt(s));
+                }
+                break;
+            case "leaback":
+                for (String s : split) {
+                    int n=Integer.parseInt(s);
+                    i+=leaBackService.deleteLeaMess(n);
+                    FeedBack byBackId = leaBackService.findByBackId(n);
+                    leaBackService.delete(byBackId.getId());
                 }
                 break;
         }

@@ -22,8 +22,8 @@
 <div class="demoTable">
     <div class="layui-form" style="float: left;">
         <select name="searchtype" lay-verify="required" id="searchtype">
-            <option value="inf_title">事务标题</option>
-            <option value="inf_msg">事务信息</option>
+            <option value="inf_title">信息标题</option>
+            <option value="inf_msg">信息内容</option>
             <%--暂定发布人ID 可改发布人姓名--%>
             <option value="pre_id">发布人ID</option>
 
@@ -68,8 +68,8 @@
             ,cols: [[
                 {type: 'checkbox', fixed: 'left'}
                 ,{field:'id', title:'事务序号', width:110, fixed: 'left',align:'center'}
-                ,{field:'inf_title', title:'事务标题', width:110, fixed: 'left',align:'center'}
-                ,{field:'inf_msg', title:'事务信息', width:200,align:'center'}
+                ,{field:'inf_title', title:'信息标题', width:110, fixed: 'left',align:'center'}
+                ,{field:'inf_msg', title:'信息内容', width:200,align:'center'}
                 ,{field:'pre_id', title:'创建人工号', width:110,align:'center'}
                 ,{field:'inf_creatime', title:'创建时间', width:160,align:'center'}
                 ,{field:'inf_updatime', title:'更新时间', width:160,align:'center'}
