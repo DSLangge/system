@@ -108,4 +108,34 @@ public interface StudentMapper {
      */
     @Select("SELECT * FROM `javawork`.`student` WHERE stu_id=#{stu_id} AND del=0")
     Student findByStuID(String stu_id);
+
+
+    @Select("<script> SELECT * FROM `javawork`.`student` " +
+                "<where> " +
+                    "<if test=\"stu_id!=null and stu_id!=''\">" +
+                        "AND stu_id like concat('%', #{stu_id}, '%')"+
+                    "</if>"+
+                    "<if test=\"stu_name!=null and stu_name!=''\">" +
+                        "AND stu_name like concat('%', #{stu_name}, '%')"+
+                    "</if>"+
+                    "<if test=\"stu_age!=null and stu_age!=''\">" +
+                        "AND stu_age like concat('%', #{stu_age}, '%')"+
+                    "</if>"+
+                    "<if test=\"stu_class!=null and stu_class!=''\">" +
+                        "AND stu_class like concat('%', #{stu_class}, '%')"+
+                    "</if>"+
+                    "<if test=\"stu_nation!=null and stu_nation!=''\">" +
+                        "AND stu_nation like concat('%', #{stu_nation}, '%')"+
+                    "</if>"+
+                    "<if test=\"stu_antive!=null and stu_antive!=''\">" +
+                        "AND stu_antive like concat('%', #{stu_antive}, '%')"+
+                    "</if>"+
+                    "<if test=\"stu_high!=null and stu_high!=''\">" +
+                        "AND stu_high like concat('%', #{stu_high}, '%')"+
+                    "</if>"+
+                    "AND del=0"+
+                "</where>" +
+            "</script>")
+    List<Student> findStuByType(Student student);
+
 }

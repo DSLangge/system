@@ -66,14 +66,15 @@ public class SystemApplicationTests {
     @Test
     public void student() throws ParseException {
 //        System.out.println(studentMapper.findByStuID("201560140330"));
-//        Student stu=new Student();
+        Student stu=new Student();
+        stu.setStu_nation("汉");
 //        stu.setStu_id("201560140331");
 //        stu.setStu_name("朱振源");
 //        stu.setPassword("78456123");
 //        stu.setSchool_year(new SimpleDateFormat("yyyy-MM-dd").parse("2015-09-01"));
 //        stu.setGraduat_year(new SimpleDateFormat("yyyy-MM-dd").parse("2019-07-01"));
 
-        System.out.println(studentMapper.findAllStu());;
+        System.out.println(studentMapper.findStuByType(stu));;
     }
 
     @Test

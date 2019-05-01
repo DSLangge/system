@@ -24,7 +24,6 @@
         <select name="searchtype" lay-verify="required" id="searchtype">
             <option value="inf_title">信息标题</option>
             <option value="inf_msg">信息内容</option>
-            <%--暂定发布人ID 可改发布人姓名--%>
             <option value="pre_id">发布人ID</option>
 
         </select>

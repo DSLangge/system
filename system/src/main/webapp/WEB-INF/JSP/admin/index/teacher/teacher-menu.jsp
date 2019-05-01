@@ -18,7 +18,6 @@
             <option value="teach_id">教师工号</option>
             <option value="teach_name">教师姓名</option>
             <option value="teach_sex">性别</option>
-            <option value="entry_time">入职时间</option>0
         </select>
     </div>
     <div class="layui-inline">

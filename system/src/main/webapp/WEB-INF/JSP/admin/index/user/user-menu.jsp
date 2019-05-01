@@ -15,16 +15,8 @@
 <div class="demoTable">
 	<div class="layui-form" style="float: left;">
 		<select name="searchtype" lay-verify="required" id="searchtype">
-			<option value="stu_id">学号</option>
-			<option value="stu_name">姓名</option>
-			<option value="stu_age">年龄</option>
-			<option value="stu_edu">学制</option>
-			<option value="stu_nation">民族</option>
-			<option value="stu_style">考生类型</option>
-			<option value="stu_antive">出生地</option>
-			<option value="stu_high">高中</option>
-			<option value="stu_high">入学年份</option>
-			<option value="stu_high">高中</option>
+			<option value="user_id">学号</option>
+			<option value="user_name">姓名</option>
 		</select>
 	</div>
 	<div class="layui-inline">

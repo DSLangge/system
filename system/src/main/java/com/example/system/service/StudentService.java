@@ -13,4 +13,6 @@ public interface StudentService {
     PageInfo<Student> findAllStu(Integer page, Integer limit);
     Student findByID(Integer id);
     Student findByStuID(String stu_id);
+
+    PageInfo<Student> findStuByType(Student student,Integer page, Integer limit);
 }

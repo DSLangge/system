@@ -22,10 +22,10 @@
 <div class="demoTable">
     <div class="layui-form" style="float: left;">
         <select name="searchtype" lay-verify="required" id="searchtype">
-            <option value="inf_title">信息标题</option>
-            <option value="inf_msg">信息内容</option>
-            <%--暂定发布人ID 可改发布人姓名--%>
-            <option value="pre_id">发布人ID</option>
+            <option value="lea_per_id">留言人工号</option>
+            <option value="lea_msg">留言内容</option>
+            <option value="back_per_id">反馈人工号</option>
+            <option value="back_msg">反馈内容</option>
 
         </select>
     </div>

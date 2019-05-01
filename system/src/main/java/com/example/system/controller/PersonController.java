@@ -125,6 +125,34 @@ public class PersonController {
      */
     @GetMapping("/student")
     public ResultMapDTO getStudent(PageDTO pageDTO, SearchDTO searchDTO) throws JsonProcessingException {
+        if(null!=searchDTO.getSearchcontent()){
+            Student student = new Student();
+            switch (searchDTO.getSearchtype()){
+                case "stu_id":
+                    student.setStu_id(searchDTO.getSearchcontent());
+                    break;
+                case "stu_name":
+                    student.setStu_name(searchDTO.getSearchcontent());
+                    break;
+                case "stu_age":
+                    student.setStu_age(Integer.parseInt(searchDTO.getSearchcontent()));
+                    break;
+                case "stu_class":
+                    student.setStu_class(searchDTO.getSearchcontent());
+                    break;
+                case "stu_nation":
+                    student.setStu_nation(searchDTO.getSearchcontent());
+                    break;
+                case "stu_antive":
+                    student.setStu_antive(searchDTO.getSearchcontent());
+                    break;
+                case "stu_high":
+                    student.setStu_high(searchDTO.getSearchcontent());
+                    break;
+            }
+            PageInfo<Student> stuByType = studentService.findStuByType(student, pageDTO.getPage(), pageDTO.getLimit());
+            return new ResultMapDTO(200,"",stuByType.getTotal(),stuByType.getList());
+        }
         PageInfo<Student> allStu = studentService.findAllStu(pageDTO.getPage(), pageDTO.getLimit());
         return new ResultMapDTO(200,"",allStu.getTotal(),allStu.getList());
     }

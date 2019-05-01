@@ -61,9 +61,8 @@
 						</a>
 					</div>
 					<ul class="layui-nav" lay-filter="rightNav">
-					  <li class="layui-nav-item"><a href="javascript:;" data-url="email.html" data-id='4' data-text="邮件系统"><i class="iconfont">&#xe603;</i></a></li>
 					  <li class="layui-nav-item">
-					    <a href="javascript:;" data-url="admin-info.html" data-id='5' data-text="个人信息">超级管理员</a>
+					    <a href="javascript:;" data-url="admin-info.html" data-id='11' data-text="个人信息">超级管理员</a>
 					  </li>
 					  <li class="layui-nav-item"><a href="/user_loginOut">退出</a></li>
 					</ul>

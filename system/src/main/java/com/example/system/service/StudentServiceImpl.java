@@ -45,4 +45,13 @@ public class StudentServiceImpl implements StudentService {
     public Student findByStuID(String stu_id) {
         return studentMapper.findByStuID(stu_id);
     }
+
+    @Override
+    public PageInfo<Student> findStuByType(Student student, Integer page, Integer limit) {
+        PageHelper.startPage(page,limit);
+        PageInfo<Student> studentPageInfo = new PageInfo<>(studentMapper.findStuByType(student));
+        return studentPageInfo;
+    }
+
+
 }

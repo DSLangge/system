@@ -18,15 +18,10 @@
             <option value="stu_id">学号</option>
             <option value="stu_name">姓名</option>
             <option value="stu_age">年龄</option>
-            <option value="stu_edu">学制</option>
             <option value="stu_class">班级</option>
             <option value="stu_nation">民族</option>
-            <option value="stu_style">考生类型</option>
             <option value="stu_antive">出生地</option>
             <option value="stu_high">高中</option>
-            <option value="school_year">入学年份</option>
-            <option value="graduat_year">毕业年份</option>
-            <option value="stu_birth">出生日期</option>
         </select>
     </div>
     <div class="layui-inline">
