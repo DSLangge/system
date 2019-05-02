@@ -36,12 +36,18 @@ public class AdviceServiceImpl implements AdviceService {
     public PageInfo<AdviceNote> findAllAdv(Integer page, Integer limit) {
         PageHelper.startPage(page,limit);
         PageInfo<AdviceNote> adviceNotePageInfo = new PageInfo<>(adviceMapper.findAllAdv());
-
         return adviceNotePageInfo;
     }
 
     @Override
     public AdviceNote findByID(Integer id) {
         return adviceMapper.findByID(id);
+    }
+
+    @Override
+    public PageInfo<AdviceNote> findAdvByType(AdviceNote adviceNote, Integer page, Integer limit) {
+        PageHelper.startPage(page,limit);
+        PageInfo<AdviceNote> adviceNotePageInfo = new PageInfo<>(adviceMapper.findAdvByType(adviceNote));
+        return adviceNotePageInfo;
     }
 }

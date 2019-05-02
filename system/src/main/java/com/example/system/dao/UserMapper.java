@@ -38,4 +38,17 @@ public interface UserMapper {
     @Select("SELECT * FROM `javawork`.`user` WHERE user_id=#{user_id} AND del=0")
     User findByUserID(String user_id);
 
+    @Select("<script> SELECT * FROM `javawork`.`user` " +
+            "<where> " +
+            "<if test=\"user_id!=null and user_id!=''\">" +
+            "AND user_id like concat('%', #{user_id}, '%')"+
+            "</if>"+
+            "<if test=\"user_name!=null and user_name!=''\">" +
+            "AND user_name like concat('%', #{user_name}, '%')"+
+            "</if>"+
+            "AND del=0"+
+            "</where>" +
+            "</script>")
+    List<User> findUserByType(User user);
+
 }

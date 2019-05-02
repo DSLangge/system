@@ -70,4 +70,20 @@ public interface InformMapper {
      */
     @Select("SELECT * FROM `javawork`.`inform` WHERE id=#{id} AND del=0")
     Inform findByID(Integer id);
+
+    @Select("<script> SELECT * FROM `javawork`.`inform` " +
+            "<where> " +
+            "<if test=\"inf_title!=null and inf_title!=''\">" +
+            "AND inf_title like concat('%', #{inf_title}, '%')"+
+            "</if>"+
+            "<if test=\"inf_msg!=null and inf_msg!=''\">" +
+            "AND inf_msg like concat('%', #{inf_msg}, '%')"+
+            "</if>"+
+            "<if test=\"pre_id!=null and pre_id!=''\">" +
+            "AND pre_id like concat('%', #{pre_id}, '%')"+
+            "</if>"+
+            "AND del=0"+
+            "</where>" +
+            "</script>")
+    List<Inform> findInfoByType(Inform inform);
 }

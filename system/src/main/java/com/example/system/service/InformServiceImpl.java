@@ -38,4 +38,11 @@ public class InformServiceImpl implements InformService {
     public Inform findByID(Integer id) {
         return informMapper.findByID(id);
     }
+
+    @Override
+    public PageInfo<Inform> findInfoByType(Inform inform, Integer page, Integer limit) {
+        PageHelper.startPage(page,limit);
+        PageInfo<Inform> informPageInfo = new PageInfo<>(informMapper.findInfoByType(inform));
+        return informPageInfo;
+    }
 }

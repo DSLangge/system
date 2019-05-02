@@ -47,4 +47,13 @@ public class LeaBackServiceImpl implements LeaBackService {
         PageInfo<LeaBackDTO> leaBackDTOPageInfo = new PageInfo<>(leaBackMapper.findAllLeaAndBack());
         return leaBackDTOPageInfo;
     }
+
+    @Override
+    public PageInfo<LeaBackDTO> findLeaAndBackByType(LeaBackDTO leaBackDTO, Integer page, Integer limit) {
+        PageHelper.startPage(page,limit);
+        PageInfo<LeaBackDTO> leaBackDTOPageInfo = new PageInfo<>(leaBackMapper.findLeaAndBackByType(leaBackDTO));
+        return leaBackDTOPageInfo;
+    }
+
+
 }

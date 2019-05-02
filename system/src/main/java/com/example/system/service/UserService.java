@@ -12,4 +12,5 @@ public interface UserService {
     PageInfo<User> findAllUser(Integer page, Integer limit);
     User findByID(Integer id);
     User findByUserID(String user_id);
+    PageInfo<User> findUserByType(User user,Integer page, Integer limit);
 }

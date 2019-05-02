@@ -31,4 +31,22 @@ public interface AdviceMapper {
     @Select("SELECT * FROM `javawork`.`advice_note` WHERE id=#{id} AND del=0")
     AdviceNote findByID(Integer id);
 
+    @Select("<script> SELECT * FROM `javawork`.`advice_note` " +
+                "<where> " +
+                "<if test=\"adv_title!=null and adv_title!=''\">" +
+                    "AND adv_title like concat('%', #{adv_title}, '%')"+
+                "</if>"+
+                "<if test=\"adv_type!=null and adv_type!=''\">" +
+                    "AND adv_type like concat('%', #{adv_type}, '%')"+
+                "</if>"+
+                "<if test=\"adv_msg!=null and adv_msg!=''\">" +
+                    "AND adv_msg like concat('%', #{adv_msg}, '%')"+
+                "</if>"+
+                "<if test=\"per_adv_id!=null and per_adv_id!=''\">" +
+                    "AND per_adv_id like concat('%', #{per_adv_id}, '%')"+
+                "</if>"+
+                    "AND del=0"+
+                "</where>" +
+            "</script>")
+    List<AdviceNote> findAdvByType(AdviceNote adviceNote);
 }

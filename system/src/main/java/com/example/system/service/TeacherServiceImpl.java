@@ -43,4 +43,11 @@ public class TeacherServiceImpl implements TeacherService {
     public Teacher findByTeachID(String teach_id) {
         return teacherMapper.findByTeachID(teach_id);
     }
+
+    @Override
+    public PageInfo<Teacher> findTeaByType(Teacher teacher, Integer page, Integer limit) {
+        PageHelper.startPage(page,limit);
+        PageInfo<Teacher> teacherPageInfo = new PageInfo<>(teacherMapper.findTeaByType(teacher));
+        return teacherPageInfo;
+    }
 }

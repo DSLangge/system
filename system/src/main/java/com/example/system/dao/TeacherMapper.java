@@ -70,4 +70,20 @@ public interface TeacherMapper {
     @Select("SELECT * FROM `javawork`.`teacher` WHERE teach_id=#{teach_id} AND del=0")
     Teacher findByTeachID(String teach_id);
 
+
+    @Select("<script> SELECT * FROM `javawork`.`teacher` " +
+            "<where> " +
+            "<if test=\"teach_id!=null and teach_id!=''\">" +
+            "AND teach_id like concat('%', #{teach_id}, '%')"+
+            "</if>"+
+            "<if test=\"teach_name!=null and teach_name!=''\">" +
+            "AND teach_name like concat('%', #{teach_name}, '%')"+
+            "</if>"+
+            "<if test=\"teach_sex!=null and teach_sex!=''\">" +
+            "AND teach_sex like concat('%', #{teach_sex}, '%')"+
+            "</if>"+
+            "AND del=0"+
+            "</where>" +
+            "</script>")
+    List<Teacher> findTeaByType(Teacher teacher);
 }

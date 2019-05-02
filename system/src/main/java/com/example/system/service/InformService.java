@@ -11,4 +11,5 @@ public interface InformService {
     int update(Inform inform);
     PageInfo<Inform> findAllInfo(Integer page, Integer limit);
     Inform findByID(Integer id);
+    PageInfo<Inform> findInfoByType(Inform inform,Integer page, Integer limit);
 }

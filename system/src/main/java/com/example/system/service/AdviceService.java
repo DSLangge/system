@@ -11,4 +11,5 @@ public interface AdviceService {
     int delete(Integer id);
     PageInfo<AdviceNote> findAllAdv(Integer page, Integer limit);
     AdviceNote findByID(Integer id);
+    PageInfo<AdviceNote> findAdvByType(AdviceNote adviceNote,Integer page, Integer limit);
 }

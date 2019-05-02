@@ -11,17 +11,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @RestController
 public class PersonController {
@@ -48,15 +44,21 @@ public class PersonController {
      */
     @GetMapping("/user")
     public ResultMapDTO getUser(PageDTO pageDTO, SearchDTO searchDTO) throws JsonProcessingException {
-//        if(id!=null){
-////            需要在此判断查找结果是否为空，修改回传数据状态响应码
-//            List<User> list=new ArrayList<>();
-//            list.add(userService.findByID(id));
-//            return new ResultMapDTO(200,"",1,list);
-//        }
+        if(null!=searchDTO.getSearchcontent()){
+            User user = new User();
+            switch (searchDTO.getSearchtype()){
+                case "user_id":
+                    user.setUser_id(searchDTO.getSearchcontent());
+                    break;
+                case "user_name":
+                    user.setUser_name(searchDTO.getSearchcontent());
+                    break;
+            }
+            PageInfo<User> userByType = userService.findUserByType(user, pageDTO.getPage(), pageDTO.getLimit());
+            return new ResultMapDTO(200, "",userByType.getTotal(), userByType.getList());
+        }
         PageInfo<User> allUser = userService.findAllUser(pageDTO.getPage(), pageDTO.getLimit());
-        ResultMapDTO resultMapDTO = new ResultMapDTO(200, "",allUser.getTotal(), allUser.getList());
-        return resultMapDTO;
+        return new ResultMapDTO(200, "",allUser.getTotal(), allUser.getList());
     }
 
 
@@ -76,12 +78,22 @@ public class PersonController {
      */
     @GetMapping("/teacher")
     public ResultMapDTO getTeacher(PageDTO pageDTO, SearchDTO searchDTO) throws JsonProcessingException {
-//        if(id!=null){
-////            需要在此判断查找结果是否为空，修改回传数据状态响应码
-//            List<Teacher> list=new ArrayList<>();
-//            list.add(teacherService.findByID(id));
-//            return new ResultMapDTO(200,"",1,list);
-//        }
+        if(null!=searchDTO.getSearchcontent()){
+            Teacher teacher = new Teacher();
+            switch (searchDTO.getSearchtype()){
+                case "teach_id":
+                    teacher.setTeach_id(searchDTO.getSearchcontent());
+                    break;
+                case "teach_name":
+                    teacher.setTeach_name(searchDTO.getSearchcontent());
+                    break;
+                case "teach_sex":
+                    teacher.setTeach_sex(searchDTO.getSearchcontent());
+                    break;
+            }
+            PageInfo<Teacher> teaByType = teacherService.findTeaByType(teacher, pageDTO.getPage(), pageDTO.getLimit());
+            return new ResultMapDTO(200,"",teaByType.getTotal(),teaByType.getList());
+        }
         PageInfo<Teacher> allTeacher = teacherService.findAllTeacher(pageDTO.getPage(), pageDTO.getLimit());
         return new ResultMapDTO(200,"",allTeacher.getTotal(),allTeacher.getList());
     }
@@ -191,6 +203,22 @@ public class PersonController {
 
     @GetMapping("/inform")
     public ResultMapDTO getInform(PageDTO pageDTO, SearchDTO searchDTO) throws JsonProcessingException {
+        if(null!=searchDTO.getSearchcontent()){
+            Inform inform = new Inform();
+            switch (searchDTO.getSearchtype()){
+                case "inf_title":
+                    inform.setInf_title(searchDTO.getSearchcontent());
+                    break;
+                case "inf_msg":
+                    inform.setInf_msg(searchDTO.getSearchcontent());
+                    break;
+                case "pre_id":
+                    inform.setPre_id(searchDTO.getSearchcontent());
+                    break;
+            }
+            PageInfo<Inform> infoByType = informService.findInfoByType(inform, pageDTO.getPage(), pageDTO.getLimit());
+            return new ResultMapDTO(200, "",infoByType.getTotal(), infoByType.getList());
+        }
         PageInfo<Inform> allInfo = informService.findAllInfo(pageDTO.getPage(), pageDTO.getLimit());
         return new ResultMapDTO(200,"",allInfo.getTotal(),allInfo.getList());
     }
@@ -229,6 +257,25 @@ public class PersonController {
 
     @GetMapping("/advice")
     public ResultMapDTO getAdv(PageDTO pageDTO, SearchDTO searchDTO) throws JsonProcessingException {
+        if(null!=searchDTO.getSearchcontent()){
+            AdviceNote adviceNote = new AdviceNote();
+            switch (searchDTO.getSearchtype()){
+                case "adv_title":
+                    adviceNote.setAdv_title(searchDTO.getSearchcontent());
+                    break;
+                case "adv_type":
+                    adviceNote.setAdv_type(searchDTO.getSearchcontent());
+                    break;
+                case "adv_msg":
+                    adviceNote.setAdv_msg(searchDTO.getSearchcontent());
+                    break;
+                case "per_adv_id":
+                    adviceNote.setPer_adv_id(searchDTO.getSearchcontent());
+                    break;
+            }
+            PageInfo<AdviceNote> advByType = adviceService.findAdvByType(adviceNote, pageDTO.getPage(), pageDTO.getLimit());
+            return new ResultMapDTO(200, "",advByType.getTotal(), advByType.getList());
+        }
         PageInfo<AdviceNote> allAdv = adviceService.findAllAdv(pageDTO.getPage(), pageDTO.getLimit());
         return new ResultMapDTO(200,"",allAdv.getTotal(),allAdv.getList());
     }
@@ -248,6 +295,25 @@ public class PersonController {
 
     @GetMapping("/leaback")
     public ResultMapDTO getLeaBack(PageDTO pageDTO, SearchDTO searchDTO) throws JsonProcessingException {
+        if(null!=searchDTO.getSearchcontent()){
+            LeaBackDTO leaBackDTO = new LeaBackDTO();
+            switch (searchDTO.getSearchtype()){
+                case "lea_per_id":
+                    leaBackDTO.setLea_per_id(searchDTO.getSearchcontent());
+                    break;
+                case "lea_msg":
+                    leaBackDTO.setLea_msg(searchDTO.getSearchcontent());
+                    break;
+                case "back_per_id":
+                    leaBackDTO.setBack_per_id(searchDTO.getSearchcontent());
+                    break;
+                case "back_msg":
+                    leaBackDTO.setBack_msg(searchDTO.getSearchcontent());
+                    break;
+            }
+            PageInfo<LeaBackDTO> leaAndBackByType = leaBackService.findLeaAndBackByType(leaBackDTO, pageDTO.getPage(), pageDTO.getLimit());
+            return new ResultMapDTO(200, "",leaAndBackByType.getTotal(), leaAndBackByType.getList());
+        }
         PageInfo<LeaBackDTO> allLeaBack = leaBackService.findAllLeaBack(pageDTO.getPage(), pageDTO.getLimit());
         return new ResultMapDTO(200,"",allLeaBack.getTotal(),allLeaBack.getList());
     }

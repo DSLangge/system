@@ -248,4 +248,15 @@ public class PageController {
         return "admin/index/evalu/evalu-sheet";
     }
 
+
+    /**
+     * 获取系统维护页面
+     * @return
+     */
+    @RequestMapping("/systemSet")
+    public String geetSystemSet(){
+        return "admin/index/setting/system-setting";
+    }
+
+
 }

@@ -15,7 +15,7 @@
 <div class="demoTable">
 	<div class="layui-form" style="float: left;">
 		<select name="searchtype" lay-verify="required" id="searchtype">
-			<option value="user_id">学号</option>
+			<option value="user_id">工号</option>
 			<option value="user_name">姓名</option>
 		</select>
 	</div>

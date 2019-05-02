@@ -44,4 +44,11 @@ public class UserServiceImpl implements UserService {
     public User findByUserID(String user_id) {
         return userMapper.findByUserID(user_id);
     }
+
+    @Override
+    public PageInfo<User> findUserByType(User user, Integer page, Integer limit) {
+        PageHelper.startPage(page,limit);
+        PageInfo<User> userPageInfo = new PageInfo<>(userMapper.findUserByType(user));
+        return userPageInfo;
+    }
 }
