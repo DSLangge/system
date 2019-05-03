@@ -31,7 +31,7 @@
 				    </dl>
 				  </li>
 				  <li class="layui-nav-item">
-					<a href="javascript:;" data-url="/evaluSheet" data-id='5' data-text="评价管理"><i class="iconfont">&#xe60e;</i>评价管理</a>
+					<a href="javascript:;" data-url="/evaluSheetSystem" data-id='5' data-text="评价管理"><i class="iconfont">&#xe60e;</i>评价管理</a>
 				  </li>
 				  <li class="layui-nav-item">
 					  <a href="javascript:;"><i class="iconfont">&#xe605;</i>信息发布及留言反馈</a>
@@ -41,13 +41,13 @@
 					  </dl>
 				  </li>
 				   <li class="layui-nav-item">
-				    <a href="javascript:;" data-url="修改" data-id='8' data-text="系统用户权限管理"><i class="iconfont">&#xe600;</i>系统用户权限管理</a>
+				    <a href="javascript:;" data-url="/usergroupSystem" data-id='8' data-text="系统用户权限管理"><i class="iconfont">&#xe600;</i>系统用户权限管理</a>
 				  </li>
 				  <li class="layui-nav-item">
-				    <a href="javascript:;" data-url="修改" data-id='9' data-text="安全管理"><i class="iconfont">&#xe60a;</i>安全管理</a>
+				    <a href="javascript:;" data-url="/illegalSystem" data-id='9' data-text="安全管理"><i class="iconfont">&#xe60a;</i>安全管理</a>
 				  </li>
 				  <li class="layui-nav-item">
-				  	<a href="javascript:;" data-url="/systemSet" data-id='10' data-text="系统维护"><i class="iconfont">&#xe60b;</i>系统维护</a>
+				  	<a href="javascript:;" data-url="/systemSetSystem" data-id='10' data-text="系统维护"><i class="iconfont">&#xe60b;</i>系统维护</a>
 				  </li>
 				</ul>
 			</div>

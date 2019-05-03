@@ -1,10 +1,7 @@
 package com.example.system.controller;
 
 import com.example.system.dao.UserMapper;
-import com.example.system.dto.LeaBackDTO;
-import com.example.system.dto.PageDTO;
-import com.example.system.dto.ResultMapDTO;
-import com.example.system.dto.SearchDTO;
+import com.example.system.dto.*;
 import com.example.system.entity.*;
 import com.example.system.service.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -34,6 +31,12 @@ public class PersonController {
     AdviceService adviceService;
     @Resource
     LeaBackService leaBackService;
+    @Resource
+    IllegalService illegalService;
+    @Resource
+    UserGroupService userGroupService;
+
+
 
     /**
      * 需要判断传入searchDTO内的数据
@@ -340,6 +343,81 @@ public class PersonController {
 
 
 
+    @GetMapping("/usergroup")
+    public ResultMapDTO getUserGroup(PageDTO pageDTO, SearchDTO searchDTO) throws JsonProcessingException {
+        if(null!=searchDTO.getSearchcontent()){
+            UserGroupMsgDTO userGroupMsgDTO = new UserGroupMsgDTO();
+            switch (searchDTO.getSearchtype()){
+                case "group_name":
+                    userGroupMsgDTO.setGroup_name(searchDTO.getSearchcontent());
+                    break;
+                case "po_name":
+                    userGroupMsgDTO.setPo_name(searchDTO.getSearchcontent());
+                    break;
+            }
+            PageInfo<UserGroupMsgDTO> userGroupByType = userGroupService.findUserGroupByType(userGroupMsgDTO, pageDTO.getPage(), pageDTO.getLimit());
+            return new ResultMapDTO(200, "",userGroupByType.getTotal(), userGroupByType.getList());
+        }
+        PageInfo<UserGroupMsgDTO> allUserGroup = userGroupService.findAllUserGroup(pageDTO.getPage(), pageDTO.getLimit());
+        return new ResultMapDTO(200,"",allUserGroup.getTotal(),allUserGroup.getList());
+    }
+    @PostMapping("/addusergroup")
+    public String addUserGroup(UserGroup userGroup) throws IOException {
+        int i =userGroupService.insert(userGroup);
+        if(i==1){
+            return "200";
+        }
+        return "0";
+    }
+
+    @PostMapping("/editusergroup")
+    public String editUserGroup(UserGroup userGroup) throws IOException {
+        int i =userGroupService.update(userGroup);
+        if(i==1){
+            return "200";
+        }
+        return "0";
+    }
+
+
+
+
+
+
+
+
+    /**
+     * 违规操作
+     * @param pageDTO
+     * @param searchDTO
+     * @return
+     * @throws JsonProcessingException
+     */
+    @GetMapping("/illegal")
+    public ResultMapDTO getIllegal(PageDTO pageDTO, SearchDTO searchDTO) throws JsonProcessingException {
+        if(null!=searchDTO.getSearchcontent()){
+            IllegalPersonDTO illegalPersonDTO = new IllegalPersonDTO();
+            switch (searchDTO.getSearchtype()){
+                case "per_id":
+                    illegalPersonDTO.setPer_id(searchDTO.getSearchcontent());
+                    break;
+                case "po_name":
+                    illegalPersonDTO.setPo_name(searchDTO.getSearchcontent());
+                    break;
+                case "illegal_name":
+                    illegalPersonDTO.setIllegal_name(searchDTO.getSearchcontent());
+                    break;
+            }
+            PageInfo<IllegalPersonDTO> illegalByType = illegalService.findIllegalByType(illegalPersonDTO, pageDTO.getPage(), pageDTO.getLimit());
+            return new ResultMapDTO(200, "",illegalByType.getTotal(), illegalByType.getList());
+        }
+        illegalService.insert();
+        PageInfo<IllegalPersonDTO> allIllegal = illegalService.findAllIllegal(pageDTO.getPage(), pageDTO.getLimit());
+        return new ResultMapDTO(200,"",allIllegal.getTotal(),allIllegal.getList());
+    }
+
+
+
 
 
 
@@ -383,12 +461,24 @@ public class PersonController {
                     leaBackService.delete(byBackId.getId());
                 }
                 break;
+            case "illegal":
+                for (String s : split) {
+                    int n=Integer.parseInt(s);
+                    Illegal illegal = illegalService.findByID(n);
+                    studentService.delete(illegal.getPer_id());
+                   i+= illegalService.delete(n);
+                }
+                break;
+            case "usergroup":
+                for (String s : split) {
+                    int n=Integer.parseInt(s);
+                    i+=userGroupService.delete(n);
+                }
+                break;
         }
         if(i==split.length){
             return "删除成功";
         }
         return "删除失败";
     }
-
-
 }

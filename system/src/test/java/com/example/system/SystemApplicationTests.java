@@ -1,7 +1,9 @@
 package com.example.system;
 
 import com.example.system.dao.*;
+import com.example.system.dto.IllegalPersonDTO;
 import com.example.system.dto.LeaBackDTO;
+import com.example.system.dto.UserGroupMsgDTO;
 import com.example.system.entity.*;
 import com.example.system.service.InformService;
 import org.junit.Test;
@@ -36,6 +38,8 @@ public class SystemApplicationTests {
     AdviceMapper adviceMapper;
     @Resource
     IllegalPerMapper illegalPerMapper;
+    @Resource
+    UserGroupMapper userGroupMapper;
 
     @Test
     public void insert() {
@@ -93,9 +97,12 @@ public class SystemApplicationTests {
 //        System.out.println(leaBackMapper.findLeaAndBackByType(leaBackDTO));
 //        AdviceNote adviceNote = new AdviceNote();
 //        adviceNote.setAdv_type("文件");
-        System.out.println(illegalPerMapper.insert());
-        System.out.println(illegalPerMapper.findAllIll());
+//        IllegalPersonDTO illegalPersonDTO = new IllegalPersonDTO();
+//        illegalPersonDTO.setPer_id("201560140316");
+//        System.out.println(illegalPerMapper.insert());
+//        System.out.println(illegalPerMapper.findAllIll());
+        UserGroupMsgDTO userGroupMsgDTO = new UserGroupMsgDTO();
+        userGroupMsgDTO.setGroup_name("第");
+        System.out.println(userGroupMapper.findUserGroupByType(userGroupMsgDTO));
     }
-
-
 }

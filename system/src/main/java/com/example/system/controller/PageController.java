@@ -2,10 +2,7 @@ package com.example.system.controller;
 
 import com.example.system.dao.LoginMapper;
 import com.example.system.dto.LoginDTO;
-import com.example.system.entity.FeedBack;
-import com.example.system.entity.Inform;
-import com.example.system.entity.Student;
-import com.example.system.entity.Teacher;
+import com.example.system.entity.*;
 import com.example.system.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,19 +16,19 @@ public class PageController {
 
     @Resource
     LoginMapper loginMapper;
-
     @Resource
     UserService userService;
-
     @Resource
     StudentService studentService;
-
     @Resource
     TeacherService teacherService;
     @Resource
     InformService informService;
     @Resource
     LeaBackService leaBackService;
+    @Resource
+    UserGroupService userGroupService;
+
     /**
      * 登录跳转
      * @param loginDTO
@@ -243,20 +240,60 @@ public class PageController {
      * 获取评价页面
      * @return
      */
-    @RequestMapping("/evaluSheet")
+    @RequestMapping("/evaluSheetSystem")
     public String geetEvalSheet(){
         return "admin/index/evalu/evalu-sheet";
     }
 
 
     /**
+     * 用户组页面
+     * @return
+     */
+    @RequestMapping("/usergroupSystem")
+    public String getUserGroup(){
+        return "admin/index/usergtoup/usergroup-menu";
+    }
+
+    @RequestMapping("/usergroupadd")
+    public String getUserGroupAdd(){
+        return "admin/index/usergtoup/usergroup-add";
+    }
+    @RequestMapping("/usergroupedit")
+    public String getUserGroupEdit(Integer id, HttpServletRequest req){
+        UserGroup byId = userGroupService.findById(id);
+        req.setAttribute("usergroup",byId);
+        return "admin/index/usergtoup/usergroup-edit";
+    }
+
+
+
+
+
+
+
+
+
+
+    /**
+     * 获取安全管理页面，违规用户管理
+     * @return
+     */
+    @RequestMapping("/illegalSystem")
+    public String getIllegal(){
+        return "admin/index/illegal/illegal-menu";
+    }
+
+    /**
      * 获取系统维护页面
      * @return
      */
-    @RequestMapping("/systemSet")
-    public String geetSystemSet(){
+    @RequestMapping("/systemSetSystem")
+    public String getSystemSet(){
         return "admin/index/setting/system-setting";
     }
+
+
 
 
 }
