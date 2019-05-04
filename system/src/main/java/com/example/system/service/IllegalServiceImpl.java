@@ -21,6 +21,11 @@ public class IllegalServiceImpl implements IllegalService {
     }
 
     @Override
+    public void clean() {
+        illegalPerMapper.clean();
+    }
+
+    @Override
     public int delete(Integer id) {
         return illegalPerMapper.delete(id);
     }

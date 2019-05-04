@@ -148,13 +148,15 @@
                         layer.msg("只能选择一个哟~");
                         break;
                     }
-                    layer.msg("通知编辑");
                     $.each(data,function(index,ele){
-                        layer.open({
-                            type: 2,
-                            area: ['800px', '400px'],
-                            content: ['informedit?id='+ele.id, 'no']//添加修改路径
-                        });
+                        if(ele.adv_type!="文件"){
+                            layer.open({
+                                type: 2,
+                                area: ['800px', '350px'],
+                                content: ['advedit?id='+ele.id, 'no']//添加修改路径
+                            });
+                        }
+                        layer.msg("文件类型无法编辑");
                     });
                     break;
             };

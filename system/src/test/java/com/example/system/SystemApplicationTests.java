@@ -1,9 +1,7 @@
 package com.example.system;
 
 import com.example.system.dao.*;
-import com.example.system.dto.IllegalPersonDTO;
-import com.example.system.dto.LeaBackDTO;
-import com.example.system.dto.UserGroupMsgDTO;
+import com.example.system.dto.*;
 import com.example.system.entity.*;
 import com.example.system.service.InformService;
 import org.junit.Test;
@@ -101,8 +99,11 @@ public class SystemApplicationTests {
 //        illegalPersonDTO.setPer_id("201560140316");
 //        System.out.println(illegalPerMapper.insert());
 //        System.out.println(illegalPerMapper.findAllIll());
-        UserGroupMsgDTO userGroupMsgDTO = new UserGroupMsgDTO();
-        userGroupMsgDTO.setGroup_name("第");
-        System.out.println(userGroupMapper.findUserGroupByType(userGroupMsgDTO));
+//        UserGroupMsgDTO userGroupMsgDTO = new UserGroupMsgDTO();
+//        userGroupMsgDTO.setGroup_name("第");
+//        UserGroupPersonSqlDTO userGroupPersonSqlDTO = new UserGroupPersonSqlDTO();
+//        userGroupPersonSqlDTO.setUser_group_id(1);
+//        System.out.println(userGroupMapper.findAllGrpupPersonByType(new UserGroupPersonSqlDTO()));
+        illegalPerMapper.clean();
     }
 }

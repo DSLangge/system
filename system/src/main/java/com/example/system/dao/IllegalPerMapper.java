@@ -41,6 +41,9 @@ public interface IllegalPerMapper {
             "WHERE NOW()>graduat_year AND student.`del`=0")
     int insert();
 
+    @Select("TRUNCATE TABLE `illegal`")
+    void clean();
+
     @Select("SELECT * FROM illegal WHERE id=#{id} AND del=0")
     Illegal findByID(Integer id);
 

@@ -10,6 +10,7 @@ public interface IllegalService {
      * @return
      */
     int insert();
+    void clean();
     int delete(Integer id);
     Illegal findByID(Integer id);
     PageInfo<IllegalPersonDTO> findAllIllegal(Integer page, Integer limit);

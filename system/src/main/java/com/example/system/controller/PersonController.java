@@ -6,7 +6,9 @@ import com.example.system.entity.*;
 import com.example.system.service.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,6 +17,7 @@ import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 public class PersonController {
@@ -286,14 +289,36 @@ public class PersonController {
     @PostMapping("/addadv")
     public String addAdv(MultipartFile file,AdviceNote adviceNote) throws IOException {
         if(null==file){
-            adviceService.insert(adviceNote);
+            int i = adviceService.insert(adviceNote);
+            if(i==1){
+                return "200";
+            }
             return "0";
         }
         adviceNote.setAdv_msg(file.getOriginalFilename());
         file.transferTo( new File("F:/upload/"+file.getOriginalFilename()));   //根据指定的路径存放上传文件
-        adviceService.insert(adviceNote);
+        int i = adviceService.insert(adviceNote);
+        if(i==1){
+            return "200";
+        }
         return "0";
     }
+    @PostMapping("/editadv")
+    public String editAdv(AdviceNote adviceNote) throws IOException {
+        int i = adviceService.update(adviceNote);
+        if(i==1){
+            return "200";
+        }
+        return "0";
+    }
+
+
+
+
+
+
+
+
 
 
     @GetMapping("/leaback")
@@ -378,7 +403,57 @@ public class PersonController {
         }
         return "0";
     }
+    @PostMapping("/getpower")
+    public List<Power> getPower() throws IOException {
+        return userGroupService.findAllPower();
+    }
 
+    @PostMapping("/addpower")
+    public String addPower(UserGroupPowerDTO userGroupPowerDTO) throws IOException {
+        if(null!=userGroupPowerDTO.getId()){
+            int i =userGroupService.updateGroupPower(userGroupPowerDTO);
+            if(i==1){
+                return "200";
+            }
+            return "0";
+        }
+        int i =userGroupService.insertGroupPower(userGroupPowerDTO);
+        if(i==1){
+            return "200";
+        }
+        return "0";
+    }
+
+
+    @GetMapping("/usergroupperson/{userGroupId}")
+    public ResultMapDTO getUserGroupPerson(PageDTO pageDTO, SearchDTO searchDTO,@PathVariable("userGroupId")Integer userGroupId) throws JsonProcessingException {
+        if(null!=searchDTO.getSearchcontent()){
+            UserGroupPersonSqlDTO userGroupPersonSqlDTO = new UserGroupPersonSqlDTO();
+            userGroupPersonSqlDTO.setUser_group_id(userGroupId);
+            switch (searchDTO.getSearchtype()){
+                case "per_id":
+                    userGroupPersonSqlDTO.setPer_id(searchDTO.getSearchcontent());
+                    break;
+                case "po_name":
+                    userGroupPersonSqlDTO.setPo_name(searchDTO.getSearchcontent());
+                    break;
+            }
+            PageInfo<UserGroupPersonDTO> allGrpupPersonByType = userGroupService.findAllGrpupPersonByType(userGroupPersonSqlDTO, pageDTO.getPage(), pageDTO.getLimit());
+            return new ResultMapDTO(200, "",allGrpupPersonByType.getTotal(), allGrpupPersonByType.getList());
+        }
+        PageInfo<UserGroupPersonDTO> allGrpupPerson = userGroupService.findAllGrpupPerson(pageDTO.getPage(), pageDTO.getLimit(),userGroupId);
+        return new ResultMapDTO(200,"",allGrpupPerson.getTotal(),allGrpupPerson.getList());
+    }
+
+
+    @PostMapping("/addusergroupperson")
+    public String addUserGroupPerson(UserGroupPerson userGroupPerson) throws IOException {
+        int i =userGroupService.insertGroupPerson(userGroupPerson);
+        if(i==1){
+            return "200";
+        }
+        return "0";
+    }
 
 
 
@@ -411,6 +486,7 @@ public class PersonController {
             PageInfo<IllegalPersonDTO> illegalByType = illegalService.findIllegalByType(illegalPersonDTO, pageDTO.getPage(), pageDTO.getLimit());
             return new ResultMapDTO(200, "",illegalByType.getTotal(), illegalByType.getList());
         }
+        illegalService.clean();
         illegalService.insert();
         PageInfo<IllegalPersonDTO> allIllegal = illegalService.findAllIllegal(pageDTO.getPage(), pageDTO.getLimit());
         return new ResultMapDTO(200,"",allIllegal.getTotal(),allIllegal.getList());
@@ -473,6 +549,12 @@ public class PersonController {
                 for (String s : split) {
                     int n=Integer.parseInt(s);
                     i+=userGroupService.delete(n);
+                }
+                break;
+            case "usergroupperson":
+                for (String s : split) {
+                    int n=Integer.parseInt(s);
+                    i+=userGroupService.deleteGroupPerson(n);
                 }
                 break;
         }

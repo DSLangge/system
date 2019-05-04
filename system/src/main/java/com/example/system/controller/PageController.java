@@ -2,6 +2,7 @@ package com.example.system.controller;
 
 import com.example.system.dao.LoginMapper;
 import com.example.system.dto.LoginDTO;
+import com.example.system.dto.UserGroupPowerDTO;
 import com.example.system.entity.*;
 import com.example.system.service.*;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,8 @@ public class PageController {
     StudentService studentService;
     @Resource
     TeacherService teacherService;
+    @Resource
+    AdviceService adviceService;
     @Resource
     InformService informService;
     @Resource
@@ -72,6 +75,7 @@ public class PageController {
          * 此处删除登录信息，移除session中的登录对象
         */
         req.getSession().removeAttribute("vrifyCode");
+        req.getSession().removeAttribute("userGroupId");
         return "login";
     }
 
@@ -179,59 +183,98 @@ public class PageController {
         return "admin/index/inform/inform-menu";
     }
 
+    /**
+     * 信息编辑
+     * @param id
+     * @param req
+     * @return
+     */
     @RequestMapping("/informedit")
     public String getInformedit(Integer id,HttpServletRequest req){
         Inform info = informService.findByID(id);
         req.getSession().setAttribute("inform",info);
         return "admin/index/inform/inform-edit";
     }
+
+    /**
+     * 信息添加
+     * @return
+     */
     @RequestMapping("/informadd")
     public String getInformadd(){
         return "admin/index/inform/inform-add";
     }
 
 
-
-
-
-
-
-
+    /**
+     * 通知主页
+     * @return
+     */
     @RequestMapping("/adviceSystem")
     public String getAdvicePage(){
         return "admin/index/adv/adv-menu";
     }
 
-
+    /**
+     * 添加通知
+     * @return
+     */
     @RequestMapping("/advadd")
-    public String geetupload(){
+    public String getupload(){
         return "admin/index/adv/adv-add";
     }
 
+    /**
+     * 修改通知
+     * @param id
+     * @param req
+     * @return
+     */
+    @RequestMapping("/advedit")
+    public String getAdvEdit(Integer id,HttpServletRequest req ){
+        AdviceNote adviceNote = adviceService.findByID(id);
+        req.setAttribute("adviceNote",adviceNote);
+        return "admin/index/adv/adv-edit";
+    }
 
 
-
-
-
-
+    /**
+     * 反馈主页
+     * @return
+     */
     @RequestMapping("/leabackSystem")
     public String getLeaAndBackPage(){
         return "admin/index/leaAndback/lea-back-menu";
     }
 
-
+    /**
+     * 反馈添加
+     * @param feedBack
+     * @param req
+     * @return
+     */
     @RequestMapping("/leabackadd")
     public String getLeaBavkAdd(FeedBack feedBack, HttpServletRequest req){
         req.setAttribute("back_id",feedBack.getBack_id());
         return "admin/index/leaAndback/lea-back-add";
     }
 
+    /**
+     * 修改反馈
+     * @param back_id
+     * @param req
+     * @return
+     */
     @RequestMapping("/leabackedit")
     public String getLeaBavkEdit(Integer back_id, HttpServletRequest req){
         FeedBack byBackId = leaBackService.findByBackId(back_id);
         req.setAttribute("feedBack",byBackId);
         return "admin/index/leaAndback/lea-back-edit";
     }
+
+
+
+
 
 
 
@@ -244,6 +287,13 @@ public class PageController {
     public String geetEvalSheet(){
         return "admin/index/evalu/evalu-sheet";
     }
+
+
+
+
+
+
+
 
 
     /**
@@ -259,11 +309,26 @@ public class PageController {
     public String getUserGroupAdd(){
         return "admin/index/usergtoup/usergroup-add";
     }
+
     @RequestMapping("/usergroupedit")
     public String getUserGroupEdit(Integer id, HttpServletRequest req){
         UserGroup byId = userGroupService.findById(id);
+        UserGroupPowerDTO groupPower = userGroupService.findGroupPower(id);
         req.setAttribute("usergroup",byId);
+        req.setAttribute("grouppower",groupPower);
         return "admin/index/usergtoup/usergroup-edit";
+    }
+
+    @RequestMapping("/usergroupselect")
+    public String getUserGroupPersont(Integer id, HttpServletRequest req){
+        req.getSession().setAttribute("userGroupId",id);
+        return "admin/index/usergtoup/usergroup-person-menu";
+    }
+
+    @RequestMapping("/usergrouppersonadd")
+    public String getUserGroupPersontAdd(Integer id, HttpServletRequest req){
+        req.setAttribute("userGroupIdadd",id);
+        return "admin/index/usergtoup/usergroup-person-add";
     }
 
 

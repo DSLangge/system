@@ -147,7 +147,7 @@
                     $.each(data,function(index,ele){
                         layer.open({
                             type: 2,
-                            area: ['500px', '240px'],
+                            area: ['500px', '500px'],
                             content: ['usergroupedit?id='+ele.id, 'no']
                         });
                     });
@@ -158,14 +158,13 @@
                         layer.msg('请选择一个');
                         break;
                     }
-                    // $.each(data,function(index,ele){
-                    //     layer.open({
-                    //         type: 2,
-                    //         area: ['1000px', '400px'],
-                    //         content: ['usergroupedit?id='+ele.id, 'no']
-                    //     });
-                    // })
-                    layer.msg('权限管理编辑');
+                    $.each(data,function(index,ele){
+                        layer.open({
+                            type: 2,
+                            area: ['600px', '400px'],
+                            content: ['usergroupselect?id='+ele.id, 'no']
+                        });
+                    })
                     break;
             };
         });

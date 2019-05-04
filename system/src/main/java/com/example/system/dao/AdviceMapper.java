@@ -16,7 +16,22 @@ public interface AdviceMapper {
     int insert(AdviceNote adviceNote);
 
 
-    @Update("")
+    @Update("<script>" +
+            "       UPDATE `javawork`.`advice_note`" +
+            "        <set>" +
+            "        <if test=\"id!=null and id!=''\">" +
+            "            `id` = #{id}," +
+            "        </if>" +
+            "        <if test=\"adv_title!=null and adv_title!=''\">" +
+            "            `adv_title` = #{adv_title}," +
+            "        </if>" +
+            "        <if test=\"adv_msg!=null and adv_msg!=''\">" +
+            "            `adv_msg` = #{adv_msg}," +
+            "        </if>"  +
+            "           `update_time`= now() "+
+            "        </set>" +
+            "        WHERE id = #{id} and del = 0" +
+            "</script>")
     int update(AdviceNote adviceNote);
 
 

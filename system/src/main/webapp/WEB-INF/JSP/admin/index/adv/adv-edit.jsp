@@ -30,13 +30,15 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">事务标题：</label>
                     <div class="layui-input-block">
-                        <input type="text" name="adv_title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        <input type="hidden" name="id"  value="${adviceNote.id}">
+                        <input type="text" name="adv_title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input"
+                        value="${adviceNote.adv_title}">
                     </div>
                 </div>
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">通知内容：</label>
                     <div class="layui-input-block">
-                        <textarea placeholder="请输入事务内容" class="layui-textarea"></textarea>
+                        <textarea placeholder="请输入事务内容" class="layui-textarea">${adviceNote.adv_msg}</textarea>
                     </div>
                 </div>
 
@@ -46,30 +48,6 @@
                     </div>
                 </div>
             </form>
-        </div>
-
-
-        <div class="layui-tab-item">
-            <%--<form class="layui-form" v style="width: 90%;padding-top: 20px;">--%>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">事务标题：</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="adv_title1" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">文件信息：</label>
-                    <div class="layui-upload-drag" id="fileupload">
-                        <i class="layui-icon"></i>
-                        <p>点击上传，或将文件拖拽到此处</p>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-input-block">
-                        <button class="layui-btn layui-btn-normal" lay-submit lay-filter="filesubmit" id="filesubmit">立即上传</button>
-                    </div>
-                </div>
-            <%--</form>--%>
         </div>
     </div>
 </div>
@@ -82,48 +60,22 @@
         //监听信息提交
         form.on('submit(advsubmit)', function(data) {
             $.ajax({
-                url: "addadv",
+                url: "editadv",
                 type: "post",
                 data: {
+                    id: $("input[name='id']").val(),
                     adv_title: $("input[name='adv_title']").val(),
-                    adv_type : "事务",
-                    adv_msg: $("textarea").val(),
-                    per_adv_id: "10001"
+                    adv_msg: $("textarea").val()
                 },
                 success: function(data) {
                     if(data=="200"){
-                        layer.msg("添加事务成功");
+                        layer.msg("修改事务成功");
                     }else{
-                        layer.msg("添加事务失败")
+                        layer.msg("修改事务失败")
                     }
                 }
             });
             return false;
-        });
-    });
-    layui.use('upload', function() {
-        var upload = layui.upload;
-        //拖拽上传
-        upload.render({
-            elem: '#fileupload',
-            url: "addadv",
-            accept: 'file',
-            auto: false,
-            bindAction: '#filesubmit',
-            before: function(obj){
-                this.data={
-                    adv_title: $("input[name='adv_title1']").val(),
-                    adv_type : "文件",
-                    per_adv_id: "10001"
-                }
-            },
-            done: function(data) {
-                if(data=="200"){
-                    layer.msg("文件上传成功");
-                }else{
-                    layer.msg("文件上传失败")
-                }
-            }
         });
     });
 </script>
