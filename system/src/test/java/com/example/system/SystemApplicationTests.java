@@ -37,6 +37,8 @@ public class SystemApplicationTests {
     @Resource
     IllegalPerMapper illegalPerMapper;
     @Resource
+    EvaluTotalMapper evaluTotalMapper;
+    @Resource
     UserGroupMapper userGroupMapper;
 
     @Test
@@ -104,6 +106,11 @@ public class SystemApplicationTests {
 //        UserGroupPersonSqlDTO userGroupPersonSqlDTO = new UserGroupPersonSqlDTO();
 //        userGroupPersonSqlDTO.setUser_group_id(1);
 //        System.out.println(userGroupMapper.findAllGrpupPersonByType(new UserGroupPersonSqlDTO()));
-        illegalPerMapper.clean();
+//        illegalPerMapper.clean();
+
+        PersonEvalu personEvalu = new PersonEvalu();
+        personEvalu.setPow_id(1);
+        personEvalu.setTeach_id("20001");
+        System.out.println(evaluTotalMapper.findScoreByPowID(personEvalu));;
     }
 }
