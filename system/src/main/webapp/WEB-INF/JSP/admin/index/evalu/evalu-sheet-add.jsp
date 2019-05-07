@@ -110,6 +110,14 @@
                 </div>
             </div>
         </li>
+        <li>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">评价信息：</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="请输入评价信息" lay-verify="required" class="layui-textarea"></textarea>
+                </div>
+            </div>
+        </li>
     </ul>
     <div class="layui-form-item">
         <div class="layui-input-block">
@@ -128,15 +136,30 @@
             var a=(Number($("#test10 > span").text())+Number($("#test11 > span").text())+Number($("#test12 > span").text())+Number($("#test13 > span").text())+
                 Number($("#test14 > span").text())+Number($("#test15 > span").text())+Number($("#test16 > span").text())+Number($("#test17 > span").text())+
                 Number($("#test18 > span").text())+Number($("#test19 > span").text()))/10;
-            alert(a);
-// 					$.ajax({
-// 						url: "addstudent12312312312312312313",
-// 						type: "post",
-// 						data: JSON.stringify(data.field),
-// 						success: function() {
-// 							alert(123456)
-// 						}
-// 					});
+            $.ajax({
+                url: "addevalu",
+                type: "post",
+                data: {
+                    teach_id: ${teach_id},
+                    score: a,
+                    user_id: "10001",
+                    pow_id: "1",
+                    evalu_msg : $("textarea").val()
+                },
+                success: function(data) {
+                    switch(data){
+                        case "200":
+                            layer.msg("添加成功");
+                            break;
+                        case "0":
+                            layer.msg("添加失败");
+                            break;
+                        case "50":
+                            layer.msg("您已评价，不能重复评价");
+                            break;
+                    }
+                }
+            });
             return false;
         });
     });

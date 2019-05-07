@@ -59,7 +59,7 @@
                 {type: 'checkbox', fixed: 'left'}
                 ,{field:'id', title:'ID', width:80, fixed: 'left',align:'center'}
                 ,{field:'per_id', title:'用户工号', width:130, fixed: 'left',align:'center'}
-                ,{field:'po_name', title:'用户组权限', width:130,align:'center'}
+                ,{field:'po_name', title:'角色', width:130,align:'center'}
             ]]
             ,id: 'testReload'
             ,height: 315
@@ -101,7 +101,10 @@
                     layer.open({
                         type: 2,
                         area: ['500px', '320px'],
-                        content: ['usergrouppersonadd?id='+${userGroupId}, 'no']
+                        content: ['usergrouppersonadd?id='+${userGroupId}, 'no'],
+                        end: function(){
+                            location.reload();
+                        }
                     });
                     break;
                 case 'delete':

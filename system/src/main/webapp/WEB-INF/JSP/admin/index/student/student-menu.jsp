@@ -116,7 +116,10 @@
                     layer.open({
                         type: 2,
                         area: ['1400px', '600px'],
-                        content: ['studentadd', 'no']//添加修改路径
+                        content: ['studentadd', 'no'],
+                        end: function(){
+                            location.reload();
+                        }
                     });
                     break;
                 case 'delete':
@@ -159,7 +162,10 @@
                         layer.open({
                             type: 2,
                             area: ['1400px', '600px'],
-                            content: ['studentedit?stu_id='+ele.stu_id, 'no']//添加修改路径
+                            content: ['studentedit?stu_id='+ele.stu_id, 'no'],
+                            end: function(){
+                                location.reload();
+                            }
                         });
                     });
                     break;

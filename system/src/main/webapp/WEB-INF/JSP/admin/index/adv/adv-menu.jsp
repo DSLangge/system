@@ -109,7 +109,10 @@
                     layer.open({
                         type: 2,
                         area: ['800px', '400px'],
-                        content: ['advadd', 'no']//添加修改路径
+                        content: ['advadd', 'no'],
+                        end: function(){
+                            location.reload();
+                        }
                     });
                     break;
                 case 'delete':
@@ -153,7 +156,10 @@
                             layer.open({
                                 type: 2,
                                 area: ['800px', '350px'],
-                                content: ['advedit?id='+ele.id, 'no']//添加修改路径
+                                content: ['advedit?id='+ele.id, 'no'],
+                                end: function(){
+                                    location.reload();
+                                }
                             });
                         }
                         layer.msg("文件类型无法编辑");

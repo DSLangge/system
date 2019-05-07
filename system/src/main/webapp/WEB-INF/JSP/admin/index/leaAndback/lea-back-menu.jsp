@@ -114,7 +114,10 @@
                         layer.open({
                             type: 2,
                             area: ['600px', '300px'],
-                            content: ['leabackadd?back_id='+ele.id, 'no']//添加修改路径
+                            content: ['leabackadd?back_id='+ele.id, 'no'],
+                            end: function(){
+                                location.reload();
+                            }
                         });
                     });
                     break;
@@ -158,7 +161,10 @@
                         layer.open({
                             type: 2,
                             area: ['600px', '300px'],
-                            content: ['leabackedit?back_id='+ele.id, 'no']//添加修改路径
+                            content: ['leabackedit?back_id='+ele.id, 'no'],
+                            end: function(){
+                                location.reload();
+                            }
                         });
                     });
                     break;

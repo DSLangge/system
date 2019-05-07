@@ -17,7 +17,6 @@
         <select name="searchtype" lay-verify="required" id="searchtype">
             <option value="teach_id">教师工号</option>
             <option value="teach_name">教师姓名</option>
-            <option value="teach_sex">性别</option>
         </select>
     </div>
     <div class="layui-inline">
@@ -30,9 +29,12 @@
 
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" lay-event="add"><i class="layui-icon layui-icon-add-1"></i> 添加</button>
-        <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="delete"><i class="layui-icon layui-icon-delete"></i> 删除</button>
-        <button class="layui-btn layui-btn-sm" lay-event="edit"><i class="layui-icon layui-icon-edit"></i> 编辑</button>
+        <%--<button class="layui-btn layui-btn-sm" lay-event="add"><i class="layui-icon layui-icon-add-1"></i> 添加</button>--%>
+        <%--<button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="delete"><i class="layui-icon layui-icon-delete"></i> 删除</button>--%>
+        <%--<button class="layui-btn layui-btn-sm" lay-event="edit"><i class="layui-icon layui-icon-edit"></i> 编辑</button>--%>
+            <button class="layui-btn layui-btn-sm" lay-event="addevalu"><i class="layui-icon layui-icon-survey"></i> 添加评价</button>
+            <button class="layui-btn layui-btn-sm" lay-event="detail"><i class="layui-icon layui-icon-search"></i> 查看详情</button>
+            <button class="layui-btn layui-btn-sm" lay-event="scorelist"><i class="layui-icon layui-icon-chart-screen"></i> 生成总表</button>
     </div>
 </script>
 
@@ -47,16 +49,16 @@
 
         table.render({
             elem: '#test'
-            ,url:'/teacher'
+            ,url:'evalu'
             ,toolbar: '#toolbarDemo'
             ,title: '教师信息'
             ,cols: [[
                 {type: 'checkbox', fixed: 'left'}
                 ,{field:'teach_id', title:'教师工号', width:125, fixed: 'left', unresize: true, sort: true,align:'center'}
                 ,{field:'teach_name', title:'教师姓名', width:110,align:'center'}
-                ,{field:'teach_sex', title:'性别', width:80,align:'center'}
-                ,{field:'password', title:'密码', width:100,align:'center'}
-                ,{field:'entry_time', title:'入职时间', width:110,align:'center'}
+                ,{field:'user_count', title:'系统管理员评价统计', width:160,align:'center'}
+                ,{field:'teach_count', title:'辅导员评价统计', width:160,align:'center'}
+                ,{field:'stu_count', title:'学生评价统计', width:160,align:'center'}
                 ,{field:'del', title:'状态', width:60,align:'center'}
             ]]
             ,page: true
@@ -95,61 +97,46 @@
         table.on('toolbar(test)', function(obj){
             var checkStatus = table.checkStatus(obj.config.id);
             switch(obj.event){
-                case 'add':
-                    layer.open({
-                        type: 2,
-                        area: ['1000px', '400px'],
-                        content: ['teacheradd', 'no'],
-                        end: function(){
-                            location.reload();
-                        }
-                    });
-                    break;
-                case 'delete':
-                    var data = checkStatus.data;
-                    var batdel="";//批量删除参数
-                    if(data.length===0){
-                        layer.msg('请选择一个用户');
-                        break;
-                    }
-                    var n=data.length-1;
-                    $.each(data,function(index,ele){
-                        if(index<n){
-                            batdel+=ele.teach_id+"-";
-                        }else{
-                            batdel+=ele.teach_id;
-                        }
-                    });
-                    layer.confirm('真的要删除么？', function(index){
-                        $.ajax({
-                            url : "delete",
-                            type : "post",
-                            data : {
-                                batdel : batdel,
-                                type: "teacher"
-                            },
-                            success : function(data){
-                                layer.msg(data)
-                            }
-                        });
-                        layer.close(index);
-                    });
-                    break;
-                case 'edit':
+                case 'addevalu':
                     var data = checkStatus.data;
                     if(data.length!=1){
-                        layer.msg("只能选择一个用户哟~");
+                        layer.msg("请选择一个用户进行评价~");
                         break;
                     }
                     $.each(data,function(index,ele){
                         layer.open({
                             type: 2,
                             area: ['1000px', '400px'],
-                            content: ['teacheredit?teach_id='+ele.teach_id, 'no'],
+                            content: ['evaluadd?teach_id='+ele.teach_id],
                             end: function(){
                                 location.reload();
                             }
                         });
+                    });
+                    break;
+                case 'detail':
+                    var data = checkStatus.data;
+                    if(data.length!=1){
+                        layer.msg("只能选择一个用户");
+                        break;
+                    }
+                    $.each(data,function(index,ele){
+                        layer.open({
+                            type: 2,
+                            title: ' 查看详情',
+                            area: ['600px', '300px'],
+                            content: ['evaludetail?teach_id='+ele.teach_id]
+                        });
+                    });
+                    break;
+                case 'scorelist':
+                    layer.confirm('若存在评价人数为零的列，总体评价将不再显示。确定生成？', function(index){
+                        layer.open({
+                            type: 2,
+                            area: ['1200px', '400px'],
+                            content: ['evaludetailmenuSystem', 'no']
+                        });
+                        layer.close(index);
                     });
                     break;
             };

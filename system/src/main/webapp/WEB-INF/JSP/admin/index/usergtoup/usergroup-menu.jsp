@@ -105,7 +105,10 @@
                     layer.open({
                         type: 2,
                         area: ['500px', '240px'],
-                        content: ['usergroupadd', 'no']
+                        content: ['usergroupadd', 'no'],
+                        end: function(){
+                            location.reload();
+                        }
                     });
                     break;
                 case 'delete':
@@ -148,7 +151,10 @@
                         layer.open({
                             type: 2,
                             area: ['500px', '500px'],
-                            content: ['usergroupedit?id='+ele.id, 'no']
+                            content: ['usergroupedit?id='+ele.id, 'no'],
+                            end: function(){
+                                location.reload();
+                            }
                         });
                     });
                     break;
@@ -162,7 +168,10 @@
                         layer.open({
                             type: 2,
                             area: ['600px', '400px'],
-                            content: ['usergroupselect?id='+ele.id, 'no']
+                            content: ['usergroupselect?id='+ele.id, 'no'],
+                            end: function(){
+                                location.reload();
+                            }
                         });
                     })
                     break;

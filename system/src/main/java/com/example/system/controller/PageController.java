@@ -1,6 +1,7 @@
 package com.example.system.controller;
 
 import com.example.system.dao.LoginMapper;
+import com.example.system.dto.EvaluDetailDTO;
 import com.example.system.dto.LoginDTO;
 import com.example.system.dto.UserGroupPowerDTO;
 import com.example.system.entity.*;
@@ -31,6 +32,8 @@ public class PageController {
     LeaBackService leaBackService;
     @Resource
     UserGroupService userGroupService;
+    @Resource
+    EvaluService evaluService;
 
     /**
      * 登录跳转
@@ -278,15 +281,43 @@ public class PageController {
 
 
 
-
+    @RequestMapping("/evaluSystem")
+    public String geetEvalSystem(){
+        return "admin/index/evalu/evalu-menu";
+    }
     /**
      * 获取评价页面
      * @return
      */
-    @RequestMapping("/evaluSheetSystem")
-    public String geetEvalSheet(){
-        return "admin/index/evalu/evalu-sheet";
+    @RequestMapping("/evaluadd")
+    public String geetEvalSheet(String teach_id,HttpServletRequest req){
+        req.setAttribute("teach_id",teach_id);
+        return "admin/index/evalu/evalu-sheet-add";
     }
+
+    @RequestMapping("/evaludetail")
+    public String evaluDetail(PersonEvalu personEvalu,HttpServletRequest req){
+        EvaluDetailDTO evaluDetailDTO = new EvaluDetailDTO();
+        personEvalu.setPow_id(1);
+        evaluDetailDTO.setUser_score(evaluService.findScoreByPowID(personEvalu));
+        personEvalu.setPow_id(2);
+        evaluDetailDTO.setTeach_score(evaluService.findScoreByPowID(personEvalu));
+        personEvalu.setPow_id(3);
+        evaluDetailDTO.setStu_score(evaluService.findScoreByPowID(personEvalu));
+        PersonEvalu userMsg = evaluService.findUserEvaluMsg(personEvalu.getTeach_id());
+        if (null!=userMsg) {
+            evaluDetailDTO.setEvalu_msg(userMsg.getEvalu_msg());
+        }
+        req.setAttribute("evaluDetailDTO",evaluDetailDTO);
+        return "admin/index/evalu/evalu-detail";
+    }
+
+    @RequestMapping("/evaludetailmenuSystem")
+    public String geetEvaluDetailMenuSystem(){
+        return "admin/index/evalu/evalu-detail-menu";
+    }
+
+
 
 
 

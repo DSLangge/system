@@ -157,7 +157,10 @@
                     layer.open({
                         type: 2,
                         area: ['800px', '350px'],
-                        content: ['informadd', 'no']//添加修改路径
+                        content: ['informadd', 'no'],
+                        end: function(){
+                            location.reload();
+                        }
                     });
                     break;
                 case 'delete':
@@ -201,7 +204,10 @@
                         layer.open({
                             type: 2,
                             area: ['800px', '400px'],
-                            content: ['informedit?id='+ele.id, 'no']//添加修改路径
+                            content: ['informedit?id='+ele.id, 'no'],
+                            end: function(){
+                                location.reload();
+                            }
                         });
                     });
                     break;

@@ -134,7 +134,10 @@
 					layer.open({
 						type: 2,
 						area: ['500px', '500px'],
-						content: ['', 'no']//添加修改路径
+						content: ['', 'no'],//添加修改路径
+						end: function(){
+							location.reload();
+						}
 					});
 					break;
 			};

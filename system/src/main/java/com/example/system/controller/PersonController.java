@@ -29,6 +29,8 @@ public class PersonController {
     @Resource
     StudentService studentService;
     @Resource
+    EvaluService evaluService;
+    @Resource
     InformService informService;
     @Resource
     AdviceService adviceService;
@@ -107,7 +109,8 @@ public class PersonController {
     @PostMapping("/addteacher")
     public String addTeacher(Teacher teacher){
         int i = teacherService.insert(teacher);
-        if(i==1){
+        int n = evaluService.insertEvaTotalTeach(teacher.getTeach_id());
+        if((i+n)/2==1){
             return "老师添加成功";
         }
         return "老师添加失败";
@@ -313,6 +316,68 @@ public class PersonController {
     }
 
 
+    /**
+     * 评价管理主页
+     * @param pageDTO
+     * @param searchDTO
+     * @return
+     * @throws JsonProcessingException
+     */
+
+    @GetMapping("/evalu")
+    public ResultMapDTO getEvalu(PageDTO pageDTO, SearchDTO searchDTO) throws JsonProcessingException {
+        if(null!=searchDTO.getSearchcontent()){
+            EvaluTotalDTO evaluTotalDTO = new EvaluTotalDTO();
+            switch (searchDTO.getSearchtype()){
+                case "teach_id":
+                    evaluTotalDTO.setTeach_id(searchDTO.getSearchcontent());
+                    break;
+                case "teach_name":
+                    evaluTotalDTO.setTeach_name(searchDTO.getSearchcontent());
+                    break;
+            }
+            PageInfo<EvaluTotalDTO> allEvaTotalByType = evaluService.findAllEvaTotalByType(evaluTotalDTO, pageDTO.getPage(), pageDTO.getLimit());
+            return new ResultMapDTO(200, "",allEvaTotalByType.getTotal(), allEvaTotalByType.getList());
+        }
+        PageInfo<EvaluTotalDTO> allEvaTotal = evaluService.findAllEvaTotal(pageDTO.getPage(), pageDTO.getLimit());
+        return new ResultMapDTO(200,"",allEvaTotal.getTotal(),allEvaTotal.getList());
+    }
+    @PostMapping("/addevalu")
+    public String addEvalu(PersonEvalu personEvalu) throws IOException {
+        if(null==evaluService.findByTeachIdUsersonId(personEvalu.getTeach_id(), personEvalu.getUser_id())){
+            int i = evaluService.insertPersonEva(personEvalu);
+            if(i==1){
+                return "200";
+            }
+            return "0";
+        }
+        return "50";
+    }
+
+
+    @GetMapping("/evaludetailmenu")
+    public ResultMapDTO getEvaluDetailMenu(PageDTO pageDTO) throws JsonProcessingException {
+        List<EvaluDetailDTO> detail = evaluService.getDetail();
+        int i=0;
+        for (EvaluDetailDTO evaluDetailDTO : detail) {
+            evaluDetailDTO.setUser_score(evaluService.findScoreByPowID(new PersonEvalu(evaluDetailDTO.getTeach_id(), 1)));
+            evaluDetailDTO.setTeach_score(evaluService.findScoreByPowID(new PersonEvalu(evaluDetailDTO.getTeach_id(), 2)));
+            evaluDetailDTO.setStu_score(evaluService.findScoreByPowID(new PersonEvalu(evaluDetailDTO.getTeach_id(), 3)));
+            if(null!=evaluDetailDTO.getUser_score()&&null!=evaluDetailDTO.getTeach_score()&&null!=evaluDetailDTO.getStu_score()){
+                evaluService.updateEvaluTotal(evaluDetailDTO);
+            }
+            i++;
+        }
+        PageInfo<EvaluDetailDTO> detailList = evaluService.getDetailList(pageDTO.getPage(), pageDTO.getLimit());
+        if(i!=detail.size()){
+            return new ResultMapDTO(0,"数据有错",detailList.getTotal(),detailList.getList());
+        }
+        return new ResultMapDTO(200,"",detailList.getTotal(),detailList.getList());
+    }
+
+
+
+
 
 
 
@@ -514,8 +579,9 @@ public class PersonController {
                 break;
             case "teacher":
                 for (String s : split) {
-                    i+=teacherService.delete(s);
+                    i+=teacherService.delete(s)+evaluService.deleteEvaTotalTeach(s);
                 }
+                i/=2;
                 break;
             case "user":
                 break;

@@ -1,7 +1,6 @@
 package com.example.system;
 
 import com.example.system.dao.*;
-import com.example.system.dto.*;
 import com.example.system.entity.*;
 import com.example.system.service.InformService;
 import org.junit.Test;
@@ -11,8 +10,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -37,7 +34,7 @@ public class SystemApplicationTests {
     @Resource
     IllegalPerMapper illegalPerMapper;
     @Resource
-    EvaluTotalMapper evaluTotalMapper;
+    EvaluMapper evaluMapper;
     @Resource
     UserGroupMapper userGroupMapper;
 
@@ -108,9 +105,11 @@ public class SystemApplicationTests {
 //        System.out.println(userGroupMapper.findAllGrpupPersonByType(new UserGroupPersonSqlDTO()));
 //        illegalPerMapper.clean();
 
-        PersonEvalu personEvalu = new PersonEvalu();
-        personEvalu.setPow_id(1);
-        personEvalu.setTeach_id("20001");
-        System.out.println(evaluTotalMapper.findScoreByPowID(personEvalu));;
+//        PersonEvalu personEvalu = new PersonEvalu();
+//        personEvalu.setPow_id(1);
+//        personEvalu.setTeach_id("20001");
+//        System.out.println(evaluMapper.findScoreByPowID(personEvalu));;
+        System.out.println(evaluMapper.getDetail());
+
     }
 }

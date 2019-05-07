@@ -31,7 +31,7 @@
 				    </dl>
 				  </li>
 				  <li class="layui-nav-item">
-					<a href="javascript:;" data-url="/evaluSheetSystem" data-id='5' data-text="评价管理"><i class="iconfont">&#xe60e;</i>评价管理</a>
+					<a href="javascript:;" data-url="/evaluSystem" data-id='5' data-text="评价管理"><i class="iconfont">&#xe60e;</i>评价管理</a>
 				  </li>
 				  <li class="layui-nav-item">
 					  <a href="javascript:;"><i class="iconfont">&#xe605;</i>信息发布及留言反馈</a>
