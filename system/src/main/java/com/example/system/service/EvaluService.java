@@ -54,6 +54,9 @@ public interface EvaluService {
      */
     PersonEvalu findByTeachIdUsersonId(String teach_id,String user_id);
 
+
+    PersonEvalu findByTeachIdPowId(String teach_id,Integer pow_id);
+
     List<EvaluDetailDTO> getDetail();
 
 

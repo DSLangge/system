@@ -60,7 +60,7 @@
                 url : "addinform",
                 type : "post",
                 data : {
-                    pre_id : "10001",
+                    pre_id : ${userlogin.user_id},
                     inf_title : $("input[name='inf_title']").val(),
                     inf_msg : $("textarea").val()
                 },

@@ -68,6 +68,23 @@ public class PersonController {
         PageInfo<User> allUser = userService.findAllUser(pageDTO.getPage(), pageDTO.getLimit());
         return new ResultMapDTO(200, "",allUser.getTotal(), allUser.getList());
     }
+    @PostMapping("/edituser")
+    public String editUser(User user){
+        int i = userService.upDate(user);
+        if(i==1){
+            return "200";
+        }
+        return "0";
+    }
+    @PostMapping("/adduser")
+    public String addUser(User user){
+        int i = userService.insert(user);
+        if(i==1){
+            return "200";
+        }
+        return "0";
+    }
+
 
 
 
@@ -345,11 +362,14 @@ public class PersonController {
     @PostMapping("/addevalu")
     public String addEvalu(PersonEvalu personEvalu) throws IOException {
         if(null==evaluService.findByTeachIdUsersonId(personEvalu.getTeach_id(), personEvalu.getUser_id())){
-            int i = evaluService.insertPersonEva(personEvalu);
-            if(i==1){
-                return "200";
+            if(null==evaluService.findByTeachIdPowId(personEvalu.getTeach_id(),personEvalu.getPow_id())){
+                int i = evaluService.insertPersonEva(personEvalu);
+                if(i==1){
+                    return "200";
+                }
+                return "0";
             }
-            return "0";
+            return "45";
         }
         return "50";
     }

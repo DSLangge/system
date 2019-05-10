@@ -53,6 +53,11 @@ public interface EvaluMapper {
     PersonEvalu findByTeachIdUsersonId(String teach_id,String user_id);
 
     @Select("SELECT * FROM `javawork`.`per_evalu`\n" +
+            "WHERE teach_id=#{teach_id} AND pow_id=#{pow_id}")
+    PersonEvalu findByTeachIdPowId(String teach_id,Integer pow_id);
+
+
+    @Select("SELECT * FROM `javawork`.`per_evalu`\n" +
             "WHERE teach_id=#{teach_id} AND pow_id=1")
     PersonEvalu findUserEvaluMsg(String teach_id);
 

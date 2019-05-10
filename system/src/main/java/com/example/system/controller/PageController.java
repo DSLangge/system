@@ -49,18 +49,27 @@ public class PageController {
          */
         if(req.getSession().getAttribute("vrifyCode")!=null){
             if(req.getSession().getAttribute("vrifyCode").equals(loginDTO.getVerify())){
-//            switch (loginDTO.getPower()){
-//                case 0:
-//                    System.out.println(loginMapper.stuLogin(loginDTO.getUserid(),loginDTO.getPassword()));;
-//                    return "admin/index/index";
-//                case 1:
-//                    System.out.println(loginMapper.teachLogin(loginDTO.getUserid(),loginDTO.getPassword()));;
-//                    return "admin/index/index";
-//                case 2:
-//                    System.out.println(loginMapper.userLogin(loginDTO.getUserid(),loginDTO.getPassword()));;
-//                    return "admin/index/index";
-//            }
-                return "admin/index/index";
+                switch (loginDTO.getPower()){
+                    case 3:
+                        Student student = loginMapper.stuLogin(loginDTO.getUserid(), loginDTO.getPassword());
+                        if(null!=student){
+                            return "admin/index/index";
+                        }
+                        return "login";
+                    case 2:
+                        Teacher teacher = loginMapper.teachLogin(loginDTO.getUserid(), loginDTO.getPassword());
+                        if(null!=teacher){
+                            return "admin/index/index";
+                        }
+                        return "login";
+                    case 1:
+                        User user = loginMapper.userLogin(loginDTO.getUserid(), loginDTO.getPassword());
+                        if(null!=user){
+                            req.getSession().setAttribute("userlogin",user);
+                            return "admin/index/index";
+                        }
+                        return "login";
+                }
             }
         }
         return "login";
@@ -79,8 +88,17 @@ public class PageController {
         */
         req.getSession().removeAttribute("vrifyCode");
         req.getSession().removeAttribute("userGroupId");
+        req.getSession().removeAttribute("userlogin");
         return "login";
     }
+
+    @RequestMapping("/adminSystem")
+    public String adminInfo(){
+        return "admin/index/user/user-admin";
+    }
+
+
+
 
 
     /**
@@ -88,9 +106,21 @@ public class PageController {
      * @return
      */
     @RequestMapping("/userSystem")
-    public String getUserPage(){
-        return "admin/index/user/user-menu";
+    public String getUserPage(HttpServletRequest req){
+        if(null!=req.getSession().getAttribute("userlogin")){
+            return "admin/index/user/user-menu";
+        }
+        return "login";
     }
+
+    @RequestMapping("/useradd")
+    public String userAdd(){
+        return "admin/index/user/user-add";
+    }
+
+
+
+
 
 
 

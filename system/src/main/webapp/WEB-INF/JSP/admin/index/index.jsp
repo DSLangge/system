@@ -62,7 +62,7 @@
 					</div>
 					<ul class="layui-nav" lay-filter="rightNav">
 					  <li class="layui-nav-item">
-					    <a href="javascript:;" data-url="admin-info.html" data-id='11' data-text="个人信息">超级管理员</a>
+						  <a href="javascript:;" data-url="/adminSystem" data-id='11' data-text="个人信息">${userlogin.user_name}</a>
 					  </li>
 					  <li class="layui-nav-item"><a href="/user_loginOut">退出</a></li>
 					</ul>

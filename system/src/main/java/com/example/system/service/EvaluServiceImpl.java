@@ -58,6 +58,11 @@ public class EvaluServiceImpl implements EvaluService {
     }
 
     @Override
+    public PersonEvalu findByTeachIdPowId(String teach_id, Integer pow_id) {
+        return evaluMapper.findByTeachIdPowId(teach_id,pow_id);
+    }
+
+    @Override
     public List<EvaluDetailDTO> getDetail() {
         return evaluMapper.getDetail();
     }

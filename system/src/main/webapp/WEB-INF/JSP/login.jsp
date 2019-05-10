@@ -47,9 +47,9 @@
                     <label class="layui-form-label"><i class="layui-icon layui-icon-rate-solid"></i>身份选择</label>
                     <div class="layui-input-block">
                         <select name="power" lay-verify="required">
-                            <option value="0">学生</option>
-                            <option value="1">老师</option>
-                            <option value="2">系统管理员</option>
+                            <option value="3">学生</option>
+                            <option value="2">辅导员</option>
+                            <option value="1">系统管理员</option>
                         </select>
                     </div>
                 </div>

@@ -142,7 +142,7 @@
                 data: {
                     teach_id: ${teach_id},
                     score: a,
-                    user_id: "10001",
+                    user_id: ${userlogin.user_id},
                     pow_id: "1",
                     evalu_msg : $("textarea").val()
                 },
@@ -156,6 +156,9 @@
                             break;
                         case "50":
                             layer.msg("您已评价，不能重复评价");
+                            break;
+                        case "45":
+                            layer.msg("已被其他管理员评价，不能重复评价");
                             break;
                     }
                 }

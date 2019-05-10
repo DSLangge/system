@@ -88,7 +88,7 @@
                     adv_title: $("input[name='adv_title']").val(),
                     adv_type : "事务",
                     adv_msg: $("textarea").val(),
-                    per_adv_id: "10001"
+                    per_adv_id: ${userlogin.user_id}
                 },
                 success: function(data) {
                     if(data=="200"){
@@ -114,7 +114,7 @@
                 this.data={
                     adv_title: $("input[name='adv_title1']").val(),
                     adv_type : "文件",
-                    per_adv_id: "10001"
+                    per_adv_id: ${userlogin.user_id}
                 }
             },
             done: function(data) {

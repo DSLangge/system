@@ -22,8 +22,18 @@ public interface UserMapper {
     int delete(String user_id);
 
 //    通过工号更新系统用户名和密码
-    @Update("UPDATE `javawork`.`user` SET `user_name` = #{user_name}," +
-            "   `password` = #{password} WHERE `user_id` = #{user_id}")
+    @Update("<script>" +
+            "       UPDATE `javawork`.`user`" +
+            "        <set>" +
+            "        <if test=\"user_name!=null and user_name!=''\">" +
+            "            `user_name` = #{user_name}," +
+            "        </if>" +
+            "        <if test=\"password!=null and password!=''\">" +
+            "            `password` = #{password}," +
+            "        </if>" +
+            "        </set>" +
+            "        WHERE `user_id` = #{user_id} and del = 0" +
+            "</script>")
     int upDate(User user);
 
 //    查找所有存在的用户

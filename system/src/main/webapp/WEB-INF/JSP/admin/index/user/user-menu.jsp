@@ -94,7 +94,14 @@
 			var checkStatus = table.checkStatus(obj.config.id);
 			switch(obj.event){
 				case 'add':
-
+					layer.open({
+						type: 2,
+						area: ['600px', '300px'],
+						content: ['useradd', 'no'],
+						end: function(){
+							location.reload();
+						}
+					});
 					break;
 				case 'delete':
 					var data = checkStatus.data;
@@ -111,34 +118,28 @@
 							batdel+=ele.stu_id;
 						}
 					});
-					layer.confirm('真的要删除么？', function(index){
-						// $.ajax({
-						// 	url : "deletestudent",
-						// 	type : "post",
-						// 	data : {
-						// 		batdel : batdel
-						// 	},
-						// 	success : function(data){
-						// 		layer.msg(data)
-						// 	}
-						// });
-						layer.close(index);
-					});
+					layer.msg('系统管理员无法删除请联系开发人员');
+					// layer.confirm('真的要删除么？', function(index){
+					// 	// $.ajax({
+					// 	// 	url : "deletestudent",
+					// 	// 	type : "post",
+					// 	// 	data : {
+					// 	// 		batdel : batdel
+					// 	// 	},
+					// 	// 	success : function(data){
+					// 	// 		layer.msg(data)
+					// 	// 	}
+					// 	// });
+					// 	layer.close(index);
+					// });
 					break;
 				case 'edit':
 					var data = checkStatus.data;
-					if(data.length!=1){
-						layer.msg("只能选择一个用户哟~");
+					if(data.length===0){
+						layer.msg("请选择一个用户");
 						break;
 					}
-					layer.open({
-						type: 2,
-						area: ['500px', '500px'],
-						content: ['', 'no'],//添加修改路径
-						end: function(){
-							location.reload();
-						}
-					});
+					layer.msg("无法对管理员进行编辑操作，若想编辑请登录相应账号进行操作");
 					break;
 			};
 		});

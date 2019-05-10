@@ -108,7 +108,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">当前版本：</label>
                     <div class="layui-input-block">
-                        <a class="layui-input" href="https://github.com/DSLangge/system/commit/960f288f64fdf143af12ecc606c78db9a509c58b" target="_blank">V1.0</a>
+                        <a class="layui-input" href="https://github.com/DSLangge/system/commit/63e3c491731c1f1f57ccfe0c51aeec8f009d115b" target="_blank">V1.0</a>
                     </div>
                 </div>
                 <div class="layui-form-item">
