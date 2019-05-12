@@ -20,7 +20,7 @@
 				    <a href="javascript:;"><i class="iconfont">&#xe607;</i>用户基本管理</a>
 				    <dl class="layui-nav-child">
 				      <dd><a href="javascript:;" data-url="/userSystem" data-id='1' data-text="系统用户"><span class="l-line"></span>系统用户</a></dd>
-				      <dd><a href="javascript:;" data-url="/teacherSystem" data-id='2' data-text="老师用户"><span class="l-line"></span>老师用户</a></dd>
+				      <dd><a href="javascript:;" data-url="/teacherSystem" data-id='2' data-text="辅导员用户"><span class="l-line"></span>辅导员用户</a></dd>
 					  <dd><a href="javascript:;" data-url="/studentSystem" data-id='3' data-text="学生用户"><span class="l-line"></span>学生用户</a></dd>
 				    </dl>
 				  </li>

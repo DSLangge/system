@@ -49,11 +49,11 @@
             elem: '#test'
             ,url:'/teacher'
             ,toolbar: '#toolbarDemo'
-            ,title: '教师信息'
+            ,title: '辅导员信息'
             ,cols: [[
                 {type: 'checkbox', fixed: 'left'}
-                ,{field:'teach_id', title:'教师工号', width:125, fixed: 'left', unresize: true, sort: true,align:'center'}
-                ,{field:'teach_name', title:'教师姓名', width:110,align:'center'}
+                ,{field:'teach_id', title:'辅导员工号', width:125, fixed: 'left', unresize: true, sort: true,align:'center'}
+                ,{field:'teach_name', title:'辅导员姓名', width:110,align:'center'}
                 ,{field:'teach_sex', title:'性别', width:80,align:'center'}
                 ,{field:'password', title:'密码', width:100,align:'center'}
                 ,{field:'entry_time', title:'入职时间', width:110,align:'center'}

@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">教师姓名：</label>
+                    <label class="layui-form-label">姓名：</label>
                     <div class="layui-input-block">
                         <input type="text" name="teach_name" disabled autocomplete="off" class="layui-input layui-disabled" value="${teacher.teach_name}">
                     </div>
@@ -76,7 +76,7 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">教师姓名：</label>
+                    <label class="layui-form-label">姓名：</label>
                     <div class="layui-input-block">
                         <input type="text" name="teach_name" disabled autocomplete="off" class="layui-input layui-disabled" value="${teacher.teach_name}">
                     </div>

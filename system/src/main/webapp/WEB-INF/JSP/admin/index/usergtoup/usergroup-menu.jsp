@@ -59,10 +59,10 @@
             ,title: '用户组表'
             ,cols: [[
                 {type: 'checkbox', fixed: 'left'}
-                ,{field:'id', title:'ID', width:80, fixed: 'left',align:'center'}
-                ,{field:'group_name', title:'用户组名称', width:130, fixed: 'left',align:'center'}
-                ,{field:'sum', title:'人数', width:80,align:'center'}
-                ,{field:'po_name', title:'用户组权限', width:130,align:'center'}
+                // ,{field:'id', title:'ID', width:80, fixed: 'left',align:'center'}
+                ,{field:'group_name', title:'用户组名称',  fixed: 'left',align:'center'}
+                ,{field:'sum', title:'人数', maxwidth:80,align:'center'}
+                ,{field:'po_name', title:'用户组权限',align:'center'}
             ]]
             ,id: 'testReload'
             ,height: 'full'

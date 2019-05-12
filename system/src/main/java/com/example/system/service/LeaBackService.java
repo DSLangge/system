@@ -11,6 +11,7 @@ public interface LeaBackService {
     int delete(Integer id);
 
     int deleteLeaMess(Integer id);
+    LeaBackDTO getBoolen(Integer back_id);
     FeedBack findByBackId(Integer back_id);
     PageInfo<LeaBackDTO> findAllLeaBack(Integer page, Integer limit);
     PageInfo<LeaBackDTO> findLeaAndBackByType(LeaBackDTO leaBackDTO,Integer page, Integer limit);

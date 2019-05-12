@@ -21,7 +21,7 @@
 <body>
 <div class="layui-tab page-content-wrap">
     <ul class="layui-tab-title">
-        <li class="layui-this">添加学生</li>
+        <li class="layui-this">添加辅导员</li>
     </ul>
     <div class="layui-tab-content">
         <div class="layui-tab-item layui-show">
@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">教师姓名：</label>
+                    <label class="layui-form-label">姓名：</label>
                     <div class="layui-input-block">
                         <input type="text" name="teach_name" required lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
                     </div>

@@ -53,6 +53,14 @@ public interface LeaBackMapper {
     int deleteLeaMess(Integer id);
 
 
+    @Select("SELECT lea_message.`id`,lea_message.`lea_per_id`,lea_message.`lea_msg`,lea_message.`lea_creat`,\n" +
+            "feedback.`back_per_id`,feedback.`back_msg`,feedback.`back_time`\n" +
+            "FROM feedback RIGHT JOIN lea_message ON feedback.`back_id`=lea_message.`id` AND feedback.`del`=0\n" +
+            "WHERE lea_message.`del`=0   AND feedback.`back_id`= #{back_id} \n" +
+            "ORDER BY id")
+    LeaBackDTO getBoolen(Integer back_id);
+
+
     @Select("<script>" +
             "SELECT lea_message.`id`,lea_message.`lea_per_id`,lea_message.`lea_msg`,lea_message.`lea_creat`,feedback.`back_per_id`,feedback.`back_msg`,feedback.`back_time`\n" +
             "FROM feedback RIGHT JOIN lea_message ON feedback.`back_id`=lea_message.`id` AND feedback.`del`=0 \n" +

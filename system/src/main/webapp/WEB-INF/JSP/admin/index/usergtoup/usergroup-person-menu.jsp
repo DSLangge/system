@@ -39,7 +39,7 @@
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
         <button class="layui-btn layui-btn-sm" lay-event="add"><i class="layui-icon layui-icon-add-1"></i> 添加用户</button>
-        <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="delete"><i class="layui-icon layui-icon-delete"></i> 删除用户组</button>
+        <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="delete"><i class="layui-icon layui-icon-delete"></i> 删除用户</button>
     </div>
 </script>
 
@@ -57,9 +57,9 @@
             ,title: '用户组表'
             ,cols: [[
                 {type: 'checkbox', fixed: 'left'}
-                ,{field:'id', title:'ID', width:80, fixed: 'left',align:'center'}
-                ,{field:'per_id', title:'用户工号', width:130, fixed: 'left',align:'center'}
-                ,{field:'po_name', title:'角色', width:130,align:'center'}
+                // ,{field:'id', title:'ID', width:80, fixed: 'left',align:'center'}
+                ,{field:'per_id', title:'用户工号', fixed: 'left',align:'center'}
+                ,{field:'po_name', title:'角色', align:'center'}
             ]]
             ,id: 'testReload'
             ,height: 315

@@ -77,7 +77,6 @@ public class UserGroupServiceImpl implements UserGroupService {
     public PageInfo<UserGroupPersonDTO> findAllGrpupPerson(Integer page, Integer limit,Integer user_group_id) {
         PageHelper.startPage(page,limit);
         PageInfo<UserGroupPersonDTO> userGroupPersonDTOPageInfo = new PageInfo<>(userGroupMapper.findAllGrpupPerson(user_group_id));
-        System.out.println(userGroupPersonDTOPageInfo);
         return userGroupPersonDTOPageInfo;
     }
 
@@ -99,7 +98,6 @@ public class UserGroupServiceImpl implements UserGroupService {
     @Override
     public PageInfo<UserGroupMsgDTO> findUserGroupByType(UserGroupMsgDTO userGroupMsgDTO, Integer page, Integer limit) {
         PageHelper.startPage(page,limit);
-        System.out.println(userGroupMsgDTO);
         PageInfo<UserGroupMsgDTO> userGroupMsgDTOPageInfo = new PageInfo<>(userGroupMapper.findUserGroupByType(userGroupMsgDTO));
         return userGroupMsgDTOPageInfo;
     }

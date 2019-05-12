@@ -37,6 +37,11 @@ public class LeaBackServiceImpl implements LeaBackService {
     }
 
     @Override
+    public LeaBackDTO getBoolen(Integer back_id) {
+        return leaBackMapper.getBoolen(back_id);
+    }
+
+    @Override
     public FeedBack findByBackId(Integer back_id) {
         return leaBackMapper.findByBackId(back_id);
     }

@@ -54,8 +54,8 @@
             ,title: '教师信息'
             ,cols: [[
                 {type: 'checkbox', fixed: 'left'}
-                ,{field:'teach_id', title:'教师工号', width:125, fixed: 'left', unresize: true, sort: true,align:'center'}
-                ,{field:'teach_name', title:'教师姓名', width:110,align:'center'}
+                ,{field:'teach_id', title:'辅导员工号', width:125, fixed: 'left', unresize: true, sort: true,align:'center'}
+                ,{field:'teach_name', title:'辅导员姓名', width:110,align:'center'}
                 ,{field:'user_count', title:'系统管理员评价统计', width:160,align:'center'}
                 ,{field:'teach_count', title:'辅导员评价统计', width:160,align:'center'}
                 ,{field:'stu_count', title:'学生评价统计', width:160,align:'center'}

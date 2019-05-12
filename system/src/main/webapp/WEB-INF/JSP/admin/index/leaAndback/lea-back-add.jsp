@@ -58,14 +58,19 @@
                     back_id : ${back_id}
                 },
                 success : function(data){
-                    if(data=="200"){
-                        layer.msg("反馈成功");
-                    }else{
-                        layer.msg("反馈失败")
+                    switch(data){
+                        case "200":
+                            layer.msg("反馈成功");
+                            break;
+                        case "0":
+                            layer.msg("反馈失败");
+                            break;
+                        case "50":
+                            layer.msg("已被其他管理员反馈，尽可以选择编辑按钮进行操作！");
+                            break;
                     }
                 }
             });
-            alert($("textarea").val())
             return false;
         });
     });

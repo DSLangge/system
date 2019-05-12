@@ -433,11 +433,14 @@ public class PersonController {
 
     @PostMapping("/addleaback")
     public String addLeaBack(FeedBack feedBack) throws IOException {
-        int i = leaBackService.insert(feedBack);
-        if(i==1){
-            return "200";
+        if(null==leaBackService.getBoolen(feedBack.getBack_id())){
+            int i = leaBackService.insert(feedBack);
+            if(i==1){
+                return "200";
+            }
+            return "0";
         }
-        return "0";
+        return "50";
     }
 
     @PostMapping("/editleaback")

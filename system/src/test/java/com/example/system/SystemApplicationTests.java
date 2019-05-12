@@ -109,7 +109,7 @@ public class SystemApplicationTests {
 //        personEvalu.setPow_id(1);
 //        personEvalu.setTeach_id("20001");
 //        System.out.println(evaluMapper.findScoreByPowID(personEvalu));;
-        System.out.println(evaluMapper.getDetail());
+        System.out.println(leaBackMapper.getBoolen(2));
 
     }
 }

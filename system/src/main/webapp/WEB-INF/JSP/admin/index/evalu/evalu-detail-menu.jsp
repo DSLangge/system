@@ -29,8 +29,8 @@
             ,title: '总表信息'
             ,cols: [[
                 {type: 'checkbox', fixed: 'left'}
-                ,{field:'teach_id', title:'教师工号', width:125, fixed: 'left', unresize: true, sort: true,align:'center'}
-                ,{field:'teach_name', title:'教师姓名', width:110,align:'center'}
+                ,{field:'teach_id', title:'辅导员工号', width:125, fixed: 'left', unresize: true, sort: true,align:'center'}
+                ,{field:'teach_name', title:'辅导员姓名', width:110,align:'center'}
                 ,{field:'user_score', title:'系统管理员评分', width:160,align:'center'}
                 ,{field:'teach_score', title:'辅导员评分', width:140,align:'center'}
                 ,{field:'stu_score', title:'学生评分', width:120,align:'center'}
