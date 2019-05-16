@@ -22,7 +22,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">学号：</label>
                     <div class="layui-input-block">
-                        <input type="text" name="stu_id" required lay-verify="required" placeholder="请输入学号" autocomplete="off" class="layui-input">
+                        <input type="text" name="stu_id" required lay-verify="number" placeholder="请输入学号" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -42,7 +42,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">年龄：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="stu_age" required lay-verify="required" placeholder="请输入年龄" autocomplete="off" class="layui-input"
+                            <input type="text" name="stu_age" required lay-verify="number" placeholder="请输入年龄" autocomplete="off" class="layui-input"
                             >
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">学制：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="stu_edu" required lay-verify="required" placeholder="请输入学制" autocomplete="off" class="layui-input"
+                            <input type="text" name="stu_edu" required lay-verify="number" placeholder="请输入学制" autocomplete="off" class="layui-input"
                             >
                         </div>
                     </div>

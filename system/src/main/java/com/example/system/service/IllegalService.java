@@ -9,7 +9,14 @@ public interface IllegalService {
      * 自动插入，不能手动插入
      * @return
      */
-    int insert();
+    int insertTimeOut();
+
+    /**
+     * 插入违规用户
+     * @return
+     */
+    int insertIllegal();
+
     void clean();
     int delete(Integer id);
     Illegal findByID(Integer id);

@@ -16,8 +16,13 @@ public class IllegalServiceImpl implements IllegalService {
     IllegalPerMapper illegalPerMapper;
 
     @Override
-    public int insert() {
-        return illegalPerMapper.insert();
+    public int insertTimeOut() {
+        return illegalPerMapper.insertTimeOut();
+    }
+
+    @Override
+    public int insertIllegal() {
+        return illegalPerMapper.insertIllegal();
     }
 
     @Override

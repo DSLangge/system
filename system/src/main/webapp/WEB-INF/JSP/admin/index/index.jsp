@@ -64,7 +64,7 @@
 					  <li class="layui-nav-item">
 						  <a href="javascript:;" data-url="/adminSystem" data-id='11' data-text="个人信息">${userlogin.user_name}</a>
 					  </li>
-					  <li class="layui-nav-item"><a href="/user_loginOut">退出</a></li>
+					  <li class="layui-nav-item"><a href="javascript:login_out();">注销</a></li>
 					</ul>
 				</div>
 				<!--主体内容-->
@@ -90,10 +90,14 @@
 			</div>
 		</div>
 		<script type="text/javascript">
-			var scope={
-				link:'修改'
+			function login_out(){
+				layer.confirm('真的要退出么？', function(index){
+					window.location.href="user_loginOut";
+					layer.close(index);
+				});
 			}
 		</script>
+		<script src="js/jquery-1.11.1.js" type="text/javascript" charset="utf-8"></script>
 		<script src="static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 		<script src="static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="static/admin/js/main.js" type="text/javascript" charset="utf-8"></script>

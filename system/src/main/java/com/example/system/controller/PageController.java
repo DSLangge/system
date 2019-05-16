@@ -47,7 +47,7 @@ public class PageController {
         /**
          * 定义一个登录表单的DTO
          */
-        if(req.getSession().getAttribute("vrifyCode")!=null){
+        if(null!=req.getSession().getAttribute("vrifyCode")){
             if(req.getSession().getAttribute("vrifyCode").equals(loginDTO.getVerify())){
                 switch (loginDTO.getPower()){
                     case 3:
@@ -55,22 +55,31 @@ public class PageController {
                         if(null!=student){
                             return "admin/index/index";
                         }
+                        req.setAttribute("loginmsg","请核对用户名、密码及角色");
                         return "login";
                     case 2:
                         Teacher teacher = loginMapper.teachLogin(loginDTO.getUserid(), loginDTO.getPassword());
                         if(null!=teacher){
                             return "admin/index/index";
                         }
+                        req.setAttribute("loginmsg","请核对用户名、密码及角色");
                         return "login";
                     case 1:
                         User user = loginMapper.userLogin(loginDTO.getUserid(), loginDTO.getPassword());
                         if(null!=user){
-                            req.getSession().setAttribute("userlogin",user);
-                            return "admin/index/index";
+                            if(!user.equals(req.getSession().getAttribute("userlogin"))){
+                                req.getSession().setAttribute("userlogin",user);
+                                return "admin/index/index";
+                            }
+                            req.setAttribute("loginmsg","该用户已登录");
+                            return "login";
                         }
+                        req.setAttribute("loginmsg","账户名密码不正确");
                         return "login";
                 }
             }
+            req.setAttribute("loginmsg","验证码不正确");
+            return "login";
         }
         return "login";
     }

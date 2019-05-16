@@ -33,15 +33,15 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label"><i class="layui-icon layui-icon-rate-solid"></i>用户名</label>
                     <div class="layui-input-block">
-                        <input type="text" name="userid" required  lay-verify="required" placeholder="请输入学工号" autocomplete="off" class="layui-input">
+                        <input type="text" name="userid" required  lay-verify="number" placeholder="请输入学工号" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label"><i class="layui-icon layui-icon-rate-solid"></i>密码</label>
                     <div class="layui-input-inline">
-                        <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                        <input type="password" name="password" required lay-verify="number" placeholder="请输入密码" autocomplete="off" class="layui-input">
                     </div>
-                    <div class="layui-form-mid layui-word-aux ">辅助文字</div>
+                    <div class="layui-form-mid layui-word-aux "></div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label"><i class="layui-icon layui-icon-rate-solid"></i>身份选择</label>
@@ -68,15 +68,20 @@
                     </div>
                 </div>
             </form>
-
+            <script src="js/jquery-1.11.1.js" type="text/javascript" charset="utf-8"></script>
             <script>
+                $(function(){
+                    var msg="${loginmsg}";
+                    if(msg!=""){
+                        alert(msg);
+                    }
+                });
                 function change() {
                     document.getElementById("img").src ="verify?r="+Math.random();
                 }
                 //Demo
                 layui.use('form', function(){
                     var form = layui.form;
-
                     //监听提交
                     form.on('submit(formDemo)', function(data){
 

@@ -39,7 +39,22 @@ public interface IllegalPerMapper {
     @Insert("REPLACE INTO `javawork`.`illegal`(`per_id`,`pow_id`,`type`)\n" +
             "SELECT stu_id per_id,pow_id,1 FROM student\n" +
             "WHERE NOW()>graduat_year AND student.`del`=0")
-    int insert();
+    int insertTimeOut();
+
+
+    @Insert("REPLACE INTO `javawork`.`illegal`(`per_id`,`pow_id`,`type`)\n" +
+            "SELECT lea_message.`lea_per_id` per_id,lea_message.`pow_id`,3 FROM `lea_message`\n" +
+            "WHERE (lea_message.`lea_msg` LIKE CONCAT( '%',\"国家\",'%') OR \n" +
+            "lea_message.`lea_msg` LIKE CONCAT( '%',\"习近平\",'%') OR\n" +
+            "lea_message.`lea_msg` LIKE CONCAT( '%',\"主席\",'%') OR\n" +
+            "lea_message.`lea_msg` LIKE CONCAT( '%',\"政府\",'%') OR\n" +
+            "lea_message.`lea_msg` LIKE CONCAT( '%',\"中央\",'%') OR\n" +
+            "lea_message.`lea_msg` LIKE CONCAT( '%',\"中共\",'%') OR\n" +
+            "lea_message.`lea_msg` LIKE CONCAT( '%',\"毒品\",'%') OR\n" +
+            "lea_message.`lea_msg` LIKE CONCAT( '%',\"维权\",'%'))AND lea_message.`del`=0")
+    int insertIllegal();
+
+
 
     @Select("TRUNCATE TABLE `illegal`")
     void clean();

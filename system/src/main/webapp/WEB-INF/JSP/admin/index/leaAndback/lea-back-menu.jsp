@@ -158,14 +158,18 @@
                         break;
                     }
                     $.each(data,function(index,ele){
-                        layer.open({
-                            type: 2,
-                            area: ['600px', '300px'],
-                            content: ['leabackedit?back_id='+ele.id, 'no'],
-                            end: function(){
-                                location.reload();
-                            }
-                        });
+                        if(ele.back_per_id!=null){
+                            layer.open({
+                                type: 2,
+                                area: ['600px', '300px'],
+                                content: ['leabackedit?back_id='+ele.id, 'no'],
+                                end: function(){
+                                    location.reload();
+                                }
+                            });
+                        }else{
+                            layer.msg("请先进行反馈！");
+                        }
                     });
                     break;
             };

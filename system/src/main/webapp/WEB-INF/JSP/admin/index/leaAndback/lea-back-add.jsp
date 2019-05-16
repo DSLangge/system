@@ -29,7 +29,7 @@
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">反馈内容：</label>
                     <div class="layui-input-block">
-                        <textarea placeholder="请输入事务内容" class="layui-textarea"></textarea>
+                        <textarea placeholder="请输入反馈内容" class="layui-textarea"></textarea>
                     </div>
                 </div>
                 <div class="layui-form-item">

@@ -1,12 +1,10 @@
 package com.example.system.controller;
 
-import com.example.system.dao.UserMapper;
 import com.example.system.dto.*;
 import com.example.system.entity.*;
 import com.example.system.service.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.pagehelper.PageInfo;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,7 +50,7 @@ public class PersonController {
      */
     @GetMapping("/user")
     public ResultMapDTO getUser(PageDTO pageDTO, SearchDTO searchDTO) throws JsonProcessingException {
-        if(null!=searchDTO.getSearchcontent()){
+        if(null!=searchDTO.getSearchcontent()&&""!=searchDTO.getSearchcontent()){
             User user = new User();
             switch (searchDTO.getSearchtype()){
                 case "user_id":
@@ -103,7 +101,7 @@ public class PersonController {
      */
     @GetMapping("/teacher")
     public ResultMapDTO getTeacher(PageDTO pageDTO, SearchDTO searchDTO) throws JsonProcessingException {
-        if(null!=searchDTO.getSearchcontent()){
+        if(null!=searchDTO.getSearchcontent()&&""!=searchDTO.getSearchcontent()){
             Teacher teacher = new Teacher();
             switch (searchDTO.getSearchtype()){
                 case "teach_id":
@@ -163,7 +161,7 @@ public class PersonController {
      */
     @GetMapping("/student")
     public ResultMapDTO getStudent(PageDTO pageDTO, SearchDTO searchDTO) throws JsonProcessingException {
-        if(null!=searchDTO.getSearchcontent()){
+        if(null!=searchDTO.getSearchcontent()&&""!=searchDTO.getSearchcontent()){
             Student student = new Student();
             switch (searchDTO.getSearchtype()){
                 case "stu_id":
@@ -229,7 +227,7 @@ public class PersonController {
 
     @GetMapping("/inform")
     public ResultMapDTO getInform(PageDTO pageDTO, SearchDTO searchDTO) throws JsonProcessingException {
-        if(null!=searchDTO.getSearchcontent()){
+        if(null!=searchDTO.getSearchcontent()&&""!=searchDTO.getSearchcontent()){
             Inform inform = new Inform();
             switch (searchDTO.getSearchtype()){
                 case "inf_title":
@@ -283,7 +281,7 @@ public class PersonController {
 
     @GetMapping("/advice")
     public ResultMapDTO getAdv(PageDTO pageDTO, SearchDTO searchDTO) throws JsonProcessingException {
-        if(null!=searchDTO.getSearchcontent()){
+        if(null!=searchDTO.getSearchcontent()&&""!=searchDTO.getSearchcontent()){
             AdviceNote adviceNote = new AdviceNote();
             switch (searchDTO.getSearchtype()){
                 case "adv_title":
@@ -343,7 +341,7 @@ public class PersonController {
 
     @GetMapping("/evalu")
     public ResultMapDTO getEvalu(PageDTO pageDTO, SearchDTO searchDTO) throws JsonProcessingException {
-        if(null!=searchDTO.getSearchcontent()){
+        if(null!=searchDTO.getSearchcontent()&&""!=searchDTO.getSearchcontent()){
             EvaluTotalDTO evaluTotalDTO = new EvaluTotalDTO();
             switch (searchDTO.getSearchtype()){
                 case "teach_id":
@@ -408,7 +406,7 @@ public class PersonController {
 
     @GetMapping("/leaback")
     public ResultMapDTO getLeaBack(PageDTO pageDTO, SearchDTO searchDTO) throws JsonProcessingException {
-        if(null!=searchDTO.getSearchcontent()){
+        if(null!=searchDTO.getSearchcontent()&&""!=searchDTO.getSearchcontent()){
             LeaBackDTO leaBackDTO = new LeaBackDTO();
             switch (searchDTO.getSearchtype()){
                 case "lea_per_id":
@@ -458,7 +456,7 @@ public class PersonController {
 
     @GetMapping("/usergroup")
     public ResultMapDTO getUserGroup(PageDTO pageDTO, SearchDTO searchDTO) throws JsonProcessingException {
-        if(null!=searchDTO.getSearchcontent()){
+        if(null!=searchDTO.getSearchcontent()&&""!=searchDTO.getSearchcontent()){
             UserGroupMsgDTO userGroupMsgDTO = new UserGroupMsgDTO();
             switch (searchDTO.getSearchtype()){
                 case "group_name":
@@ -515,7 +513,7 @@ public class PersonController {
 
     @GetMapping("/usergroupperson/{userGroupId}")
     public ResultMapDTO getUserGroupPerson(PageDTO pageDTO, SearchDTO searchDTO,@PathVariable("userGroupId")Integer userGroupId) throws JsonProcessingException {
-        if(null!=searchDTO.getSearchcontent()){
+        if(null!=searchDTO.getSearchcontent()&&""!=searchDTO.getSearchcontent()){
             UserGroupPersonSqlDTO userGroupPersonSqlDTO = new UserGroupPersonSqlDTO();
             userGroupPersonSqlDTO.setUser_group_id(userGroupId);
             switch (searchDTO.getSearchtype()){
@@ -558,7 +556,7 @@ public class PersonController {
      */
     @GetMapping("/illegal")
     public ResultMapDTO getIllegal(PageDTO pageDTO, SearchDTO searchDTO) throws JsonProcessingException {
-        if(null!=searchDTO.getSearchcontent()){
+        if(null!=searchDTO.getSearchcontent()&&""!=searchDTO.getSearchcontent()){
             IllegalPersonDTO illegalPersonDTO = new IllegalPersonDTO();
             switch (searchDTO.getSearchtype()){
                 case "per_id":
@@ -575,7 +573,8 @@ public class PersonController {
             return new ResultMapDTO(200, "",illegalByType.getTotal(), illegalByType.getList());
         }
         illegalService.clean();
-        illegalService.insert();
+        illegalService.insertTimeOut();
+        illegalService.insertIllegal();
         PageInfo<IllegalPersonDTO> allIllegal = illegalService.findAllIllegal(pageDTO.getPage(), pageDTO.getLimit());
         return new ResultMapDTO(200,"",allIllegal.getTotal(),allIllegal.getList());
     }
@@ -623,14 +622,20 @@ public class PersonController {
                     int n=Integer.parseInt(s);
                     i+=leaBackService.deleteLeaMess(n);
                     FeedBack byBackId = leaBackService.findByBackId(n);
-                    leaBackService.delete(byBackId.getId());
+                    if(null!=byBackId){
+                        leaBackService.delete(byBackId.getId());
+                    }
                 }
                 break;
             case "illegal":
                 for (String s : split) {
                     int n=Integer.parseInt(s);
                     Illegal illegal = illegalService.findByID(n);
-                    studentService.delete(illegal.getPer_id());
+                    if(illegal.getPow_id()==3){
+                        studentService.delete(illegal.getPer_id());
+                    }else{
+                        teacherService.delete(illegal.getPer_id());
+                    }
                    i+= illegalService.delete(n);
                 }
                 break;

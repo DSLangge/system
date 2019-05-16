@@ -199,16 +199,19 @@
                         layer.msg("只能选择一个哟~");
                         break;
                     }
-                    layer.msg("通知编辑");
                     $.each(data,function(index,ele){
-                        layer.open({
-                            type: 2,
-                            area: ['800px', '400px'],
-                            content: ['informedit?id='+ele.id, 'no'],
-                            end: function(){
-                                location.reload();
-                            }
-                        });
+                        if(ele.inf_pub==1){
+                            layer.msg("请取消发布再进行编辑操作！");
+                        }else{
+                            layer.open({
+                                type: 2,
+                                area: ['800px', '400px'],
+                                content: ['informedit?id='+ele.id, 'no'],
+                                end: function(){
+                                    location.reload();
+                                }
+                            });
+                        }
                     });
                     break;
             };

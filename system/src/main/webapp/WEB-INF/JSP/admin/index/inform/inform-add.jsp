@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="layui-form-item layui-form-text">
-                    <label class="layui-form-label">通知内容：</label>
+                    <label class="layui-form-label">信息内容：</label>
                     <div class="layui-input-block">
                         <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
                     </div>

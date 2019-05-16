@@ -29,7 +29,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">工号：</label>
                     <div class="layui-input-block">
-                        <input type="text" name="teach_id" required lay-verify="required" placeholder="请输入学号" autocomplete="off" class="layui-input">
+                        <input type="text" name="teach_id" required lay-verify="required" placeholder="请输入工号" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">

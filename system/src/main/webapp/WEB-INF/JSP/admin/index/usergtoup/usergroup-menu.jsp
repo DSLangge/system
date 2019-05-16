@@ -168,6 +168,7 @@
                         layer.open({
                             type: 2,
                             area: ['600px', '400px'],
+                            title: ele.group_name,
                             content: ['usergroupselect?id='+ele.id, 'no'],
                             end: function(){
                                 location.reload();
