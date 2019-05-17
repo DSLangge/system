@@ -8,6 +8,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service("illegalService")
 public class IllegalServiceImpl implements IllegalService {
@@ -26,6 +27,16 @@ public class IllegalServiceImpl implements IllegalService {
     }
 
     @Override
+    public int insertIllegaOper(String per_id, Integer pow_id) {
+        return illegalPerMapper.insertIllegaOper(per_id,pow_id);
+    }
+
+    @Override
+    public List<Illegal> findAll() {
+        return illegalPerMapper.findAll();
+    }
+
+    @Override
     public void clean() {
         illegalPerMapper.clean();
     }
@@ -41,7 +52,7 @@ public class IllegalServiceImpl implements IllegalService {
     }
 
     @Override
-    public PageInfo<IllegalPersonDTO> findAllIllegal(Integer page, Integer limit) {
+    public PageInfo<IllegalPersonDTO> findAllIll(Integer page, Integer limit) {
         PageHelper.startPage(page,limit);
         PageInfo<IllegalPersonDTO> illegalPersonDTOPageInfo = new PageInfo<>(illegalPerMapper.findAllIll());
         return illegalPersonDTOPageInfo;

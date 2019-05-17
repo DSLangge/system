@@ -1,6 +1,7 @@
 package com.example.system;
 
 import com.example.system.dao.*;
+import com.example.system.dto.DataAnalyzDTO;
 import com.example.system.entity.*;
 import com.example.system.service.InformService;
 import org.junit.Test;
@@ -10,6 +11,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -38,6 +43,9 @@ public class SystemApplicationTests {
     @Resource
     UserGroupMapper userGroupMapper;
 
+    @Resource
+    DataAnalyzMapper dataAnalyzMapper;
+
     @Test
     public void insert() {
         User user = new User();
@@ -45,7 +53,32 @@ public class SystemApplicationTests {
 //        user.setUser_name("李华");
 //        user.setPassword("123");
 //        userMapper.insert(user);
-        System.out.println(userMapper.findUserByType(user));
+//        System.out.println("1".equals(1));
+//        System.out.println(dataAnalyzMapper.findAdv());
+//        System.out.println(dataAnalyzMapper.findInf());
+//        System.out.println(dataAnalyzMapper.findLea());
+//        List<DataAnalyzDTO> adv = dataAnalyzMapper.findAdv();
+        Map<String,Integer> advmap= new HashMap<>();
+        List<Map<String,Integer>> mapList=new ArrayList<>();
+        mapList.add(advmap);
+        mapList.add(advmap);
+        mapList.add(advmap);
+        System.out.println(mapList);
+//        advmap.put("1",0);
+//        advmap.put("2",0);
+//        advmap.put("3",0);
+//        advmap.put("4",0);
+//        advmap.put("5",0);
+//        advmap.put("6",0);
+//        advmap.put("7",0);
+//        for (String s : advmap.keySet()) {
+//            for (DataAnalyzDTO dataAnalyzDTO : adv) {
+//                if(s.equals(dataAnalyzDTO.getDay_week())){
+//                    advmap.put(s,dataAnalyzDTO.getNum());
+//                }
+//            }
+//        }
+//        System.out.println(advmap);
     }
 
     @Test

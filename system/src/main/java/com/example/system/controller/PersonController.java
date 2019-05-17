@@ -14,8 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @RestController
 public class PersonController {
@@ -38,6 +37,9 @@ public class PersonController {
     IllegalService illegalService;
     @Resource
     UserGroupService userGroupService;
+    @Resource
+    DataAnalyzService dataAnalyzService;
+
 
 
 
@@ -139,15 +141,6 @@ public class PersonController {
         }
         return "老师修改失败";
     }
-
-
-
-
-
-
-
-
-
 
 
 
@@ -572,11 +565,49 @@ public class PersonController {
             PageInfo<IllegalPersonDTO> illegalByType = illegalService.findIllegalByType(illegalPersonDTO, pageDTO.getPage(), pageDTO.getLimit());
             return new ResultMapDTO(200, "",illegalByType.getTotal(), illegalByType.getList());
         }
+        List<Illegal> all = illegalService.findAll();
         illegalService.clean();
+        for (Illegal illegal : all) {
+            illegalService.insertIllegaOper(illegal.getPer_id(),illegal.getPow_id());
+        }
         illegalService.insertTimeOut();
         illegalService.insertIllegal();
-        PageInfo<IllegalPersonDTO> allIllegal = illegalService.findAllIllegal(pageDTO.getPage(), pageDTO.getLimit());
+        PageInfo<IllegalPersonDTO> allIllegal = illegalService.findAllIll(pageDTO.getPage(), pageDTO.getLimit());
         return new ResultMapDTO(200,"",allIllegal.getTotal(),allIllegal.getList());
+    }
+
+
+
+
+    @PostMapping("/dataanalyz")
+    public List<Map<String,Integer>> dataAnalyz() throws IOException {
+        Map<String,Integer> advmap= new HashMap<>();
+        List<DataAnalyzDTO> adv = dataAnalyzService.findAdv();
+        List<DataAnalyzDTO> inf = dataAnalyzService.findInf();
+        List<DataAnalyzDTO> lea = dataAnalyzService.findLea();
+        List<Map<String,Integer>> mapList=new ArrayList<>();
+        mapList.add(disPoseData(adv));
+        mapList.add(disPoseData(inf));
+        mapList.add(disPoseData(lea));
+        return mapList;
+    }
+    public Map<String,Integer> disPoseData(List<DataAnalyzDTO> data){
+        Map<String,Integer> map= new HashMap<>();
+        map.put("Sunday",0);
+        map.put("Monday",0);
+        map.put("Tuesday",0);
+        map.put("Wednesday",0);
+        map.put("Thursday",0);
+        map.put("Friday",0);
+        map.put("Saturday",0);
+        for (String s : map.keySet()) {
+            for (DataAnalyzDTO dataAnalyzDTO : data) {
+                if(s.equals(dataAnalyzDTO.getDay_week())){
+                    map.put(s,dataAnalyzDTO.getNum());
+                }
+            }
+        }
+        return map;
     }
 
 

@@ -29,11 +29,16 @@ public class PageController {
     @Resource
     InformService informService;
     @Resource
+    IllegalService illegalService;
+    @Resource
     LeaBackService leaBackService;
     @Resource
     UserGroupService userGroupService;
     @Resource
     EvaluService evaluService;
+
+    private int times=0;
+    private String per_id;
 
     /**
      * 登录跳转
@@ -47,6 +52,7 @@ public class PageController {
         /**
          * 定义一个登录表单的DTO
          */
+
         if(null!=req.getSession().getAttribute("vrifyCode")){
             if(req.getSession().getAttribute("vrifyCode").equals(loginDTO.getVerify())){
                 switch (loginDTO.getPower()){
@@ -54,6 +60,17 @@ public class PageController {
                         Student student = loginMapper.stuLogin(loginDTO.getUserid(), loginDTO.getPassword());
                         if(null!=student){
                             return "admin/index/index";
+                        }
+                        if(!loginDTO.getUserid().equals(per_id)){
+                            per_id=loginDTO.getUserid();
+                            times=0;
+                        }
+                        times++;
+                        if (times>=3) {
+                            Student byStuID = studentService.findByStuID(per_id);
+                            illegalService.insertIllegaOper(byStuID.getStu_id(),byStuID.getPow_ID());
+                            req.setAttribute("loginmsg","您的账户涉嫌非法操作，请联系管理员");
+                            return "login";
                         }
                         req.setAttribute("loginmsg","请核对用户名、密码及角色");
                         return "login";
@@ -95,6 +112,7 @@ public class PageController {
         /**
          * 此处删除登录信息，移除session中的登录对象
         */
+        times=0;
         req.getSession().removeAttribute("vrifyCode");
         req.getSession().removeAttribute("userGroupId");
         req.getSession().removeAttribute("userlogin");
@@ -420,12 +438,22 @@ public class PageController {
     }
 
     /**
-     * 获取系统维护页面
+     * 获取网站页面
      * @return
      */
     @RequestMapping("/systemSetSystem")
     public String getSystemSet(){
         return "admin/index/setting/system-setting";
+    }
+
+
+    /**
+     *
+     * @return
+     */
+    @RequestMapping("/dataAnalyzSystem")
+    public String getDataAnalyzSystem(){
+        return "admin/index/setting/data-analyz";
     }
 
 

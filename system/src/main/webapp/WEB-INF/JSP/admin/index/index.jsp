@@ -47,7 +47,11 @@
 				    <a href="javascript:;" data-url="/illegalSystem" data-id='9' data-text="安全管理"><i class="iconfont">&#xe60a;</i>安全管理</a>
 				  </li>
 				  <li class="layui-nav-item">
-				  	<a href="javascript:;" data-url="/systemSetSystem" data-id='10' data-text="系统维护"><i class="iconfont">&#xe60b;</i>系统维护</a>
+					  <a href="javascript:;"><i class="iconfont">&#xe60b;</i>系统维护</a>
+					  <dl class="layui-nav-child">
+						  <dd><a href="javascript:;" data-url="/systemSetSystem" data-id='10' data-text="网站设置"><span class="l-line"></span>网站设置</a></dd>
+						  <dd><a href="javascript:;" data-url="/dataAnalyzSystem" data-id='11' data-text="数据维护"><span class="l-line"></span>数据维护</a></dd>
+					  </dl>
 				  </li>
 				</ul>
 			</div>
@@ -62,7 +66,7 @@
 					</div>
 					<ul class="layui-nav" lay-filter="rightNav">
 					  <li class="layui-nav-item">
-						  <a href="javascript:;" data-url="/adminSystem" data-id='11' data-text="个人信息">${userlogin.user_name}</a>
+						  <a href="javascript:;" data-url="/adminSystem" data-id='12' data-text="个人信息">${userlogin.user_name}</a>
 					  </li>
 					  <li class="layui-nav-item"><a href="javascript:login_out();">注销</a></li>
 					</ul>
@@ -77,7 +81,7 @@
 					  <div class="layui-tab-content">
 					    <div class="layui-tab-item layui-show" style="background: #f5f5f5;">
 					    	<!--1-->
-					    	<iframe src="/userSystem" width="100%" height="100%" name="iframe" scrolling="auto" class="iframe" framborder="0"></iframe>
+					    	<iframe src="/systemSetSystem" width="100%" height="100%" name="iframe" scrolling="auto" class="iframe" framborder="0"></iframe>
 					    	<!--1end-->
 					    </div>
 					  </div>

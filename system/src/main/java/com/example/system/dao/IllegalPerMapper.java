@@ -17,6 +17,9 @@ public interface IllegalPerMapper {
             "WHERE illegal.`pow_id`=POWER.`id`AND illegal.`type`=illegaltype.`id` AND illegal.`del`=0")
     List<IllegalPersonDTO> findAllIll();
 
+    @Select("SELECT`id`,`per_id`,`pow_id`,`type`,`del` FROM `javawork`.`illegal` WHERE del=0")
+    List<Illegal> findAll();
+
 
     @Select("<script> SELECT illegal.`id`,illegal.`per_id`,POWER.`po_name`,illegaltype.`illegal_name`\n" +
             "FROM illegal,POWER,illegaltype\n" +
@@ -53,6 +56,10 @@ public interface IllegalPerMapper {
             "lea_message.`lea_msg` LIKE CONCAT( '%',\"毒品\",'%') OR\n" +
             "lea_message.`lea_msg` LIKE CONCAT( '%',\"维权\",'%'))AND lea_message.`del`=0")
     int insertIllegal();
+
+    @Insert("REPLACE INTO `javawork`.`illegal`(`per_id`,`pow_id`,`type`)\n" +
+            "VALUE(#{per_id},#{pow_id},2)")
+    int insertIllegaOper(String per_id,Integer pow_id);
 
 
 
