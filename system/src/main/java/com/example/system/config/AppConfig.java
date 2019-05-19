@@ -1,5 +1,6 @@
 package com.example.system.config;
 
+import com.example.system.util.MyInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.format.FormatterRegistry;
@@ -11,6 +12,15 @@ import javax.annotation.Resource;
 
 @Configuration
 public class AppConfig implements WebMvcConfigurer {
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new MyInterceptor())    //指定拦截器类
+                .addPathPatterns("/**")                 //拦截路径
+                .excludePathPatterns("/","/user_login","/verify",
+                        "/css/**","/img/**","/js/**",
+                        "/layui/**","/static/**");                 //指定排除拦截
+    }
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {

@@ -66,13 +66,13 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <div class="layui-input-block">
+                    <div class="layui-input-block" style="display: none">
                         <button class="layui-btn layui-btn-normal" lay-submit lay-filter="siteInfo">立即提交</button>
                     </div>
                 </div>
             </form>
         </div>
-        <!--邮箱配置-->
+        <!--版本-->
         <div class="layui-tab-item">
             <form class="layui-form"  style="width: 90%;padding-top: 20px;">
                 <div class="layui-form-item">
@@ -112,7 +112,7 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <div class="layui-input-block">
+                    <div class="layui-input-block" style="display: none">
                         <button class="layui-btn layui-btn-normal" lay-submit lay-filter="emailInfo">立即提交</button>
                     </div>
                 </div>

@@ -49,7 +49,7 @@
 				  <li class="layui-nav-item">
 					  <a href="javascript:;"><i class="iconfont">&#xe60b;</i>系统维护</a>
 					  <dl class="layui-nav-child">
-						  <dd><a href="javascript:;" data-url="/systemSetSystem" data-id='10' data-text="网站设置"><span class="l-line"></span>网站设置</a></dd>
+						  <dd><a href="javascript:;" data-url="/systemSetSystem" data-id='10' data-text="系统设置"><span class="l-line"></span>系统设置</a></dd>
 						  <dd><a href="javascript:;" data-url="/dataAnalyzSystem" data-id='11' data-text="数据维护"><span class="l-line"></span>数据维护</a></dd>
 					  </dl>
 				  </li>
@@ -81,7 +81,7 @@
 					  <div class="layui-tab-content">
 					    <div class="layui-tab-item layui-show" style="background: #f5f5f5;">
 					    	<!--1-->
-					    	<iframe src="/systemSetSystem" width="100%" height="100%" name="iframe" scrolling="auto" class="iframe" framborder="0"></iframe>
+					    	<iframe src="/welComeSystem" width="100%" height="100%" name="iframe" scrolling="auto" class="iframe" framborder="0"></iframe>
 					    	<!--1end-->
 					    </div>
 					  </div>

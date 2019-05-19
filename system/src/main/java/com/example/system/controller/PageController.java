@@ -124,6 +124,11 @@ public class PageController {
         return "admin/index/user/user-admin";
     }
 
+    @RequestMapping("/welComeSystem")
+    public String welcome(){
+        return "admin/index/welcome";
+    }
+
 
 
 
@@ -134,10 +139,7 @@ public class PageController {
      */
     @RequestMapping("/userSystem")
     public String getUserPage(HttpServletRequest req){
-        if(null!=req.getSession().getAttribute("userlogin")){
-            return "admin/index/user/user-menu";
-        }
-        return "login";
+        return "admin/index/user/user-menu";
     }
 
     @RequestMapping("/useradd")
@@ -172,20 +174,16 @@ public class PageController {
     @RequestMapping("/teacheredit")
     public String getTeacheredit(String teach_id,HttpServletRequest req){
         Teacher tea = teacherService.findByTeachID(teach_id);
-        req.getSession().setAttribute("teacher",tea);
+        req.setAttribute("teacher",tea);
         return "admin/index/teacher/tea-edit";
     }
 
     /**
-     * 教师添加用户跳转
-     * @param teach_id
-     * @param req
+     * 添加教师跳转
      * @return
      */
     @RequestMapping("/teacheradd")
-    public String getTeacheradd(String teach_id,HttpServletRequest req){
-        Teacher tea = teacherService.findByTeachID(teach_id);
-        req.getSession().setAttribute("teacher",tea);
+    public String getTeacheradd(){
         return "admin/index/teacher/tea-add";
     }
 
@@ -215,7 +213,7 @@ public class PageController {
     @RequestMapping("/studentedit")
     public String getStudentedit(String stu_id,HttpServletRequest req){
         Student stu = studentService.findByStuID(stu_id);
-        req.getSession().setAttribute("student",stu);
+        req.setAttribute("student",stu);
         return "admin/index/student/stu-edit";
     }
 
@@ -252,7 +250,7 @@ public class PageController {
     @RequestMapping("/informedit")
     public String getInformedit(Integer id,HttpServletRequest req){
         Inform info = informService.findByID(id);
-        req.getSession().setAttribute("inform",info);
+        req.setAttribute("inform",info);
         return "admin/index/inform/inform-edit";
     }
 

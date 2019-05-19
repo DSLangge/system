@@ -17,6 +17,10 @@ margin-top: -155px;margin-right: -290px;;padding: 20px;padding-right: 50px;borde
 .head_img{width: 400px;height: 100%;background: url(../img/login.png) no-repeat transparent center;}
 
 .bac{height: 65%;background: url(../img/bac.jpg) no-repeat center;background-size: contain;}
+.back{
+    height: 100%;
+    background: url(../img/background.png) no-repeat center;background-size:cover ;
+}
 .layui-form-item >.layui-form-label > i{font-size: 10px;float: right;color: #FF0000;}
 
 .fot{font-size:12px ;color: rgb(136,136,136);text-align: center;padding-top: 20px;}
